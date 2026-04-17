@@ -1,0 +1,105 @@
+BASEMENT BASEBALL - SETUP INSTRUCTIONS
+=======================================
+
+ACCESSING THE GAME
+------------------
+The game is hosted on GitHub Pages and can be accessed from any device:
+
+Website URL: https://mjk5000.github.io/basement-baseball/
+
+This works on:
+- iPad (Safari, Chrome)
+- Kindle Fire (Silk Browser, Chrome)
+- Desktop/Laptop computers
+- Android tablets and phones
+- iPhones
+
+No installation required - just open the URL in your browser!
+
+
+GITHUB PAGES SETUP (Already Complete)
+--------------------------------------
+The game is already deployed and live. If you need to update it in the future:
+
+1. Make changes to the files locally
+2. Commit and push changes:
+   git add .
+   git commit -m "Description of changes"
+   git push origin main
+
+3. GitHub Pages will automatically update within 1-2 minutes
+
+
+OFFLINE USE (PWA - Progressive Web App)
+----------------------------------------
+You can install the game as an app on your device:
+
+On iPad/iPhone:
+1. Open https://mjk5000.github.io/basement-baseball/ in Safari
+2. Tap the Share button
+3. Tap "Add to Home Screen"
+4. Name it "Basement Baseball"
+5. Tap "Add"
+
+On Android/Kindle Fire:
+1. Open the URL in Chrome
+2. Tap the menu (3 dots)
+3. Tap "Add to Home screen" or "Install app"
+4. Confirm installation
+
+On Desktop:
+1. Open the URL in Chrome or Edge
+2. Look for the install icon in the address bar
+3. Click "Install"
+
+Once installed, the game will work offline and feel like a native app!
+
+
+RECOMMENDED SETTINGS FOR TABLETS
+---------------------------------
+1. Use landscape orientation for best experience
+2. Enable sound for the full experience (unmute button in game)
+3. Adjust brightness to comfortable level for extended play
+4. Consider enabling full-screen mode (icon button in-game)
+
+
+GAME REPOSITORY
+---------------
+GitHub Repository: https://github.com/mjk5000/basement-baseball
+- View source code
+- Report issues
+- Download files
+- See update history
+
+
+TROUBLESHOOTING
+---------------
+If the game doesn't load:
+1. Check your internet connection
+2. Try refreshing the page (pull down on mobile)
+3. Clear browser cache
+4. Try a different browser
+
+If installed as PWA and not updating:
+1. Uninstall the app
+2. Clear browser cache
+3. Reinstall from the website
+
+
+FEATURES
+--------
+- Realistic baseball simulation
+- 1 or 2 player modes
+- Variable innings (3, 6, or 9)
+- Complete stat tracking
+- Pitcher statistics
+- Undo functionality
+- Sound effects
+- Full-screen mode
+- Responsive design for all devices
+
+
+SUPPORT
+-------
+For questions or issues, visit:
+https://github.com/mjk5000/basement-baseball/issues
