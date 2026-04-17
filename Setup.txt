@@ -47,12 +47,39 @@ On Android/Kindle Fire:
 3. Tap "Add to Home screen" or "Install app"
 4. Confirm installation
 
-On Desktop:
-1. Open the URL in Chrome or Edge
-2. Look for the install icon in the address bar
-3. Click "Install"
+On Desktop (Windows/Mac/Linux):
 
-Once installed, the game will work offline and feel like a native app!
+Using Chrome:
+1. Open https://mjk5000.github.io/basement-baseball/ in Chrome
+2. Look for the install icon (⊕ or computer icon) in the address bar (right side)
+   - OR click the three dots menu → "Install Basement Baseball..."
+3. Click "Install" in the popup
+4. The app will open in its own window
+5. A desktop shortcut and Start Menu entry will be created
+
+Using Microsoft Edge:
+1. Open the URL in Edge
+2. Click the install icon (+) in the address bar
+   - OR click the three dots menu → "Apps" → "Install this site as an app"
+3. Click "Install"
+4. The app appears in your Start Menu and taskbar
+
+Using Safari (Mac):
+1. Open the URL in Safari
+2. Click "File" → "Add to Dock"
+3. The game will be added as a web app in your Dock
+
+Once installed, the desktop app will:
+- Open in its own window (no browser tabs/address bar)
+- Have its own icon in Start Menu/Dock/Applications
+- Work offline after first load
+- Feel like a native desktop application
+- Support keyboard shortcuts and notifications
+
+To uninstall desktop app:
+- Windows: Right-click the app → "Uninstall"
+- Mac: Right-click in Dock → "Options" → "Remove from Dock"
+- Or use browser settings → Apps → Remove
 
 
 RECOMMENDED SETTINGS FOR TABLETS
