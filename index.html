@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Baseball">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
+    <title>⚾️ Basement Baseball</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚾️ Basement Baseball ⚾️</h1>
+        </header>
+
+        <!-- Scoreboard with Lineups -->
+        <div class="scoreboard-wrapper">
+            <!-- Away Lineup (Left Side) -->
+            <div class="lineup away-lineup">
+                <div class="lineup-title away-team-name">Away</div>
+                <div class="lineup-score" id="away-lineup-score">0</div>
+                <div class="lineup-list">
+                    <div class="batter-spot" id="away-batter-1">CF Brown<div class="player-stats">0-0</div></div>
+                    <div class="batter-spot" id="away-batter-2">SS Wilson<div class="player-stats">0-0</div></div>
+                    <div class="batter-spot" id="away-batter-3">RF Anderson<div class="player-stats">0-0</div></div>
+                    <div class="batter-spot" id="away-batter-4">1B Taylor<div class="player-stats">0-0</div></div>
+                    <div class="batter-spot" id="away-batter-5">LF Thomas<div class="player-stats">0-0</div></div>
+                    <div class="batter-spot" id="away-batter-6">3B Moore<div class="player-stats">0-0</div></div>
+                    <div class="batter-spot" id="away-batter-7">2B Jackson<div class="player-stats">0-0</div></div>
+                    <div class="batter-spot" id="away-batter-8">C White<div class="player-stats">0-0</div></div>
+                    <div class="batter-spot" id="away-batter-9">P Harris<div class="player-stats">0-0</div></div>
+                </div>
+            </div>
+
+            <!-- Center Column: Scoreboard + Game Status -->
+            <div class="center-column">
+                <!-- MLB Style Scoreboard -->
+                <div class="mlb-scoreboard">
+                    <table class="scoreboard-table">
+                        <thead>
+                            <tr>
+                                <th class="team-header"></th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                                <th>7</th>
+                                <th>8</th>
+                                <th>9</th>
+                                <th class="runs-header">R</th>
+                                <th class="hits-header">H</th>
+                                <th class="errors-header">E</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="away-row">
+                                <td class="team-name away-team-name">Away</td>
+                                <td id="away-inning-1">-</td>
+                                <td id="away-inning-2">-</td>
+                                <td id="away-inning-3">-</td>
+                                <td id="away-inning-4">-</td>
+                                <td id="away-inning-5">-</td>
+                                <td id="away-inning-6">-</td>
+                                <td id="away-inning-7">-</td>
+                                <td id="away-inning-8">-</td>
+                                <td id="away-inning-9">-</td>
+                                <td class="total-runs away-runs" id="awayScore">0</td>
+                                <td class="total-hits" id="awayHits">0</td>
+                                <td class="total-errors" id="awayErrors">0</td>
+                            </tr>
+                            <tr class="home-row">
+                                <td class="team-name home-team-name">Home</td>
+                                <td id="home-inning-1">-</td>
+                                <td id="home-inning-2">-</td>
+                                <td id="home-inning-3">-</td>
+                                <td id="home-inning-4">-</td>
+                                <td id="home-inning-5">-</td>
+                                <td id="home-inning-6">-</td>
+                                <td id="home-inning-7">-</td>
+                                <td id="home-inning-8">-</td>
+                                <td id="home-inning-9">-</td>
+                                <td class="total-runs home-runs" id="homeScore">0</td>
+                                <td class="total-hits" id="homeHits">0</td>
+                                <td class="total-errors" id="homeErrors">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- TV Broadcast Style Game Status -->
+                <div class="game-status">
+                    <div class="status-left">
+                        <div class="inning-display">
+                            <div class="inning-indicator">
+                                <div class="top-indicator">▲</div>
+                                <div class="bottom-indicator">▼</div>
+                            </div>
+                            <div class="inning-number" id="inning">1</div>
+                        </div>
+                        
+                        <div class="count-display">
+                            <div class="count-item">
+                                <span class="count-label">BALLS</span>
+                                <div class="count-circles">
+                                    <span class="circle" id="ball-1"></span>
+                                    <span class="circle" id="ball-2"></span>
+                                    <span class="circle" id="ball-3"></span>
+                                </div>
+                            </div>
+                            <div class="count-item">
+                                <span class="count-label">STRIKES</span>
+                                <div class="count-circles">
+                                    <span class="circle" id="strike-1"></span>
+                                    <span class="circle" id="strike-2"></span>
+                                </div>
+                            </div>
+                            <div class="count-item">
+                                <span class="count-label">OUTS</span>
+                                <div class="count-circles">
+                                    <span class="circle" id="out-1"></span>
+                                    <span class="circle" id="out-2"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="status-center">
+                        <div class="message" id="message">Play Ball!</div>
+                    </div>
+
+                    <div class="status-right">
+                        <div class="runners-display">
+                            <svg width="180" height="180" viewBox="0 0 100 100">
+                                <!-- Diamond outline -->
+                                <line x1="50" y1="80" x2="80" y2="50" stroke="#666" stroke-width="2"/>
+                                <line x1="80" y1="50" x2="50" y2="20" stroke="#666" stroke-width="2"/>
+                                <line x1="50" y1="20" x2="20" y2="50" stroke="#666" stroke-width="2"/>
+                                <line x1="20" y1="50" x2="50" y2="80" stroke="#666" stroke-width="2"/>
+                                
+                                <!-- Bases -->
+                                <rect x="43" y="13" width="14" height="14" class="base-indicator" id="base2-indicator" rx="2"/>
+                                <rect x="73" y="43" width="14" height="14" class="base-indicator" id="base1-indicator" rx="2"/>
+                                <rect x="43" y="73" width="14" height="14" class="base-indicator home-indicator" id="home-indicator" rx="2"/>
+                                <rect x="13" y="43" width="14" height="14" class="base-indicator" id="base3-indicator" rx="2"/>
+                                
+                                <!-- Out X markers at bases -->
+                                <g id="base1-out" class="out-marker">
+                                    <line x1="74" y1="44" x2="86" y2="56" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="86" y1="44" x2="74" y2="56" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                </g>
+                                <g id="base2-out" class="out-marker">
+                                    <line x1="44" y1="14" x2="56" y2="26" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="56" y1="14" x2="44" y2="26" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                </g>
+                                <g id="base3-out" class="out-marker">
+                                    <line x1="14" y1="44" x2="26" y2="56" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="26" y1="44" x2="14" y2="56" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                </g>
+                                <g id="home-out" class="out-marker">
+                                    <line x1="44" y1="74" x2="56" y2="86" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="56" y1="74" x2="44" y2="86" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                </g>
+                                
+                                <!-- Out X markers at field positions -->
+                                <!-- Pitcher (center of diamond) -->
+                                <g id="P-out" class="out-marker">
+                                    <line x1="45" y1="48" x2="55" y2="58" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="55" y1="48" x2="45" y2="58" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                </g>
+                                <!-- Shortstop (between 2nd and 3rd) -->
+                                <g id="SS-out" class="out-marker">
+                                    <line x1="28" y1="28" x2="38" y2="38" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="38" y1="28" x2="28" y2="38" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                </g>
+                                <!-- Second baseman (between 1st and 2nd) -->
+                                <g id="2B-out" class="out-marker">
+                                    <line x1="62" y1="28" x2="72" y2="38" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="72" y1="28" x2="62" y2="38" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                </g>
+                                <!-- Left field -->
+                                <g id="LF-out" class="out-marker">
+                                    <line x1="8" y1="18" x2="18" y2="28" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="18" y1="18" x2="8" y2="28" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                </g>
+                                <!-- Center field -->
+                                <g id="CF-out" class="out-marker">
+                                    <line x1="45" y1="3" x2="55" y2="13" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="55" y1="3" x2="45" y2="13" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                </g>
+                                <!-- Right field -->
+                                <g id="RF-out" class="out-marker">
+                                    <line x1="82" y1="18" x2="92" y2="28" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="92" y1="18" x2="82" y2="28" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                </g>
+                                <!-- Catcher (at home plate) -->
+                                <g id="C-out" class="out-marker">
+                                    <line x1="44" y1="86" x2="56" y2="96" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="56" y1="86" x2="44" y2="96" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                </g>
+                                
+                                <!-- Hit type labels (placed last to render on top) -->
+                                <text id="base1-label" class="hit-label" x="80" y="52" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="bold" fill="#22c55e" stroke="#000" stroke-width="2" paint-order="stroke">1B</text>
+                                <text id="base2-label" class="hit-label" x="50" y="22" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="bold" fill="#22c55e" stroke="#000" stroke-width="2" paint-order="stroke">2B</text>
+                                <text id="base3-label" class="hit-label" x="20" y="52" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="bold" fill="#22c55e" stroke="#000" stroke-width="2" paint-order="stroke">3B</text>
+                                <text id="home-label" class="hit-label hit-label-hr" x="50" y="82" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="bold" fill="#fbbf24" stroke="#000" stroke-width="2" paint-order="stroke">HR</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Controls -->
+                <div class="game-area">
+                    <!-- Left: Main Pitch Controls -->
+                    <div class="controls-container">
+                        <!-- Pitch Result Input -->
+                        <div class="pitch-input" id="pitchInput">
+                            
+                            <div class="pitch-options">
+                            <button class="pitch-btn contact-btn" onclick="processContact('grounder')">
+                                <span class="icon">⚾</span>
+                                <span class="label">Grounder</span>
+                            </button>
+                            <button class="pitch-btn contact-btn" onclick="processContact('linedrive')">
+                                <span class="icon">➡️</span>
+                                <span class="label">Line Drive</span>
+                            </button>
+                            <button class="pitch-btn contact-btn" onclick="processContact('popup')">
+                                <span class="icon">⬆️</span>
+                                <span class="label">Pop Fly</span>
+                            </button>
+                            <button class="pitch-btn homerun-btn" onclick="backWallHomeRun()">
+                                <span class="icon">💥</span>
+                                <span class="label">Home Run</span>
+                            </div>
+                            
+                            <div class="pitch-options">
+                                <button class="pitch-btn special-btn" onclick="swingAndMiss()">
+                                    <span class="icon">❌</span>
+                                    <span class="label">Swing & Miss</span>
+                                </button>
+                                <button class="pitch-btn special-btn" onclick="noSwing()">
+                                    <span class="icon">👀</span>
+                                    <span class="label">No Swing</span>
+                                </button>
+                                <button class="pitch-btn special-btn" onclick="foulBall()">
+                                    <span class="icon">⚠️</span>
+                                    <span class="label">Foul Ball</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Quality Selection -->
+                        <div class="quality-input" id="qualityInput" style="display: none;">
+                            <div class="pitch-header">How hard was it hit?</div>
+                            <div class="pitch-options">
+                                <button class="pitch-btn quality-btn" onclick="selectQuality('hard')">
+                                    <span class="icon">💪</span>
+                                    <span class="label">Hard Hit</span>
+                                </button>
+                                <button class="pitch-btn quality-btn" onclick="selectQuality('soft')">
+                                    <span class="icon">🤚</span>
+                                    <span class="label">Soft Hit</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Advanced Manual Controls -->
+                    <div class="manual-controls" id="manualControls">
+                        <div class="manual-header">Advanced Controls</div>
+                        <div class="manual-section">
+                            <div class="manual-group">
+                                <button class="manual-btn hit-btn" onclick="manualSingle()">
+                                    <span class="label">Single</span>
+                                </button>
+                                <button class="manual-btn hit-btn" onclick="manualDouble()">
+                                    <span class="label">Double</span>
+                                </button>
+                                <button class="manual-btn hit-btn" onclick="manualTriple()">
+                                    <span class="label">Triple</span>
+                                </button>
+                                <button class="manual-btn hit-btn" onclick="manualHomeRun()">
+                                    <span class="label">Home Run</span>
+                                </button>
+                            </div>
+                            <div class="manual-group">
+                                <button class="manual-btn count-btn" onclick="manualBall()">
+                                    <span class="label">Ball</span>
+                                </button>
+                                <button class="manual-btn count-btn" onclick="manualStrike()">
+                                    <span class="label">Strike</span>
+                                </button>
+                                <button class="manual-btn count-btn" onclick="manualWalk()">
+                                    <span class="label">Walk</span>
+                                </button>
+                                <button class="manual-btn out-btn" onclick="manualOut()">
+                                    <span class="label">Out</span>
+                                </button>
+                            </div>
+                            <div class="manual-group">
+                                <button class="manual-btn hit-btn" onclick="advanceAllRunners()">
+                                    <span class="label">Advance Runner</span>
+                                </button>
+                                <button class="manual-btn hit-btn" onclick="processBunt()">
+                                    <span class="label">Bunt</span>
+                                </button>
+                                <button class="manual-btn undo-btn" id="undoBtn" onclick="undoLastAction()" disabled>
+                                    <span class="icon">↩️</span>
+                                </button>
+                            </div>
+                            <div class="manual-group">
+                                <button class="manual-btn simulate-btn" onclick="manualSimulateBatter()">
+                                    <span class="label">Simulate Batter</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            <!-- Icon Buttons Section -->
+            <div class="lineup-icon-buttons">
+                <button class="icon-btn" id="enterFullscreenBtn" onclick="enterFullscreen()" title="Fullscreen">
+                    <span class="icon">⛶️</span>
+                </button>
+                <button class="icon-btn" id="exitFullscreenBtn" onclick="exitFullscreen()" style="display: none;" title="Exit Fullscreen">
+                    <span class="icon">❌</span>
+                </button>
+                <button class="icon-btn" id="muteBtn" onclick="toggleSound()" style="display: none;" title="Sound On">
+                    <span class="icon">🔊</span>
+                </button>
+                <button class="icon-btn" id="unmuteBtn" onclick="toggleSound()" title="Sound Off">
+                    <span class="icon">🔇</span>
+                </button>
+                <button class="icon-btn" onclick="showGameSettings()" title="Settings">
+                    <span class="icon">⚙️</span>
+                </button>
+                <button class="icon-btn" onclick="showRules()" title="Rules">
+                    <span class="icon">📋</span>
+                </button>
+            </div>
+            </div>
+
+            <!-- Home Lineup Column (Right Side) -->
+            <div class="home-lineup-column">
+                <div class="lineup home-lineup">
+                    <div class="lineup-title home-team-name">Home</div>
+                    <div class="lineup-score" id="home-lineup-score">0</div>
+                    <div class="lineup-list">
+                        <div class="batter-spot" id="home-batter-1">CF Smith<div class="player-stats">0-0</div></div>
+                        <div class="batter-spot" id="home-batter-2">SS Jones<div class="player-stats">0-0</div></div>
+                        <div class="batter-spot" id="home-batter-3">RF Garcia<div class="player-stats">0-0</div></div>
+                        <div class="batter-spot" id="home-batter-4">1B Johnson<div class="player-stats">0-0</div></div>
+                        <div class="batter-spot" id="home-batter-5">LF Williams<div class="player-stats">0-0</div></div>
+                        <div class="batter-spot" id="home-batter-6">3B Davis<div class="player-stats">0-0</div></div>
+                        <div class="batter-spot" id="home-batter-7">2B Miller<div class="player-stats">0-0</div></div>
+                        <div class="batter-spot" id="home-batter-8">C Rodriguez<div class="player-stats">0-0</div></div>
+                        <div class="batter-spot" id="home-batter-9">P Martinez<div class="player-stats">0-0</div></div>
+                    </div>
+                </div>
+
+        <div class="actions">
+            <div class="action-row">
+                <button class="game-btn random-btn" onclick="randomOutcome()">
+                    <span class="icon">🎲</span>
+                    <span class="label">Random Play</span>
+                </button>
+            </div>
+
+            <div class="action-row">
+                <button class="game-btn" onclick="hit(1)">Advanced Control
+                    <span class="icon">🏃</span>
+                    <span class="label">Single</span>
+                </button>
+                <button class="game-btn" onclick="hit(2)">
+                    <span class="icon">🏃‍♂️💨</span>
+                    <span class="label">Double</span>
+                </button>
+            </div>
+
+            <div class="action-row">
+                <button class="game-btn" onclick="hit(3)">
+                    <span class="icon">⚡️</span>
+                    <span class="label">Triple</span>
+                </button>
+                <button class="game-btn" onclick="homeRun()">
+                    <span class="icon">🎆</span>
+                    <span class="label">Home Run!</span>
+                </button>
+            </div>
+
+            <div class="action-row">
+                <button class="game-btn out-btn" onclick="manualOut()">
+                    <span class="icon">❌</span>
+                    <span class="label">Out</span>
+                </button>
+                <button class="game-btn reset-btn" onclick="newGame()">
+                    <span class="icon">🔄</span>
+                    <span class="label">New Game</span>
+                </button>
+            </div>
+            
+            <div class="action-row" style="margin-top: 15px;">
+                <button class="game-btn" onclick="toggleManualButtons()" style="background: linear-gradient(135deg, #6366f1, #4f46e5); width: 100%;">
+                    <span class="icon">🎮</span>
+                    <span class="label" id="toggleLabel">Show Manual Controls</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Fireworks container -->
+        <div class="fireworks-container" id="fireworksContainer"></div>
+        
+        <!-- Rules Modal -->
+        <div id="rulesModal" class="modal">
+            <div class="modal-content">
+                <h2>📋 Game Rules</h2>
+                
+                <div class="rules-content">
+                    <div class="rule-item">
+                        <h3>⚾ Hit Determination</h3>
+                        <p>Determination of type of hit is on your honor.</p>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <h3>🚫 No Swing Rule</h3>
+                        <p>If you aren't ready to swing, you MUST press "No Swing".</p>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <h3>🏏 Bat Requirements</h3>
+                        <p>• You must use a skinny bat for one inning (if you have one)</p>
+                        <p>• You can use a fat whiffle bat for one inning (if you have one)</p>
+                        <p>• You must use a real bat for one inning</p>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <h3>⚠️ Complaining Penalty</h3>
+                        <p>Any complaining results in:</p>
+                        <p>• Simulate Batter button press against the complaining batter, OR</p>
+                        <p>• A walk against the complaining scorekeeper</p>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <h3>👥 Player Roles</h3>
+                        <p>One player will bat and one player will scorekeep and control the pitching machine.</p>
+                    </div>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button class="start-game-btn" onclick="hideRules()">Got It! ⚾</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Settings Modal -->
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <h2>⚾ Game Setup</h2>
+                
+                <div class="settings-section">
+                    <label for="awayTeamName">Away Team Name:</label>
+                    <input type="text" id="awayTeamName" value="Away" maxlength="12" onfocus="this.select()" oninput="capitalizeTeamName('awayTeamName')">
+                </div>
+                
+                <div class="settings-section">
+                    <label for="homeTeamName">Home Team Name:</label>
+                    <input type="text" id="homeTeamName" value="Home" maxlength="12" onfocus="this.select()" oninput="capitalizeTeamName('homeTeamName')">
+                </div>
+                
+                <div class="settings-section">
+                    <label">Game Mode:</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="gameMode" value="2player" checked>
+                            <span>2 Player (Manual)</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="gameMode" value="1player">
+                            <span>1 Player (vs Computer)</span>
+                        </label>
+                    </div>
+                    <p class="help-text">In 1-player mode, the computer bats first as the Away team.</p>
+                </div>
+                
+                <div class="settings-section innings-section">
+                    <label>Innings:</label>
+                    <div class="radio-group horizontal">
+                        <label class="radio-label">
+                            <input type="radio" name="innings" value="3">
+                            <span>3</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="innings" value="6" checked>
+                            <span>6</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="innings" value="9">
+                            <span>9</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button class="cancel-btn" onclick="hideGameSettings()">Cancel</button>
+                    <button class="start-game-btn" onclick="startNewGame()">New Game! ⚾</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
