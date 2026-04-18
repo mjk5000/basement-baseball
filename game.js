@@ -2286,6 +2286,15 @@ function sacrificeFly() {
             gameState.homeScore += 1;
             gameState.currentInningRuns += 1;
             flashScoreboardRuns(1);
+            
+            // Check for walk-off IMMEDIATELY when home team goes ahead in final inning or later
+            if (gameState.inning >= gameState.totalInnings && gameState.homeScore > gameState.awayScore) {
+                setTimeout(() => {
+                    announceScore(true, false); // true = game over, false = don't play end of inning sound
+                    showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off sacrifice fly! 🎊`);
+                }, 1000);
+                return; // Walk-off!
+            }
         }
         gameState.runners.third = false;
     } else if (gameState.runners.third && gameState.outs >= 3) {
