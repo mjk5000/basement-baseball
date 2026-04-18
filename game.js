@@ -2856,7 +2856,7 @@ function announceScore(isGameOver = false, playEndOfInningSound = true) {
         }
     }
     
-    // THEN delay before announcing score (let end of inning sound play)
+    // THEN delay before announcing score (let end of inning sound play and finish)
     setTimeout(() => {
         // Queue sounds in order
         if (isGameOver) {
@@ -2890,7 +2890,7 @@ function announceScore(isGameOver = false, playEndOfInningSound = true) {
         if (!isGameOver) {
             playSound(leadStatus); // Home/Away leads or Tie
         }
-    }, 2000); // 2 second delay to let end of inning sound finish
+    }, 4000); // 4 second delay to let end of inning sound finish completely
 }
 
 // Record an out
