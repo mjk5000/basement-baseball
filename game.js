@@ -56,12 +56,12 @@ function preloadCustomSounds() {
             'sounds/Great catch.m4a'
         ],
         'ball': [
-            'sounds/Ball.m4a',
-            'sounds/Walk 1.m4a',
-            'sounds/Walk 2.m4a'
+            'sounds/Ball.m4a'
         ],
         'walk': [
-            'sounds/Ball 4 take your base.m4a'
+            'sounds/Ball 4 take your base.m4a',
+            'sounds/Walk 1.m4a',
+            'sounds/Walk 2.m4a'
         ],
         'hit': [
             'sounds/Great hit.m4a',
