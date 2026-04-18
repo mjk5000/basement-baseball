@@ -32,6 +32,10 @@ let soundMuted = true;
 // Custom audio files
 const customSounds = {};
 
+// Sound queue to prevent overlapping
+let soundQueue = [];
+let currentlyPlaying = null;
+
 // Preload custom audio files
 function preloadCustomSounds() {
     const soundFiles = {
@@ -66,6 +70,18 @@ function preloadCustomSounds() {
         'hit': [
             'sounds/Great hit.m4a',
             'sounds/Did you just see that.m4a'
+        ],
+        'single': [
+            'sounds/Single.m4a',
+            'sounds/Single 2.m4a'
+        ],
+        'double': [
+            'sounds/Double 1.m4a',
+            'sounds/Double 2.m4a'
+        ],
+        'triple': [
+            'sounds/Triple 1.m4a',
+            'sounds/Triple 2.m4a'
         ],
         'homerun': [
             'sounds/Home run buddy boy.m4a',
@@ -143,24 +159,70 @@ function toggleSound() {
     }
 }
 
-function playSound(type) {
+function playSound(type, allowOverlap = false) {
     if (soundMuted) return; // Don't play if muted
     
+    // Clapping/crowd sounds can overlap with anything
+    if (type === 'crowd' || allowOverlap) {
+        playImmediately(type);
+        return;
+    }
+    
+    // Add to queue for sequential playback
+    soundQueue.push(type);
+    processNextSound();
+}
+
+function processNextSound() {
+    // If already playing something, wait
+    if (currentlyPlaying) return;
+    
+    // If queue is empty, nothing to do
+    if (soundQueue.length === 0) return;
+    
+    // Get next sound from queue
+    const type = soundQueue.shift();
+    playImmediately(type);
+}
+
+function playImmediately(type) {
     // Try to play custom sound first
     if (customSounds[type] && customSounds[type].length > 0) {
         // Randomly select from available sounds of this type
         const randomIndex = Math.floor(Math.random() * customSounds[type].length);
         const audio = customSounds[type][randomIndex].cloneNode();
         audio.volume = 0.7; // Adjust volume as needed
-        audio.play().catch(() => {
+        
+        currentlyPlaying = audio;
+        
+        audio.onended = () => {
+            currentlyPlaying = null;
+            // Process next sound in queue after a small delay
+            setTimeout(processNextSound, 100);
+        };
+        
+        audio.onerror = () => {
+            currentlyPlaying = null;
             // If custom sound fails, fall back to synthesized
             playSynthesizedSound(type);
+            setTimeout(processNextSound, 100);
+        };
+        
+        audio.play().catch(() => {
+            currentlyPlaying = null;
+            playSynthesizedSound(type);
+            setTimeout(processNextSound, 100);
         });
         return;
     }
     
     // Fall back to synthesized sound
     playSynthesizedSound(type);
+    // Synthesized sounds are short, mark as done quickly
+    setTimeout(() => {
+        currentlyPlaying = null;
+        processNextSound();
+    }, 500);
 }
 
 function playSynthesizedSound(type) {
@@ -2141,10 +2203,14 @@ function sacrificeFly() {
 
 // Handle hits
 function hit(bases, skipMessage = false) {
-    // Play hit sound multiple times based on bases
+    // Play specific hit sound based on bases
     if (!skipMessage) {
-        for (let i = 0; i < bases; i++) {
-            setTimeout(() => playSound('hit'), i * 150);
+        if (bases === 1) {
+            playSound('single');
+        } else if (bases === 2) {
+            playSound('double');
+        } else if (bases === 3) {
+            playSound('triple');
         }
     }
     let hitType;
@@ -2427,10 +2493,8 @@ function walk() {
 
 // Handle home run
 function homeRun() {
-    // Play home run sound 6 times
-    for (let i = 0; i < 6; i++) {
-        setTimeout(() => playSound('homerun'), i * 700);
-    }
+    // Play home run sound once
+    playSound('homerun');
     
     const batter = getCurrentBatter();
     let runsScored = 1; // Batter
