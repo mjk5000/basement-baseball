@@ -1368,6 +1368,17 @@ header {
     font-size: 1.2rem;
 }
 
+/* Version Info */
+.version-info {
+    text-align: center;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 8px;
+    padding: 4px;
+    font-family: monospace;
+    user-select: none;
+}
+
 /* Lineup Icon Buttons */
 .lineup-icon-buttons {
     display: flex;
