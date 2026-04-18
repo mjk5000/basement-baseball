@@ -121,6 +121,9 @@ function preloadCustomSounds() {
         ],
         'undo': [
             'sounds/Undo.m4a'
+        ],
+        'simulate': [
+            'sounds/Simulate batter.m4a'
         ]
     };
     
@@ -2636,21 +2639,21 @@ function simulateComputerAtBat() {
 // Manual simulate button - works for any game mode
 function manualSimulateBatter() {
     cancelAllSounds(); // Cancel any playing sounds
+    playSound('simulate'); // Play simulate sound
     saveState(); // Save state before action
     simulateOneBatter();
 }
 
 // Core simulation logic
 function simulateOneBatter() {
-    // Simulate a realistic at-bat with complete plate appearance outcomes
+    // Simulate a realistic at-bat with complete plate appearance outcomes only
+    // No intermediate balls/strikes - only final results
     const outcomes = [
         { action: () => processContact('grounder'), weight: 25 },
         { action: () => processContact('linedrive'), weight: 20 },
         { action: () => processContact('popup'), weight: 15 },
-        { action: () => { completeStrikeout(); }, weight: 22 },
-        { action: () => { completeWalk(); }, weight: 9 },
-        { action: () => { swingAndMiss(); }, weight: 5 },
-        { action: () => { foulBall(); }, weight: 4 }
+        { action: () => { completeStrikeout(); }, weight: 27 },  // Increased to compensate for removed swing/miss/foul
+        { action: () => { completeWalk(); }, weight: 13 }  // Increased to compensate
     ];
     
     const totalWeight = outcomes.reduce((sum, o) => sum + o.weight, 0);
