@@ -29,6 +29,38 @@ const POPULAR_NAMES = [
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 let soundMuted = true;
 
+// Custom audio files
+const customSounds = {};
+
+// Preload custom audio files
+function preloadCustomSounds() {
+    const soundFiles = {
+        'out': 'sounds/out.mp3',
+        // Add more custom sounds here as you record them:
+        // 'strike': 'sounds/strike.mp3',
+        // 'ball': 'sounds/ball.mp3',
+        // 'hit': 'sounds/hit.mp3',
+        // 'homerun': 'sounds/homerun.mp3',
+        // 'crowd': 'sounds/crowd.mp3'
+    };
+    
+    for (const [type, path] of Object.entries(soundFiles)) {
+        const audio = new Audio(path);
+        audio.preload = 'auto';
+        audio.onerror = () => {
+            console.log(`Custom sound '${type}' not found, will use synthesized sound`);
+        };
+        customSounds[type] = audio;
+    }
+}
+
+// Call preload when page loads
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', preloadCustomSounds);
+} else {
+    preloadCustomSounds();
+}
+
 function toggleSound() {
     soundMuted = !soundMuted;
     const muteBtn = document.getElementById('muteBtn');
@@ -45,6 +77,23 @@ function toggleSound() {
 
 function playSound(type) {
     if (soundMuted) return; // Don't play if muted
+    
+    // Try to play custom sound first
+    if (customSounds[type]) {
+        const audio = customSounds[type].cloneNode();
+        audio.volume = 0.7; // Adjust volume as needed
+        audio.play().catch(() => {
+            // If custom sound fails, fall back to synthesized
+            playSynthesizedSound(type);
+        });
+        return;
+    }
+    
+    // Fall back to synthesized sound
+    playSynthesizedSound(type);
+}
+
+function playSynthesizedSound(type) {
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
     
