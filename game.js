@@ -2858,39 +2858,43 @@ function announceScore(isGameOver = false, playEndOfInningSound = true) {
     
     // THEN delay before announcing score (let end of inning sound play and finish)
     setTimeout(() => {
-        // Queue sounds in order
+        // Queue sounds in order with delays between parts
         if (isGameOver) {
             playSound('scoreThatsTheBallgame');
-            playSound(leadStatus); // Home/Visitor team wins
+            setTimeout(() => playSound(leadStatus), 300); // Home/Visitor team wins
         }
         
-        playSound('scoreTheScoreIs');
+        setTimeout(() => playSound('scoreTheScoreIs'), isGameOver ? 600 : 0);
         
         // Leading score
-        if (leadingScore > 25) {
-            playSound('scoreTooMany');
-        } else {
-            playSound(`scoreNum_${leadingScore}`);
-        }
+        setTimeout(() => {
+            if (leadingScore > 25) {
+                playSound('scoreTooMany');
+            } else {
+                playSound(`scoreNum_${leadingScore}`);
+            }
+        }, isGameOver ? 900 : 300);
         
-        playSound('scoreTo');
+        setTimeout(() => playSound('scoreTo'), isGameOver ? 1200 : 600);
         
         // Trailing score
-        if (trailingScore > 25) {
-            // If both are over 25, use "Also too many to count"
-            if (leadingScore > 25) {
-                playSound('scoreAlsoTooMany');
+        setTimeout(() => {
+            if (trailingScore > 25) {
+                // If both are over 25, use "Also too many to count"
+                if (leadingScore > 25) {
+                    playSound('scoreAlsoTooMany');
+                } else {
+                    playSound('scoreTooMany');
+                }
             } else {
-                playSound('scoreTooMany');
+                playSound(`scoreNum_${trailingScore}`);
             }
-        } else {
-            playSound(`scoreNum_${trailingScore}`);
-        }
+        }, isGameOver ? 1500 : 900);
         
         if (!isGameOver) {
-            playSound(leadStatus); // Home/Away leads or Tie
+            setTimeout(() => playSound(leadStatus), 1200); // Home/Away leads or Tie
         }
-    }, 4000); // 4 second delay to let end of inning sound finish completely
+    }, 5000); // 5 second delay to let end of inning sound finish completely
 }
 
 // Record an out
