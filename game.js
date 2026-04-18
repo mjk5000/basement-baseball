@@ -124,10 +124,49 @@ function preloadCustomSounds() {
         ],
         'simulate': [
             'sounds/Simulate batter.m4a'
-        ]
+        ],
+        'scoreNumbers': {},
+        'scoreTheScoreIs': 'sounds/ScoreSounds/The score is.m4a',
+        'scoreTo': 'sounds/ScoreSounds/To.m4a',
+        'scoreHomeLeads': 'sounds/ScoreSounds/Home team leads.m4a',
+        'scoreAwayLeads': 'sounds/ScoreSounds/Away team leads.m4a',
+        'scoreTie': 'sounds/ScoreSounds/Tie ball game.m4a',
+        'scoreHomeWins': 'sounds/ScoreSounds/Home team wins.m4a',
+        'scoreVisitorWins': 'sounds/ScoreSounds/Visitor team wins.m4a',
+        'scoreThatsTheBallgame': 'sounds/ScoreSounds/That\'s the ballgame.m4a'
     };
     
+    // Preload number sounds 0-25
+    for (let i = 0; i <= 25; i++) {
+        soundFiles.scoreNumbers[i] = `sounds/ScoreSounds/${i}.m4a`;
+    }
+    
     for (const [type, paths] of Object.entries(soundFiles)) {
+        // Skip scoreNumbers object - handle it separately
+        if (type === 'scoreNumbers') {
+            customSounds[type] = {};
+            for (const [num, path] of Object.entries(paths)) {
+                const audio = new Audio(path);
+                audio.preload = 'auto';
+                audio.onerror = () => {
+                    console.log(`Score number sound '${num}' not found`);
+                };
+                customSounds[type][num] = audio;
+            }
+            continue;
+        }
+        
+        // Handle special score sounds (single files)
+        if (type.startsWith('score') && typeof paths === 'string') {
+            const audio = new Audio(paths);
+            audio.preload = 'auto';
+            audio.onerror = () => {
+                console.log(`Score sound '${type}' not found`);
+            };
+            customSounds[type] = audio;
+            continue;
+        }
+        
         customSounds[type] = [];
         const pathArray = Array.isArray(paths) ? paths : [paths];
         pathArray.forEach(path => {
@@ -187,6 +226,12 @@ function playSound(type, allowOverlap = false) {
         return;
     }
     
+    // Handle special score sound types
+    if (type.startsWith('score')) {
+        playImmediately(type);
+        return;
+    }
+    
     // Add to queue for sequential playback
     soundQueue.push(type);
     processNextSound();
@@ -205,6 +250,51 @@ function processNextSound() {
 }
 
 function playImmediately(type) {
+    // Handle score number sounds
+    if (type.startsWith('scoreNum_')) {
+        const num = type.replace('scoreNum_', '');
+        if (customSounds.scoreNumbers && customSounds.scoreNumbers[num]) {
+            const audio = customSounds.scoreNumbers[num].cloneNode();
+            audio.volume = 0.7;
+            
+            currentlyPlaying = audio;
+            audio.onended = () => {
+                currentlyPlaying = null;
+                setTimeout(processNextSound, 100);
+            };
+            audio.onerror = () => {
+                currentlyPlaying = null;
+                setTimeout(processNextSound, 100);
+            };
+            audio.play().catch(() => {
+                currentlyPlaying = null;
+                setTimeout(processNextSound, 100);
+            });
+            return;
+        }
+    }
+    
+    // Handle special single-file score sounds
+    if (type.startsWith('score') && customSounds[type] && !Array.isArray(customSounds[type])) {
+        const audio = customSounds[type].cloneNode();
+        audio.volume = 0.7;
+        
+        currentlyPlaying = audio;
+        audio.onended = () => {
+            currentlyPlaying = null;
+            setTimeout(processNextSound, 100);
+        };
+        audio.onerror = () => {
+            currentlyPlaying = null;
+            setTimeout(processNextSound, 100);
+        };
+        audio.play().catch(() => {
+            currentlyPlaying = null;
+            setTimeout(processNextSound, 100);
+        });
+        return;
+    }
+    
     // Try to play custom sound first
     if (customSounds[type] && customSounds[type].length > 0) {
         // Randomly select from available sounds of this type
@@ -2604,7 +2694,7 @@ function checkWalkOff() {
         // If home team is ahead, they win! (walk-off)
         if (gameState.homeScore > gameState.awayScore) {
             setTimeout(() => {
-                playSound('gameOver');
+                announceScore(true); // true = game over
                 showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off victory! 🎊`);
             }, 1000);
             return true;
@@ -2617,7 +2707,7 @@ function checkWalkOff() {
             const winner = gameState.homeScore > gameState.awayScore ? gameState.homeTeamName : gameState.awayTeamName;
             const finalScore = `${gameState.awayScore}-${gameState.homeScore}`;
             setTimeout(() => {
-                playSound('gameOver');
+                announceScore(true); // true = game over
                 showMessage(`🎉 GAME OVER! ${winner} wins ${finalScore}! 🎊`);
             }, 1000);
             return true;
@@ -2707,6 +2797,49 @@ function getOrdinal(n) {
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
 }
 
+// Announce score at end of inning or game
+function announceScore(isGameOver = false) {
+    const homeScore = gameState.homeScore;
+    const awayScore = gameState.awayScore;
+    
+    // Determine leading team and scores
+    let leadingScore, trailingScore, leadStatus;
+    
+    if (homeScore > awayScore) {
+        leadingScore = homeScore;
+        trailingScore = awayScore;
+        leadStatus = isGameOver ? 'scoreHomeWins' : 'scoreHomeLeads';
+    } else if (awayScore > homeScore) {
+        leadingScore = awayScore;
+        trailingScore = homeScore;
+        leadStatus = isGameOver ? 'scoreVisitorWins' : 'scoreAwayLeads';
+    } else {
+        // Tie game
+        leadingScore = homeScore;
+        trailingScore = awayScore;
+        leadStatus = 'scoreTie';
+    }
+    
+    // Cap scores at 25
+    const leadingScoreCapped = Math.min(leadingScore, 25);
+    const trailingScoreCapped = Math.min(trailingScore, 25);
+    
+    // Queue sounds in order
+    if (isGameOver) {
+        playSound('scoreThatsTheBallgame');
+        playSound(leadStatus); // Home/Visitor team wins
+    }
+    
+    playSound('scoreTheScoreIs');
+    playSound(`scoreNum_${leadingScoreCapped}`);
+    playSound('scoreTo');
+    playSound(`scoreNum_${trailingScoreCapped}`);
+    
+    if (!isGameOver) {
+        playSound(leadStatus); // Home/Away leads or Tie
+    }
+}
+
 // Record an out
 function recordOut(skipSound = false) {
     if (!skipSound) {
@@ -2724,37 +2857,49 @@ function recordOut(skipSound = false) {
             // Record runs for this inning
             if (gameState.inningHalf === 'top') {
                 gameState.awayInnings[gameState.inning - 1] = gameState.currentInningRuns;
-                playSound('endTopInning'); // End of top inning sound
-                showMessage(`${gameState.lastPlay}! End of Top ${inningOrdinal}. ${battingTeam} scored ${gameState.currentInningRuns} run${gameState.currentInningRuns !== 1 ? 's' : ''}.`);
-                gameState.inningHalf = 'bottom';
                 
                 // Check if home team wins without batting (ahead after top of final inning or later)
-                if (gameState.inning >= gameState.totalInnings && gameState.homeScore > gameState.awayScore) {
+                const gameOverNow = gameState.inning >= gameState.totalInnings && gameState.homeScore > gameState.awayScore;
+                
+                if (gameOverNow) {
+                    // Game over - announce game over with score
                     setTimeout(() => {
-                        playSound('gameOver');
+                        announceScore(true); // true = game over
                         showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! 🎊`);
                     }, 1500);
                     return; // Game over, home team doesn't need to bat
+                } else {
+                    // Not game over - announce end of top inning with score
+                    playSound('endTopInning');
+                    announceScore(false); // false = not game over, just end of inning
+                    showMessage(`${gameState.lastPlay}! End of Top ${inningOrdinal}. ${battingTeam} scored ${gameState.currentInningRuns} run${gameState.currentInningRuns !== 1 ? 's' : ''}.`);
                 }
                 
+                gameState.inningHalf = 'bottom';
                 // Set home's current inning to 0 to start
                 gameState.homeInnings[gameState.inning - 1] = 0;
             } else {
                 gameState.homeInnings[gameState.inning - 1] = gameState.currentInningRuns;
-                playSound('endInning'); // End of inning sound
-                showMessage(`${gameState.lastPlay}! End of ${inningOrdinal}. ${battingTeam} scored ${gameState.currentInningRuns} run${gameState.currentInningRuns !== 1 ? 's' : ''}.`);
-                
-                // Check for walk-off or game end before advancing inning
-                if (checkWalkOff()) {
-                    return; // Game over!
-                }
                 
                 // Check if away team won after bottom of final inning or later
-                if (gameState.inning >= gameState.totalInnings && gameState.awayScore > gameState.homeScore) {
+                const gameOverNow = gameState.inning >= gameState.totalInnings && gameState.awayScore > gameState.homeScore;
+                
+                if (gameOverNow) {
+                    // Game over - announce game over with score
                     setTimeout(() => {
-                        playSound('gameOver');
+                        announceScore(true); // true = game over
                         showMessage(`🎉 GAME OVER! ${gameState.awayTeamName} wins ${gameState.awayScore}-${gameState.homeScore}! 🎊`);
                     }, 1500);
+                    return; // Game over!
+                } else {
+                    // Not game over - announce end of inning with score
+                    playSound('endInning');
+                    announceScore(false); // false = not game over, just end of inning
+                    showMessage(`${gameState.lastPlay}! End of ${inningOrdinal}. ${battingTeam} scored ${gameState.currentInningRuns} run${gameState.currentInningRuns !== 1 ? 's' : ''}.`);
+                }
+                
+                // Check for walk-off (will be handled by checkWalkOff modifications below)
+                if (checkWalkOff()) {
                     return; // Game over!
                 }
                 
