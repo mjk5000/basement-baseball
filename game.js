@@ -35,22 +35,78 @@ const customSounds = {};
 // Preload custom audio files
 function preloadCustomSounds() {
     const soundFiles = {
-        'out': 'sounds/out.mp3',
-        // Add more custom sounds here as you record them:
-        // 'strike': 'sounds/strike.mp3',
-        // 'ball': 'sounds/ball.mp3',
-        // 'hit': 'sounds/hit.mp3',
-        // 'homerun': 'sounds/homerun.mp3',
-        // 'crowd': 'sounds/crowd.mp3'
+        'strike': [
+            'sounds/Strike.m4a',
+            'sounds/Swing miss - serious.m4a',
+            'sounds/Swing miss what is that.m4a',
+            'sounds/Turn belly button missed swing.m4a'
+        ],
+        'strikeout': [
+            'sounds/Strike 3.m4a',
+            'sounds/Struck out swinging.m4a',
+            'sounds/Swing and miss kid doesn\'t play baseball.m4a',
+            'sounds/Take a seat.m4a'
+        ],
+        'out': [
+            'sounds/Out.m4a',
+            'sounds/You are out.m4a'
+        ],
+        'popout': [
+            'sounds/Pop out.m4a',
+            'sounds/Great catch.m4a'
+        ],
+        'ball': [
+            'sounds/Ball.m4a',
+            'sounds/Walk 1.m4a',
+            'sounds/Walk 2.m4a'
+        ],
+        'walk': [
+            'sounds/Ball 4 take your base.m4a'
+        ],
+        'hit': [
+            'sounds/Great hit.m4a',
+            'sounds/Did you just see that.m4a'
+        ],
+        'homerun': [
+            'sounds/Home run buddy boy.m4a',
+            'sounds/Home run outta here.m4a',
+            'sounds/That\'s a home run.m4a',
+            'sounds/Unbelievable.m4a'
+        ],
+        'crowd': [
+            'sounds/Clapping.m4a'
+        ],
+        'foul': [
+            'sounds/Bunt foul did he just try.m4a'
+        ],
+        'error': [
+            'sounds/Error.m4a'
+        ],
+        'endInning': [
+            'sounds/End of inning.m4a'
+        ],
+        'endTopInning': [
+            'sounds/End of top inning.m4a'
+        ],
+        'gameOver': [
+            'sounds/That\'s ballgame.m4a'
+        ],
+        'undo': [
+            'sounds/Undo.m4a'
+        ]
     };
     
-    for (const [type, path] of Object.entries(soundFiles)) {
-        const audio = new Audio(path);
-        audio.preload = 'auto';
-        audio.onerror = () => {
-            console.log(`Custom sound '${type}' not found, will use synthesized sound`);
-        };
-        customSounds[type] = audio;
+    for (const [type, paths] of Object.entries(soundFiles)) {
+        customSounds[type] = [];
+        const pathArray = Array.isArray(paths) ? paths : [paths];
+        pathArray.forEach(path => {
+            const audio = new Audio(path);
+            audio.preload = 'auto';
+            audio.onerror = () => {
+                console.log(`Custom sound '${type}' at '${path}' not found`);
+            };
+            customSounds[type].push(audio);
+        });
     }
 }
 
@@ -79,8 +135,10 @@ function playSound(type) {
     if (soundMuted) return; // Don't play if muted
     
     // Try to play custom sound first
-    if (customSounds[type]) {
-        const audio = customSounds[type].cloneNode();
+    if (customSounds[type] && customSounds[type].length > 0) {
+        // Randomly select from available sounds of this type
+        const randomIndex = Math.floor(Math.random() * customSounds[type].length);
+        const audio = customSounds[type][randomIndex].cloneNode();
         audio.volume = 0.7; // Adjust volume as needed
         audio.play().catch(() => {
             // If custom sound fails, fall back to synthesized
@@ -337,6 +395,8 @@ function undoLastAction() {
         showMessage('Nothing to undo!');
         return;
     }
+    
+    playSound('undo'); // Play undo sound
     
     // Get the last saved state
     const previousState = gameStateHistory.pop();
@@ -1533,11 +1593,11 @@ function swingAndMiss() {
     flashStrike(gameState.strikes);
     if (gameState.strikes >= 3) {
         gameState.lastPlay = 'Strikeout';
-        playSound('out'); // Sound effect
+        playSound('strikeout'); // Strikeout sound
         showMessage(`Swings and misses!<br>Strikeout by pitcher! (${gameState.strikeouts + 1} K) ⚡`);
         showOutX('home');
         recordAtBat('strikeout');
-        recordOut();
+        recordOut(true); // Skip generic out sound, we played strikeout sound
         resetCount();
     } else {
         showMessage(`Strike ${gameState.strikes}! ❌`);
@@ -1556,11 +1616,13 @@ function noSwing() {
         flashBall(gameState.balls);
         if (gameState.balls >= 4) {
             gameState.lastPlay = 'Walk';
+            playSound('walk'); // Walk sound
             showMessage('Ball 4! Walk! Take your base! 🚶');
             walk();
             recordAtBat('walk');
             resetCount();
         } else {
+            playSound('ball'); // Ball sound
             showMessage(`Ball ${gameState.balls} 🟢`);
             updateDisplay();
         }
@@ -1738,10 +1800,11 @@ function executeOutcome(outcome) {
                     { msg: 'Fly ball to right-center!<br>Outfielder runs it down! 🥎', pos: 'RF' }
                 ];
                 const flyOut = flyOutData[Math.floor(Math.random() * flyOutData.length)];
+                playSound('popout'); // Pop out sound
                 showMessage(flyOut.msg);
                 showOutX(flyOut.pos);
                 recordAtBat('out');
-                recordOut();
+                recordOut(true); // Skip generic out sound, we played popout sound
             }
             break;
         case 'lineout':
@@ -1789,6 +1852,7 @@ function executeOutcome(outcome) {
             break;
         case 'error':
             gameState.lastPlay = 'Error';
+            playSound('error'); // Error sound
             const errorMessages = [
                 'Ground ball to short!<br>Bobbled! Error! Runner safe at first! ⚠️',
                 'Grounder to second!<br>Ball goes through the legs! Error! 🙈',
@@ -2517,11 +2581,11 @@ function simulateOneBatter() {
 function completeStrikeout() {
     gameState.strikes = 3;
     gameState.lastPlay = 'Strikeout';
-    playSound('strike');
+    playSound('strikeout'); // Strikeout sound
     showMessage(`Strike three!<br>Strikeout by pitcher! (${gameState.strikeouts + 1} K) ⚡`);
     showOutX('home');
     recordAtBat('strikeout');
-    recordOut();
+    recordOut(true); // Skip generic out sound, we played strikeout sound
     resetCount();
 }
 
@@ -2529,7 +2593,7 @@ function completeStrikeout() {
 function completeWalk() {
     gameState.balls = 4;
     gameState.lastPlay = 'Walk';
-    playSound('ball');
+    playSound('walk'); // Walk sound
     walk();
     recordAtBat('walk');
     resetCount();
@@ -2543,8 +2607,10 @@ function getOrdinal(n) {
 }
 
 // Record an out
-function recordOut() {
-    playSound('out'); // Play out sound for every out
+function recordOut(skipSound = false) {
+    if (!skipSound) {
+        playSound('out'); // Play out sound for every out (unless specific sound already played)
+    }
     gameState.outs += 1;
     flashOut(gameState.outs);
     
@@ -2557,6 +2623,7 @@ function recordOut() {
             // Record runs for this inning
             if (gameState.inningHalf === 'top') {
                 gameState.awayInnings[gameState.inning - 1] = gameState.currentInningRuns;
+                playSound('endTopInning'); // End of top inning sound
                 showMessage(`${gameState.lastPlay}! End of Top ${inningOrdinal}. ${battingTeam} scored ${gameState.currentInningRuns} run${gameState.currentInningRuns !== 1 ? 's' : ''}.`);
                 gameState.inningHalf = 'bottom';
                 
@@ -2573,6 +2640,7 @@ function recordOut() {
                 gameState.homeInnings[gameState.inning - 1] = 0;
             } else {
                 gameState.homeInnings[gameState.inning - 1] = gameState.currentInningRuns;
+                playSound('endInning'); // End of inning sound
                 showMessage(`${gameState.lastPlay}! End of ${inningOrdinal}. ${battingTeam} scored ${gameState.currentInningRuns} run${gameState.currentInningRuns !== 1 ? 's' : ''}.`);
                 
                 // Check for walk-off or game end before advancing inning
@@ -2629,10 +2697,12 @@ function manualBall() {
     flashBall(gameState.balls);
     if (gameState.balls >= 4) {
         gameState.lastPlay = 'Walk';
+        playSound('walk'); // Walk sound
         walk();
         recordAtBat('walk');
         resetCount();
     } else {
+        playSound('ball'); // Ball sound
         showMessage(`Ball ${gameState.balls}`);
         updateDisplay();
     }
