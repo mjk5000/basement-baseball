@@ -79,6 +79,18 @@ function preloadCustomSounds() {
         'foul': [
             'sounds/Bunt foul did he just try.m4a'
         ],
+        'bunt': [
+            'sounds/Bunt.m4a'
+        ],
+        'buntSacrifice': [
+            'sounds/Bunt sacrifice.m4a'
+        ],
+        'buntOut': [
+            'sounds/Bunt out.m4a'
+        ],
+        'buntHit': [
+            'sounds/Bunt successful hit.m4a'
+        ],
         'error': [
             'sounds/Error.m4a'
         ],
@@ -2797,6 +2809,7 @@ function advanceAllRunners() {
 // Process bunt
 function processBunt() {
     saveState(); // Save state before action
+    playSound('bunt'); // Play general bunt sound
     
     const roll = Math.random();
     const hasRunners = gameState.runners.first || gameState.runners.second || gameState.runners.third;
@@ -2814,13 +2827,14 @@ function processBunt() {
         if (gameState.strikes >= 2) {
             // Strikeout on foul bunt with 2 strikes
             gameState.lastPlay = 'Strikeout - foul bunt';
+            playSound('foul'); // Foul bunt sound
             showMessage('Bunted foul with 2 strikes!<br>That\'s a strikeout! ⚡');
             recordAtBat('strikeout');
-            recordOut();
+            recordOut(true); // Skip generic out sound
             resetCount();
         } else {
             // Add a strike
-            playSound('strike'); // Strike sound for foul bunt
+            playSound('foul'); // Foul bunt sound (instead of strike)
             gameState.strikes++;
             incrementStrikeCount();
             flashStrike(gameState.strikes);
@@ -2839,6 +2853,7 @@ function processBunt() {
         if (adjustedRoll < 0.75) {
             // Successful sacrifice - batter out, runners advance
             gameState.lastPlay = 'Sacrifice bunt';
+            playSound('buntSacrifice'); // Sacrifice bunt sound
             const sacBuntMessages = [
                 'Perfect sacrifice bunt!<br>Batter out, runner advances! 🥎',
                 'Good bunt down the line!<br>Throws to first. OUT! Runner advances! 🥎',
@@ -2900,6 +2915,7 @@ function processBunt() {
         } else if (adjustedRoll < 0.87) {
             // Lead runner thrown out - fielder's choice
             gameState.lastPlay = 'Bunt - lead runner out';
+            playSound('buntOut'); // Bunt out sound
             
             let outLocation = '';
             const newRunners = {
@@ -2950,6 +2966,7 @@ function processBunt() {
         } else if (adjustedRoll < 0.95) {
             // Failed bunt - batter out, runners don't advance
             gameState.lastPlay = 'Failed bunt';
+            playSound('buntOut'); // Bunt out sound
             const failedMessages = [
                 'Popped up the bunt!<br>Easy catch! OUT! Runners hold! 🧤',
                 'Bunted too hard!<br>Quick throw to first! OUT! No advance! 🧤',
@@ -2965,6 +2982,7 @@ function processBunt() {
             // Double play (only possible with < 2 outs)
             if (gameState.outs < 2 && hasRunners) {
                 gameState.lastPlay = 'Bunt double play';
+                playSound('buntOut'); // Bunt out sound
                 const dpMessages = [
                     'Popped up bunt!<br>Caught! Doubles off the runner! DOUBLE PLAY! 🔥',
                     'Line drive bunt!<br>Caught and doubled off first! DOUBLE PLAY! 🔥',
@@ -2976,6 +2994,7 @@ function processBunt() {
             } else {
                 // Can't have DP with 2 outs, so treat as failed bunt instead
                 gameState.lastPlay = 'Failed bunt';
+                playSound('buntOut'); // Bunt out sound
                 const failedMessages = [
                     'Popped up the bunt!<br>Easy catch! OUT! Runners hold! 🧤',
                     'Bunted too hard!<br>Quick throw to first! OUT! No advance! 🧤'
@@ -2994,6 +3013,7 @@ function processBunt() {
         if (adjustedRoll < 0.25) {
             // Successful bunt for hit
             gameState.lastPlay = 'Bunt single';
+            playSound('buntHit'); // Bunt hit sound
             const buntHitMessages = [
                 'Perfect drag bunt!<br>Safe at first! 🥎',
                 'Bunt down the third base line!<br>Beats the throw! Safe! 🥎',
@@ -3007,6 +3027,7 @@ function processBunt() {
         } else {
             // Bunt out at first
             gameState.lastPlay = 'Bunt out';
+            playSound('buntOut'); // Bunt out sound
             const buntOutMessages = [
                 'Bunt to pitcher!<br>Throws to first. OUT! 🧤',
                 'Bunted too hard!<br>Third baseman charges, OUT at first! 🧤',
