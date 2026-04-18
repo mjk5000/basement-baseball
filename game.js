@@ -505,7 +505,8 @@ let gameState = {
     homeTeamName: 'Home',
     awayTeamName: 'Away',
     gameMode: '2player', // '2player' or '1player'
-    totalInnings: 6 // 3, 6, or 9
+    totalInnings: 6, // 3, 6, or 9
+    gameOver: false // Track if game has ended
 };
 
 // DOM elements
@@ -1614,6 +1615,7 @@ function showMessage(text) {
 
 // Pitch input handlers
 function processContact(type) {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     stopHomeRunAnimation();
@@ -1771,6 +1773,7 @@ function incrementStrikeCount() {
 }
 
 function swingAndMiss() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     stopHomeRunAnimation();
@@ -1794,6 +1797,7 @@ function swingAndMiss() {
 }
 
 function noSwing() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     stopHomeRunAnimation();
@@ -1835,6 +1839,7 @@ function noSwing() {
 }
 
 function foulBall() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     stopHomeRunAnimation();
@@ -2289,6 +2294,8 @@ function sacrificeFly() {
             
             // Check for walk-off IMMEDIATELY when home team goes ahead in final inning or later
             if (gameState.inning >= gameState.totalInnings && gameState.homeScore > gameState.awayScore) {
+                gameState.gameOver = true;
+                playSound('gameOver'); // Play game over music
                 setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
                     showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off sacrifice fly! 🎊`);
@@ -2492,6 +2499,8 @@ function hit(bases, skipMessage = false) {
             
             // Check for walk-off IMMEDIATELY when home team goes ahead in final inning or later
             if (gameState.inning >= gameState.totalInnings && gameState.homeScore > gameState.awayScore) {
+                gameState.gameOver = true;
+                playSound('gameOver'); // Play game over music
                 setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
                     showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off victory! 🎊`);
@@ -2690,6 +2699,8 @@ function homeRun() {
             
             // Check for walk-off IMMEDIATELY when home team goes ahead in final inning or later
             if (gameState.inning >= gameState.totalInnings && gameState.homeScore > gameState.awayScore) {
+                gameState.gameOver = true;
+                playSound('gameOver'); // Play game over music
                 setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
                     showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off HOME RUN! 🎇🎊`);
@@ -2720,6 +2731,8 @@ function checkWalkOff() {
     if (gameState.inning >= gameState.totalInnings && gameState.inningHalf === 'bottom') {
         // If home team is ahead, they win! (walk-off)
         if (gameState.homeScore > gameState.awayScore) {
+            gameState.gameOver = true;
+            playSound('gameOver'); // Play game over music
             setTimeout(() => {
                 announceScore(true); // true = game over
                 showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off victory! 🎊`);
@@ -2731,6 +2744,8 @@ function checkWalkOff() {
     // Check if game ends in extra innings after top half (one team ahead)
     if (gameState.inning > gameState.totalInnings && gameState.inningHalf === 'top') {
         if (gameState.homeScore !== gameState.awayScore) {
+            gameState.gameOver = true;
+            playSound('gameOver'); // Play game over music
             const winner = gameState.homeScore > gameState.awayScore ? gameState.homeTeamName : gameState.awayTeamName;
             const finalScore = `${gameState.awayScore}-${gameState.homeScore}`;
             setTimeout(() => {
@@ -2755,6 +2770,7 @@ function simulateComputerAtBat() {
 
 // Manual simulate button - works for any game mode
 function manualSimulateBatter() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     playSound('simulate'); // Play simulate sound
     saveState(); // Save state before action
@@ -2920,6 +2936,8 @@ function recordOut(skipSound = false) {
                 
                 if (gameOverNow) {
                     // Game over - announce game over with score
+                    gameState.gameOver = true;
+                    playSound('gameOver'); // Play game over music
                     setTimeout(() => {
                         announceScore(true); // true = game over
                         showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! 🎊`);
@@ -2942,6 +2960,8 @@ function recordOut(skipSound = false) {
                 
                 if (gameOverNow) {
                     // Game over - announce game over with score
+                    gameState.gameOver = true;
+                    playSound('gameOver'); // Play game over music
                     setTimeout(() => {
                         announceScore(true); // true = game over
                         showMessage(`🎉 GAME OVER! ${gameState.awayTeamName} wins ${gameState.awayScore}-${gameState.homeScore}! 🎊`);
@@ -2992,6 +3012,7 @@ function recordOut(skipSound = false) {
 
 // Manual controls
 function manualBall() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     incrementPitchCount();
@@ -3011,6 +3032,7 @@ function manualBall() {
 }
 
 function manualStrike() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     incrementPitchCount();
@@ -3032,6 +3054,7 @@ function manualStrike() {
 }
 
 function manualWalk() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     gameState.lastPlay = 'Walk';
@@ -3050,6 +3073,7 @@ function advanceAllRunners() {
         return;
     }
     
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     
@@ -3101,6 +3125,7 @@ function advanceAllRunners() {
 
 // Process bunt
 function processBunt() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     playSound('bunt'); // Play general bunt sound
@@ -3340,6 +3365,7 @@ function processBunt() {
 }
 
 function manualSingle() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     gameState.lastPlay = 'Single';
@@ -3349,6 +3375,7 @@ function manualSingle() {
 }
 
 function manualDouble() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     gameState.lastPlay = 'Double';
@@ -3358,6 +3385,7 @@ function manualDouble() {
 }
 
 function manualTriple() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     gameState.lastPlay = 'Triple';
@@ -3367,6 +3395,7 @@ function manualTriple() {
 }
 
 function manualHomeRun() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     gameState.lastPlay = 'Home Run';
@@ -3376,7 +3405,7 @@ function manualHomeRun() {
 
 function manualOut() {
     // Prevent processing if already at 3 outs (for rapid clicking)
-    if (gameState.outs >= 3) {
+    if (gameState.outs >= 3 || gameState.gameOver) {
         return;
     }
     
@@ -3449,7 +3478,8 @@ function newGame() {
             homeTeamName: homeTeamName,
             awayTeamName: awayTeamName,
             gameMode: gameMode,
-            totalInnings: totalInnings
+            totalInnings: totalInnings,
+            gameOver: false // Reset game over flag
         };
         
         // Clear history
@@ -3517,6 +3547,7 @@ function toggleManualButtons() {
 
 // Random outcome generator
 function randomOutcome() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     const groundOutMsgs = [
