@@ -133,7 +133,9 @@ function preloadCustomSounds() {
         'scoreTie': 'sounds/ScoreSounds/Tie ball game.m4a',
         'scoreHomeWins': 'sounds/ScoreSounds/Home team wins.m4a',
         'scoreVisitorWins': 'sounds/ScoreSounds/Visitor team wins.m4a',
-        'scoreThatsTheBallgame': 'sounds/ScoreSounds/That\'s the ballgame.m4a'
+        'scoreThatsTheBallgame': 'sounds/ScoreSounds/That\'s the ballgame.m4a',
+        'scoreTooMany': 'sounds/ScoreSounds/Too many to count.m4a',
+        'scoreAlsoTooMany': 'sounds/ScoreSounds/Also too many to count.m4a'
     };
     
     // Preload number sounds 0-25
@@ -2820,24 +2822,41 @@ function announceScore(isGameOver = false) {
         leadStatus = 'scoreTie';
     }
     
-    // Cap scores at 25
-    const leadingScoreCapped = Math.min(leadingScore, 25);
-    const trailingScoreCapped = Math.min(trailingScore, 25);
-    
-    // Queue sounds in order
-    if (isGameOver) {
-        playSound('scoreThatsTheBallgame');
-        playSound(leadStatus); // Home/Visitor team wins
-    }
-    
-    playSound('scoreTheScoreIs');
-    playSound(`scoreNum_${leadingScoreCapped}`);
-    playSound('scoreTo');
-    playSound(`scoreNum_${trailingScoreCapped}`);
-    
-    if (!isGameOver) {
-        playSound(leadStatus); // Home/Away leads or Tie
-    }
+    // Delay before announcing score (let action sounds finish)
+    setTimeout(() => {
+        // Queue sounds in order
+        if (isGameOver) {
+            playSound('scoreThatsTheBallgame');
+            playSound(leadStatus); // Home/Visitor team wins
+        }
+        
+        playSound('scoreTheScoreIs');
+        
+        // Leading score
+        if (leadingScore > 25) {
+            playSound('scoreTooMany');
+        } else {
+            playSound(`scoreNum_${leadingScore}`);
+        }
+        
+        playSound('scoreTo');
+        
+        // Trailing score
+        if (trailingScore > 25) {
+            // If both are over 25, use "Also too many to count"
+            if (leadingScore > 25) {
+                playSound('scoreAlsoTooMany');
+            } else {
+                playSound('scoreTooMany');
+            }
+        } else {
+            playSound(`scoreNum_${trailingScore}`);
+        }
+        
+        if (!isGameOver) {
+            playSound(leadStatus); // Home/Away leads or Tie
+        }
+    }, 1500); // 1.5 second delay to let action sounds finish
 }
 
 // Record an out
