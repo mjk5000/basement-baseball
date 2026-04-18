@@ -159,6 +159,22 @@ function toggleSound() {
     }
 }
 
+function cancelAllSounds() {
+    // Clear the queue
+    soundQueue = [];
+    
+    // Stop currently playing sound
+    if (currentlyPlaying) {
+        try {
+            currentlyPlaying.pause();
+            currentlyPlaying.currentTime = 0;
+        } catch (e) {
+            // Ignore errors if sound can't be stopped
+        }
+        currentlyPlaying = null;
+    }
+}
+
 function playSound(type, allowOverlap = false) {
     if (soundMuted) return; // Don't play if muted
     
@@ -465,6 +481,7 @@ function saveState() {
 
 // Undo last action
 function undoLastAction() {
+    cancelAllSounds(); // Cancel any playing sounds
     if (gameStateHistory.length === 0) {
         showMessage('Nothing to undo!');
         return;
@@ -1502,6 +1519,7 @@ function showMessage(text) {
 
 // Pitch input handlers
 function processContact(type) {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     stopHomeRunAnimation();
     incrementPitchCount();
@@ -1658,6 +1676,7 @@ function incrementStrikeCount() {
 }
 
 function swingAndMiss() {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     stopHomeRunAnimation();
     incrementPitchCount();
@@ -1680,6 +1699,7 @@ function swingAndMiss() {
 }
 
 function noSwing() {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     stopHomeRunAnimation();
     incrementPitchCount();
@@ -1720,6 +1740,7 @@ function noSwing() {
 }
 
 function foulBall() {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     stopHomeRunAnimation();
     incrementPitchCount();
@@ -2614,6 +2635,7 @@ function simulateComputerAtBat() {
 
 // Manual simulate button - works for any game mode
 function manualSimulateBatter() {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     simulateOneBatter();
 }
@@ -2767,6 +2789,7 @@ function recordOut(skipSound = false) {
 
 // Manual controls
 function manualBall() {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     incrementPitchCount();
     gameState.balls++;
@@ -2785,6 +2808,7 @@ function manualBall() {
 }
 
 function manualStrike() {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     incrementPitchCount();
     playSound('strike'); // Strike sound
@@ -2805,6 +2829,7 @@ function manualStrike() {
 }
 
 function manualWalk() {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     gameState.lastPlay = 'Walk';
     playSound('walk'); // Play walk sound
@@ -2822,6 +2847,7 @@ function advanceAllRunners() {
         return;
     }
     
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     
     let runsScored = 0;
@@ -2872,6 +2898,7 @@ function advanceAllRunners() {
 
 // Process bunt
 function processBunt() {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     playSound('bunt'); // Play general bunt sound
     
@@ -3110,6 +3137,7 @@ function processBunt() {
 }
 
 function manualSingle() {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     gameState.lastPlay = 'Single';
     hit(1);
@@ -3118,6 +3146,7 @@ function manualSingle() {
 }
 
 function manualDouble() {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     gameState.lastPlay = 'Double';
     hit(2);
@@ -3126,6 +3155,7 @@ function manualDouble() {
 }
 
 function manualTriple() {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     gameState.lastPlay = 'Triple';
     hit(3);
@@ -3134,6 +3164,7 @@ function manualTriple() {
 }
 
 function manualHomeRun() {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     gameState.lastPlay = 'Home Run';
     homeRun();
@@ -3146,6 +3177,7 @@ function manualOut() {
         return;
     }
     
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     gameState.lastPlay = 'Out at first';
     showMessage('Out at first base! 🧤');
@@ -3166,6 +3198,7 @@ function manualOut() {
 // Start a new game
 function newGame() {
     if (confirm('Start a new game? Current scores will be reset.')) {
+        cancelAllSounds(); // Cancel any playing sounds
         // Preserve team settings
         const homeTeamName = gameState.homeTeamName;
         const awayTeamName = gameState.awayTeamName;
@@ -3281,6 +3314,7 @@ function toggleManualButtons() {
 
 // Random outcome generator
 function randomOutcome() {
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     const groundOutMsgs = [
         'Ground ball to short!<br>Out at first! ⚾',
