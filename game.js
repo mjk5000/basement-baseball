@@ -2824,6 +2824,15 @@ function announceScore(isGameOver = false) {
     
     // Delay before announcing score (let action sounds finish)
     setTimeout(() => {
+        // Play end of inning sound first (if not game over)
+        if (!isGameOver) {
+            if (gameState.inningHalf === 'top') {
+                playSound('endTopInning');
+            } else {
+                playSound('endInning');
+            }
+        }
+        
         // Queue sounds in order
         if (isGameOver) {
             playSound('scoreThatsTheBallgame');
@@ -2888,8 +2897,7 @@ function recordOut(skipSound = false) {
                     }, 1500);
                     return; // Game over, home team doesn't need to bat
                 } else {
-                    // Not game over - announce end of top inning with score
-                    playSound('endTopInning');
+                    // Not game over - announce end of top inning with score (score announcement will play the endTopInning sound)
                     announceScore(false); // false = not game over, just end of inning
                     showMessage(`${gameState.lastPlay}! End of Top ${inningOrdinal}. ${battingTeam} scored ${gameState.currentInningRuns} run${gameState.currentInningRuns !== 1 ? 's' : ''}.`);
                 }
@@ -2911,8 +2919,7 @@ function recordOut(skipSound = false) {
                     }, 1500);
                     return; // Game over!
                 } else {
-                    // Not game over - announce end of inning with score
-                    playSound('endInning');
+                    // Not game over - announce end of inning with score (score announcement will play the endInning sound)
                     announceScore(false); // false = not game over, just end of inning
                     showMessage(`${gameState.lastPlay}! End of ${inningOrdinal}. ${battingTeam} scored ${gameState.currentInningRuns} run${gameState.currentInningRuns !== 1 ? 's' : ''}.`);
                 }
