@@ -2731,6 +2731,8 @@ function manualStrike() {
 function manualWalk() {
     saveState(); // Save state before action
     gameState.lastPlay = 'Walk';
+    playSound('walk'); // Play walk sound
+    showMessage('Ball 4! Walk! Take your base! 🚶');
     walk();
     recordAtBat('walk');
     resetCount();
