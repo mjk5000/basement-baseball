@@ -2908,7 +2908,7 @@ function announceScore(isGameOver = false, playEndOfInningSound = true) {
         }, isGameOver ? 1500 : 900);
         
         if (!isGameOver) {
-            setTimeout(() => playSound(leadStatus), 1200); // Home/Away leads or Tie
+            setTimeout(() => playSound(leadStatus), 1500); // Home/Away leads or Tie
         }
     }, 5000); // 5 second delay to let end of inning sound finish completely
 }
