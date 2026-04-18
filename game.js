@@ -2481,8 +2481,12 @@ function hit(bases, skipMessage = false) {
             gameState.currentInningRuns += runsScored;
             flashScoreboardRuns(runsScored);
             
-            // Check for walk-off when home team scores in final inning or later
-            if (gameState.inning >= gameState.totalInnings && checkWalkOff()) {
+            // Check for walk-off IMMEDIATELY when home team goes ahead in final inning or later
+            if (gameState.inning >= gameState.totalInnings && gameState.homeScore > gameState.awayScore) {
+                setTimeout(() => {
+                    announceScore(true, false); // true = game over, false = don't play end of inning sound
+                    showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off victory! 🎊`);
+                }, 1000);
                 return; // Walk-off!
             }
         }
@@ -2559,8 +2563,12 @@ function walk() {
             gameState.currentInningRuns += runsScored;
             flashScoreboardRuns(runsScored);
             
-            // Check for walk-off
-            if (gameState.inning >= gameState.totalInnings && checkWalkOff()) {
+            // Check for walk-off IMMEDIATELY when home team goes ahead in final inning or later
+            if (gameState.inning >= gameState.totalInnings && gameState.homeScore > gameState.awayScore) {
+                setTimeout(() => {
+                    announceScore(true, false); // true = game over, false = don't play end of inning sound
+                    showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off victory! 🎊`);
+                }, 1000);
                 return;
             }
         }
@@ -2670,6 +2678,15 @@ function homeRun() {
             gameState.homeScore += runsScored;
             gameState.currentInningRuns += runsScored;
             flashScoreboardRuns(runsScored);
+            
+            // Check for walk-off IMMEDIATELY when home team goes ahead in final inning or later
+            if (gameState.inning >= gameState.totalInnings && gameState.homeScore > gameState.awayScore) {
+                setTimeout(() => {
+                    announceScore(true, false); // true = game over, false = don't play end of inning sound
+                    showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off HOME RUN! 🎇🎊`);
+                }, 1000);
+                return; // Walk-off!
+            }
         }
         
         // Clear all bases
@@ -2682,8 +2699,7 @@ function homeRun() {
         showMessage(`${description}<br>🎉 HOME RUN! ${runsScored} RBI${runsScored > 1 ? 's' : ''}! 🎇`);
         updateDisplay();
         
-        // Check for walk-off
-        checkWalkOff();
+        // Don't check for walk-off here - already checked above
     }, 1300);
     
     celebrateHomeRun();
@@ -2800,7 +2816,7 @@ function getOrdinal(n) {
 }
 
 // Announce score at end of inning or game
-function announceScore(isGameOver = false) {
+function announceScore(isGameOver = false, playEndOfInningSound = true) {
     const homeScore = gameState.homeScore;
     const awayScore = gameState.awayScore;
     
@@ -2822,17 +2838,17 @@ function announceScore(isGameOver = false) {
         leadStatus = 'scoreTie';
     }
     
-    // Delay before announcing score (let action sounds finish)
-    setTimeout(() => {
-        // Play end of inning sound first (if not game over)
-        if (!isGameOver) {
-            if (gameState.inningHalf === 'top') {
-                playSound('endTopInning');
-            } else {
-                playSound('endInning');
-            }
+    // Play end of inning sound FIRST (if not game over and requested)
+    if (!isGameOver && playEndOfInningSound) {
+        if (gameState.inningHalf === 'top') {
+            playSound('endTopInning');
+        } else {
+            playSound('endInning');
         }
-        
+    }
+    
+    // THEN delay before announcing score (let end of inning sound play)
+    setTimeout(() => {
         // Queue sounds in order
         if (isGameOver) {
             playSound('scoreThatsTheBallgame');
@@ -2865,7 +2881,7 @@ function announceScore(isGameOver = false) {
         if (!isGameOver) {
             playSound(leadStatus); // Home/Away leads or Tie
         }
-    }, 1500); // 1.5 second delay to let action sounds finish
+    }, 2000); // 2 second delay to let end of inning sound finish
 }
 
 // Record an out
