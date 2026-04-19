@@ -1627,6 +1627,8 @@ function processContact(type) {
 }
 
 function backWallHomeRun() {
+    if (gameState.gameOver) return; // Prevent actions after game over
+    cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     stopHomeRunAnimation();
     incrementPitchCount();
@@ -2077,6 +2079,7 @@ function executeOutcome(outcome) {
 
 // Fielder's choice - batter safe, lead runner out
 function fieldersChoice() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     gameState.outs += 1;
     
     if (gameState.outs >= 3) {
@@ -2125,6 +2128,7 @@ function fieldersChoice() {
 
 // Double play - two outs
 function doublePlay() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     gameState.outs += 2;
     
     const dpMessages = [
@@ -2276,6 +2280,7 @@ function tagUpAttempt() {
 
 // Sacrifice fly - runner scores, batter out
 function sacrificeFly() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     gameState.outs += 1;
     
     // Only score runner from third if not the 3rd out, or if it is the 3rd out,
@@ -2336,6 +2341,7 @@ function sacrificeFly() {
 
 // Handle hits
 function hit(bases, skipMessage = false) {
+    if (gameState.gameOver) return; // Prevent actions after game over
     // Play specific hit sound based on bases
     if (!skipMessage) {
         if (bases === 1) {
@@ -2551,6 +2557,7 @@ function hit(bases, skipMessage = false) {
 
 // Handle walk - only advance runners on force plays
 function walk() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     const batter = getCurrentBatter();
     let runsScored = 0;
     
@@ -2640,6 +2647,7 @@ function walk() {
 
 // Handle home run
 function homeRun() {
+    if (gameState.gameOver) return; // Prevent actions after game over
     // Play home run sound once
     playSound('homerun');
     
