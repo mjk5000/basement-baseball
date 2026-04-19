@@ -94,7 +94,10 @@ function preloadCustomSounds() {
             'sounds/Clapping.m4a'
         ],
         'foul': [
-            'sounds/Strike.m4a' // Use strike sound for foul balls (or synthesized beep if file missing)
+            'sounds/Foul 1.m4a',
+            'sounds/Foul 2.m4a',
+            'sounds/Foul 3.m4a',
+            'sounds/Foul 4.m4a'
         ],
         'buntFoul': [
             'sounds/Bunt foul did he just try.m4a'
