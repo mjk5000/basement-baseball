@@ -1787,19 +1787,19 @@ function swingAndMiss() {
     saveState(); // Save state before action
     stopHomeRunAnimation();
     incrementPitchCount();
-    playSound('strike'); // Sound effect
     gameState.strikes++;
     incrementStrikeCount();
     flashStrike(gameState.strikes);
     if (gameState.strikes >= 3) {
+        playSound('strikeout'); // Strikeout sound only, not regular strike
         gameState.lastPlay = 'Strikeout';
-        playSound('strikeout'); // Strikeout sound
         showMessage(`Swings and misses!<br>Strikeout by pitcher! (${gameState.strikeouts + 1} K) ⚡`);
         showOutX('home');
         recordAtBat('strikeout');
         recordOut(true); // Skip generic out sound, we played strikeout sound
         resetCount();
     } else {
+        playSound('strike'); // Sound effect
         showMessage(`Strike ${gameState.strikes}! ❌`);
         updateDisplay();
     }
@@ -1829,11 +1829,11 @@ function noSwing() {
             updateDisplay();
         }
     } else {
-        playSound('strike'); // Strike sound
         gameState.strikes++;
         incrementStrikeCount();
         flashStrike(gameState.strikes);
         if (gameState.strikes >= 3) {
+            playSound('strikeout'); // Strikeout sound only, not regular strike
             gameState.lastPlay = 'Called strikeout';
             showMessage(`Called strike three!<br>Strikeout! (${gameState.strikeouts + 1} K) 👨‍⚖️`);
             showOutX('home');
@@ -1841,6 +1841,7 @@ function noSwing() {
             recordOut();
             resetCount();
         } else {
+            playSound('strike'); // Strike sound
             showMessage(`Called strike ${gameState.strikes}! 📢`);
             updateDisplay();
         }
@@ -3038,11 +3039,11 @@ function manualStrike() {
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     incrementPitchCount();
-    playSound('strike'); // Strike sound
     gameState.strikes++;
     incrementStrikeCount();
     flashStrike(gameState.strikes);
     if (gameState.strikes >= 3) {
+        playSound('strikeout'); // Strikeout sound only, not regular strike
         gameState.lastPlay = 'Strikeout';
         showMessage(`Strike three!<br>Strikeout by pitcher! (${gameState.strikeouts + 1} K) ⚡`);
         showOutX('home');
@@ -3050,6 +3051,7 @@ function manualStrike() {
         recordOut();
         resetCount();
     } else {
+        playSound('strike'); // Strike sound
         showMessage(`Strike ${gameState.strikes}`);
         updateDisplay();
     }

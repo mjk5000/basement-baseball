@@ -1241,8 +1241,144 @@ header h1 {
     }
 }
 
-/* Small mobile */
+/* Small mobile - iPhone optimization */
 @media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    /* Hide inning-by-inning display, keep only score totals */
+    .scoreboard-table th:not(.team-header):not(.runs-header):not(.hits-header):not(.errors-header) {
+        display: none;
+    }
+    
+    .scoreboard-table td:not(.team-name):not(.total-runs):not(.total-hits):not(.total-errors) {
+        display: none;
+    }
+    
+    .mlb-scoreboard {
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+    
+    .scoreboard-table {
+        font-size: 0.9rem;
+    }
+    
+    .scoreboard-table th,
+    .scoreboard-table td {
+        padding: 6px 4px;
+    }
+    
+    /* Hide lineups on small screens */
+    .lineup {
+        display: none;
+    }
+    
+    .scoreboard-wrapper {
+        justify-content: center;
+    }
+    
+    .center-column {
+        width: 100%;
+    }
+    
+    /* Compact game status */
+    .game-status {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .status-left,
+    .status-center,
+    .status-right {
+        width: 100%;
+    }
+    
+    .count-display {
+        gap: 15px;
+        justify-content: space-around;
+    }
+    
+    .count-item {
+        gap: 3px;
+    }
+    
+    .count-label {
+        font-size: 0.65rem;
+    }
+    
+    .circle {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .inning-display {
+        gap: 8px;
+    }
+    
+    .inning-number {
+        font-size: 1.8rem;
+    }
+    
+    /* Compact diamond */
+    .runners-display svg {
+        width: 120px;
+        height: 120px;
+    }
+    
+    /* Compact message */
+    .message {
+        font-size: 0.9rem;
+        padding: 8px;
+        min-height: 50px;
+    }
+    
+    /* Compact controls */
+    .game-area {
+        gap: 8px;
+    }
+    
+    .controls-container {
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .pitch-btn,
+    .manual-btn {
+        height: 50px;
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+    
+    .contact-grid,
+    .action-grid {
+        gap: 8px;
+    }
+    
+    .manual-controls {
+        width: 100%;
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .manual-row {
+        gap: 8px;
+    }
+    
+    .icon-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+    
+    .version-info,
+    .modal-version-info {
+        font-size: 0.65rem;
+    }
+    
     .action-row {
         gap: 10px;
     }
