@@ -2295,6 +2295,7 @@ function sacrificeFly() {
             // Check for walk-off IMMEDIATELY when home team goes ahead in final inning or later
             if (gameState.inning >= gameState.totalInnings && gameState.homeScore > gameState.awayScore) {
                 gameState.gameOver = true;
+                updateDisplay(); // Update scoreboard before game over message
                 playSound('gameOver'); // Play game over music
                 setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
@@ -2500,6 +2501,7 @@ function hit(bases, skipMessage = false) {
             // Check for walk-off IMMEDIATELY when home team goes ahead in final inning or later
             if (gameState.inning >= gameState.totalInnings && gameState.homeScore > gameState.awayScore) {
                 gameState.gameOver = true;
+                updateDisplay(); // Update scoreboard before game over message
                 playSound('gameOver'); // Play game over music
                 setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
@@ -2583,6 +2585,9 @@ function walk() {
             
             // Check for walk-off IMMEDIATELY when home team goes ahead in final inning or later
             if (gameState.inning >= gameState.totalInnings && gameState.homeScore > gameState.awayScore) {
+                gameState.gameOver = true;
+                updateDisplay(); // Update scoreboard before game over message
+                playSound('gameOver'); // Play game over music
                 setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
                     showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off victory! 🎊`);
@@ -2700,6 +2705,7 @@ function homeRun() {
             // Check for walk-off IMMEDIATELY when home team goes ahead in final inning or later
             if (gameState.inning >= gameState.totalInnings && gameState.homeScore > gameState.awayScore) {
                 gameState.gameOver = true;
+                updateDisplay(); // Update scoreboard before game over message
                 playSound('gameOver'); // Play game over music
                 setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
@@ -2732,6 +2738,7 @@ function checkWalkOff() {
         // If home team is ahead, they win! (walk-off)
         if (gameState.homeScore > gameState.awayScore) {
             gameState.gameOver = true;
+            updateDisplay(); // Update scoreboard before game over message
             playSound('gameOver'); // Play game over music
             setTimeout(() => {
                 announceScore(true); // true = game over
@@ -2745,6 +2752,7 @@ function checkWalkOff() {
     if (gameState.inning > gameState.totalInnings && gameState.inningHalf === 'top') {
         if (gameState.homeScore !== gameState.awayScore) {
             gameState.gameOver = true;
+            updateDisplay(); // Update scoreboard before game over message
             playSound('gameOver'); // Play game over music
             const winner = gameState.homeScore > gameState.awayScore ? gameState.homeTeamName : gameState.awayTeamName;
             const finalScore = `${gameState.awayScore}-${gameState.homeScore}`;
@@ -2845,21 +2853,15 @@ function announceScore(isGameOver = false, playEndOfInningSound = true) {
     const homeScore = gameState.homeScore;
     const awayScore = gameState.awayScore;
     
-    // Determine leading team and scores
-    let leadingScore, trailingScore, leadStatus;
+    // Determine leading team
+    let leadStatus;
     
     if (homeScore > awayScore) {
-        leadingScore = homeScore;
-        trailingScore = awayScore;
         leadStatus = isGameOver ? 'scoreHomeWins' : 'scoreHomeLeads';
     } else if (awayScore > homeScore) {
-        leadingScore = awayScore;
-        trailingScore = homeScore;
         leadStatus = isGameOver ? 'scoreVisitorWins' : 'scoreAwayLeads';
     } else {
         // Tie game
-        leadingScore = homeScore;
-        trailingScore = awayScore;
         leadStatus = 'scoreTie';
     }
     
@@ -2872,43 +2874,13 @@ function announceScore(isGameOver = false, playEndOfInningSound = true) {
         }
     }
     
-    // THEN delay before announcing score (let end of inning sound play and finish)
+    // THEN delay before announcing lead status (let end of inning sound play and finish)
     setTimeout(() => {
-        // Queue sounds in order with delays between parts
         if (isGameOver) {
             playSound('scoreThatsTheBallgame');
             setTimeout(() => playSound(leadStatus), 500); // Home/Visitor team wins
-        }
-        
-        setTimeout(() => playSound('scoreTheScoreIs'), isGameOver ? 1000 : 0);
-        
-        // Leading score
-        setTimeout(() => {
-            if (leadingScore > 25) {
-                playSound('scoreTooMany');
-            } else {
-                playSound(`scoreNum_${leadingScore}`);
-            }
-        }, isGameOver ? 1500 : 500);
-        
-        setTimeout(() => playSound('scoreTo'), isGameOver ? 2100 : 1100);
-        
-        // Trailing score
-        setTimeout(() => {
-            if (trailingScore > 25) {
-                // If both are over 25, use "Also too many to count"
-                if (leadingScore > 25) {
-                    playSound('scoreAlsoTooMany');
-                } else {
-                    playSound('scoreTooMany');
-                }
-            } else {
-                playSound(`scoreNum_${trailingScore}`);
-            }
-        }, isGameOver ? 2700 : 1700);
-        
-        if (!isGameOver) {
-            setTimeout(() => playSound(leadStatus), 2500); // Home/Away leads or Tie
+        } else {
+            playSound(leadStatus); // Home/Away leads or Tie
         }
     }, 5000); // 5 second delay to let end of inning sound finish completely
 }
