@@ -94,7 +94,7 @@ function preloadCustomSounds() {
             'sounds/Clapping.m4a'
         ],
         'foul': [
-            // No sound for regular foul balls
+            'sounds/Strike.m4a' // Use strike sound for foul balls (or synthesized beep if file missing)
         ],
         'buntFoul': [
             'sounds/Bunt foul did he just try.m4a'
@@ -769,10 +769,29 @@ function initializeGame() {
         const exitBtn = document.getElementById('exitFullscreenBtn');
         if (enterBtn) enterBtn.style.display = 'none';
         if (exitBtn) exitBtn.style.display = 'none';
+        
+        // Check if iOS and not in standalone mode
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+        
+        if (isIOS && !isStandalone) {
+            // Show message once per session
+            if (!sessionStorage.getItem('iosFullscreenMessageShown')) {
+                setTimeout(() => {
+                    showMessage('💡 For fullscreen on iPhone: Tap Share button ⬆️ then "Add to Home Screen" to hide browser UI');
+                }, 2000);
+                sessionStorage.setItem('iosFullscreenMessageShown', 'true');
+            }
+        }
     }
     
     // Show settings modal on first load
     showGameSettings();
+    
+    // Auto-scroll to hide address bar on mobile
+    setTimeout(() => {
+        window.scrollTo(0, 1);
+    }, 100);
 }
 
 // Show game settings modal

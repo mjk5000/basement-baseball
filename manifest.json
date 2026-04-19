@@ -3,7 +3,7 @@
   "short_name": "Baseball",
   "description": "Interactive baseball simulation game",
   "start_url": "./index.html",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "any",
   "background_color": "#3b82f6",
   "theme_color": "#4ade80",
