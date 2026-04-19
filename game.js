@@ -94,7 +94,10 @@ function preloadCustomSounds() {
             'sounds/Clapping.m4a'
         ],
         'foul': [
-            // No sound for foul balls - removed bunt sounds per user request
+            // No sound for regular foul balls
+        ],
+        'buntFoul': [
+            'sounds/Bunt foul did he just try.m4a'
         ],
         'bunt': [
             'sounds/Bunt.m4a'
@@ -3164,14 +3167,14 @@ function processBunt() {
         if (gameState.strikes >= 2) {
             // Strikeout on foul bunt with 2 strikes
             gameState.lastPlay = 'Strikeout - foul bunt';
-            playSound('foul'); // Foul bunt sound
+            playSound('buntFoul'); // Foul bunt sound
             showMessage('Bunted foul with 2 strikes!<br>That\'s a strikeout! ⚡');
             recordAtBat('strikeout');
             recordOut(true); // Skip generic out sound
             resetCount();
         } else {
             // Add a strike
-            playSound('foul'); // Foul bunt sound (instead of strike)
+            playSound('buntFoul'); // Foul bunt sound (instead of strike)
             gameState.strikes++;
             incrementStrikeCount();
             flashStrike(gameState.strikes);
