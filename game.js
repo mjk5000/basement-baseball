@@ -35,6 +35,7 @@ const customSounds = {};
 // Sound queue to prevent overlapping
 let soundQueue = [];
 let currentlyPlaying = null;
+let announcementTimeouts = []; // Track setTimeout IDs for announcements
 
 // Preload custom audio files
 function preloadCustomSounds() {
@@ -206,6 +207,10 @@ function toggleSound() {
 function cancelAllSounds() {
     // Clear the queue
     soundQueue = [];
+    
+    // Clear all pending announcement timeouts
+    announcementTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
+    announcementTimeouts = [];
     
     // Stop currently playing sound
     if (currentlyPlaying) {
@@ -2307,10 +2312,11 @@ function sacrificeFly() {
                 gameState.gameOver = true;
                 updateDisplay(); // Update scoreboard before game over message
                 playSound('gameOver'); // Play game over music
-                setTimeout(() => {
+                const timeoutId = setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
                     showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off sacrifice fly! 🎊`);
                 }, 1000);
+                announcementTimeouts.push(timeoutId);
                 return; // Walk-off!
             }
         }
@@ -2515,10 +2521,11 @@ function hit(bases, skipMessage = false) {
                 gameState.gameOver = true;
                 updateDisplay(); // Update scoreboard before game over message
                 playSound('gameOver'); // Play game over music
-                setTimeout(() => {
+                const timeoutId = setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
                     showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off victory! 🎊`);
                 }, 1000);
+                announcementTimeouts.push(timeoutId);
                 return; // Walk-off!
             }
         }
@@ -2602,10 +2609,11 @@ function walk() {
                 gameState.gameOver = true;
                 updateDisplay(); // Update scoreboard before game over message
                 playSound('gameOver'); // Play game over music
-                setTimeout(() => {
+                const timeoutId = setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
                     showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off victory! 🎊`);
                 }, 1000);
+                announcementTimeouts.push(timeoutId);
                 return;
             }
         }
@@ -2723,10 +2731,11 @@ function homeRun() {
                 gameState.gameOver = true;
                 updateDisplay(); // Update scoreboard before game over message
                 playSound('gameOver'); // Play game over music
-                setTimeout(() => {
+                const timeoutId = setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
                     showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off HOME RUN! 🎇🎊`);
                 }, 1000);
+                announcementTimeouts.push(timeoutId);
                 return; // Walk-off!
             }
         }
@@ -2756,10 +2765,11 @@ function checkWalkOff() {
             gameState.gameOver = true;
             updateDisplay(); // Update scoreboard before game over message
             playSound('gameOver'); // Play game over music
-            setTimeout(() => {
+            const timeoutId = setTimeout(() => {
                 announceScore(true); // true = game over
                 showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off victory! 🎊`);
             }, 1000);
+            announcementTimeouts.push(timeoutId);
             return true;
         }
     }
@@ -2772,10 +2782,11 @@ function checkWalkOff() {
             playSound('gameOver'); // Play game over music
             const winner = gameState.homeScore > gameState.awayScore ? gameState.homeTeamName : gameState.awayTeamName;
             const finalScore = `${gameState.awayScore}-${gameState.homeScore}`;
-            setTimeout(() => {
+            const timeoutId = setTimeout(() => {
                 announceScore(true); // true = game over
                 showMessage(`🎉 GAME OVER! ${winner} wins ${finalScore}! 🎊`);
             }, 1000);
+            announcementTimeouts.push(timeoutId);
             return true;
         }
     }
@@ -2891,14 +2902,16 @@ function announceScore(isGameOver = false, playEndOfInningSound = true) {
     }
     
     // THEN delay before announcing lead status (let end of inning sound play and finish)
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
         if (isGameOver) {
             playSound('scoreThatsTheBallgame');
-            setTimeout(() => playSound(leadStatus), 500); // Home/Visitor team wins
+            const winTimeoutId = setTimeout(() => playSound(leadStatus), 500); // Home/Visitor team wins
+            announcementTimeouts.push(winTimeoutId);
         } else {
             playSound(leadStatus); // Home/Away leads or Tie
         }
     }, 5000); // 5 second delay to let end of inning sound finish completely
+    announcementTimeouts.push(timeoutId);
 }
 
 // Record an out
@@ -2926,10 +2939,11 @@ function recordOut(skipSound = false) {
                     // Game over - announce game over with score
                     gameState.gameOver = true;
                     playSound('gameOver'); // Play game over music
-                    setTimeout(() => {
+                    const timeoutId = setTimeout(() => {
                         announceScore(true); // true = game over
                         showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! 🎊`);
                     }, 1500);
+                    announcementTimeouts.push(timeoutId);
                     return; // Game over, home team doesn't need to bat
                 } else {
                     // Not game over - announce end of top inning with score (score announcement will play the endTopInning sound)
@@ -2950,10 +2964,11 @@ function recordOut(skipSound = false) {
                     // Game over - announce game over with score
                     gameState.gameOver = true;
                     playSound('gameOver'); // Play game over music
-                    setTimeout(() => {
+                    const timeoutId = setTimeout(() => {
                         announceScore(true); // true = game over
                         showMessage(`🎉 GAME OVER! ${gameState.awayTeamName} wins ${gameState.awayScore}-${gameState.homeScore}! 🎊`);
                     }, 1500);
+                    announcementTimeouts.push(timeoutId);
                     return; // Game over!
                 } else {
                     // Not game over - announce end of inning with score (score announcement will play the endInning sound)
