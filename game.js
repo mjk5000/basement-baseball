@@ -760,6 +760,14 @@ function initializeGame() {
     gameState.homeLineup = lineups.homeLineup;
     gameState.awayLineup = lineups.awayLineup;
     
+    // Hide fullscreen buttons if not supported (e.g., iOS Chrome)
+    if (!document.fullscreenEnabled && !document.webkitFullscreenEnabled) {
+        const enterBtn = document.getElementById('enterFullscreenBtn');
+        const exitBtn = document.getElementById('exitFullscreenBtn');
+        if (enterBtn) enterBtn.style.display = 'none';
+        if (exitBtn) exitBtn.style.display = 'none';
+    }
+    
     // Show settings modal on first load
     showGameSettings();
 }
@@ -908,6 +916,12 @@ function updateTeamNames() {
 // Fullscreen functions
 function enterFullscreen() {
     const elem = document.documentElement;
+    
+    // Check if fullscreen is supported (iOS Chrome doesn't support it)
+    if (!document.fullscreenEnabled && !document.webkitFullscreenEnabled) {
+        return;
+    }
+    
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
     } else if (elem.webkitRequestFullscreen) {

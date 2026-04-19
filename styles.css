@@ -1284,22 +1284,59 @@ header h1 {
         width: 100%;
     }
     
-    /* Compact game status */
+    /* Compact game status - horizontal layout for top section */
     .game-status {
         flex-direction: column;
-        gap: 10px;
-        padding: 10px;
+        gap: 8px;
+        padding: 8px;
+        min-height: auto;
     }
     
-    .status-left,
-    .status-center,
-    .status-right {
+    .status-left {
+        width: auto;
+        flex-direction: row;
+        gap: 12px;
+        margin: 0;
+        align-self: auto;
+    }
+    
+    .status-center {
         width: 100%;
+        order: 3;
+    }
+    
+    .status-right {
+        width: auto;
+        order: 2;
+    }
+    
+    /* Put diamond next to count display */
+    .game-status {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        gap: 8px;
+    }
+    
+    .status-left {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    
+    .status-right {
+        grid-column: 2;
+        grid-row: 1;
+    }
+    
+    .status-center {
+        grid-column: 1 / -1;
+        grid-row: 2;
     }
     
     .count-display {
-        gap: 15px;
-        justify-content: space-around;
+        gap: 8px;
+        justify-content: flex-start;
+        flex-direction: column;
     }
     
     .count-item {
@@ -1316,17 +1353,25 @@ header h1 {
     }
     
     .inning-display {
-        gap: 8px;
+        gap: 6px;
+        flex-direction: column;
+        align-items: center;
     }
     
     .inning-number {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
     
     /* Compact diamond */
+    .runners-display {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
     .runners-display svg {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
     }
     
     /* Compact message */
@@ -1349,8 +1394,14 @@ header h1 {
     .pitch-btn,
     .manual-btn {
         height: 50px;
-        font-size: 0.8rem;
-        padding: 8px;
+        font-size: 0.75rem;
+        padding: 6px;
+        gap: 2px;
+    }
+    
+    /* Fix icon sizes in small screen */
+    .pitch-btn .icon {
+        font-size: 1.2rem;
     }
     
     .contact-grid,
