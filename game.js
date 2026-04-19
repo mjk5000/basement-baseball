@@ -562,7 +562,8 @@ function saveState() {
         homeLineup: gameState.homeLineup,
         awayLineup: gameState.awayLineup,
         currentHomeBatter: gameState.currentHomeBatter,
-        currentAwayBatter: gameState.currentAwayBatter
+        currentAwayBatter: gameState.currentAwayBatter,
+        gameOver: gameState.gameOver
     }));
     
     gameStateHistory.push(stateCopy);
@@ -618,6 +619,7 @@ function undoLastAction() {
     gameState.awayLineup = previousState.awayLineup;
     gameState.currentHomeBatter = previousState.currentHomeBatter;
     gameState.currentAwayBatter = previousState.currentAwayBatter;
+    gameState.gameOver = previousState.gameOver || false; // Restore gameOver flag
     
     updateDisplay();
     updateUndoButton();
