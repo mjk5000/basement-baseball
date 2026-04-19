@@ -74,6 +74,20 @@ A fun, kid-friendly baseball simulation web app optimized for iPad, Kindle, and 
 - ✅ **Works offline** once loaded
 - ✅ **Custom icon** on your home screen
 
+### 🔄 Will It Auto-Update?
+
+**YES** - If you add from a **web URL** (recommended for auto-updates):
+- Example: `https://yourusername.github.io/basement-baseball/`
+- Opens from URL → Always fetches latest version when launched
+- Any code pushed to GitHub Pages appears automatically
+
+**NO** - If you add from **local files**:
+- Example: `file:///storage/emulated/0/Download/index.html`
+- Opens from device storage → Shows saved version only
+- Must manually replace files to update
+
+**Recommendation:** Host on GitHub Pages (free!) for automatic updates. See "Hosting for Auto-Updates" section below.
+
 ---
 
 ## 📱 iPad Setup (Email Method)
@@ -180,7 +194,92 @@ Then open `http://localhost:8000` in your browser
 **Easy sharing methods:**
 - **OneDrive/Google Drive**: Upload the folder, open in Safari on iPad
 - **Local Network**: Run the HTTP server above, access from iPad using your computer's IP
-- **GitHub Pages**: Push to GitHub, enable Pages for free hosting
+- **GitHub Pages**: Push to GitHub, enable Pages for free hosting (best for auto-updates!)
+
+---
+
+## 🌐 Hosting for Auto-Updates (Recommended)
+
+To ensure your home screen app always shows the **latest version**, host it on the web instead of using local files.
+
+### Option 1: GitHub Pages (Free & Easy)
+
+**One-time setup:**
+
+1. **Push this code to GitHub** (if not already done):
+   ```powershell
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/yourusername/basement-baseball.git
+   git push -u origin main
+   ```
+
+2. **Enable GitHub Pages**:
+   - Go to your repo on GitHub
+   - Click **Settings** → **Pages**
+   - Under "Source", select **main** branch
+   - Click **Save**
+   - Wait 1-2 minutes for deployment
+
+3. **Your app is now live at**:
+   `https://yourusername.github.io/basement-baseball/`
+
+4. **Add to home screen from this URL** - it will auto-update!
+
+**To update the app later:**
+```powershell
+git add .
+git commit -m "Update game"
+git push
+```
+Within 1-2 minutes, anyone who opens the app gets the latest version automatically!
+
+### Option 2: Other Free Hosting
+
+- **Netlify**: Drag & drop folder, instant deployment
+- **Vercel**: Connect GitHub repo, auto-deploys on push
+- **Cloudflare Pages**: Similar to GitHub Pages
+
+### How Updates Work
+
+- **Hosted URL** (https://...): Browser checks server for latest files each launch
+- **Local files** (file:///...): Browser reads saved files, never updates
+- **Best practice**: Always use a web URL for production use
+
+---
+
+## 🔧 Troubleshooting
+
+### Home Screen App Shows Old Version
+
+**Problem:** Browser shows v1.12.2 but home screen app shows v1.11.4
+
+**Cause:** iOS/Android caches the home screen app files
+
+**Solution:**
+1. **Delete the home screen icon** (long-press → Remove/Delete)
+2. **Open in Safari/Chrome browser** and verify you see the new version
+3. **Clear browser cache** (optional but recommended):
+   - Safari: Settings → Safari → Clear History and Website Data
+   - Chrome: Settings → Privacy → Clear Browsing Data
+4. **Re-add to home screen** (Share → Add to Home Screen)
+5. **Launch from home screen** - should now show current version
+
+**Prevention:** Always access via a **web URL** (not local files) so the app checks for updates each launch
+
+### Game Not Loading or Broken
+
+- Check browser console for errors (F12 → Console tab)
+- Verify all 4 files are in the same folder
+- Try a different browser
+- Ensure sounds folder is present (optional for sound effects)
+
+### Fullscreen Not Working
+
+- **iPhone/iOS:** Browser fullscreen is not supported - use "Add to Home Screen" instead (see iPhone Setup section)
+- **Android/Desktop:** Click the fullscreen button (⛶) in the header
 
 ---
 
