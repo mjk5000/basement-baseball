@@ -1247,7 +1247,7 @@ header h1 {
 @media (max-width: 480px) {
     header h1 {
         font-size: 1.5rem;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 
     /* Hide inning-by-inning display, keep only score totals */
@@ -1260,8 +1260,8 @@ header h1 {
     }
     
     .mlb-scoreboard {
-        padding: 8px;
-        margin-bottom: 10px;
+        padding: 6px;
+        margin-bottom: 6px;
     }
     
     .scoreboard-table {
@@ -1270,7 +1270,7 @@ header h1 {
     
     .scoreboard-table th,
     .scoreboard-table td {
-        padding: 6px 4px;
+        padding: 4px 3px;
     }
     
     /* Hide lineups on small screens */
@@ -1291,8 +1291,8 @@ header h1 {
         display: grid !important;
         grid-template-columns: 1fr auto;
         grid-template-rows: auto auto;
-        gap: 8px;
-        padding: 8px;
+        gap: 5px;
+        padding: 6px;
         min-height: auto;
     }
     
@@ -1301,7 +1301,7 @@ header h1 {
         grid-row: 1;
         width: auto;
         flex-direction: row;
-        gap: 12px;
+        gap: 10px;
         margin: 0;
         align-self: auto;
     }
@@ -1319,13 +1319,13 @@ header h1 {
     }
     
     .count-display {
-        gap: 8px;
+        gap: 6px;
         justify-content: flex-start;
         flex-direction: column;
     }
     
     .count-item {
-        gap: 3px;
+        gap: 2px;
     }
     
     .count-label {
@@ -1338,7 +1338,7 @@ header h1 {
     }
     
     .inning-display {
-        gap: 6px;
+        gap: 4px;
         flex-direction: column;
         align-items: center;
     }
@@ -1355,25 +1355,42 @@ header h1 {
     }
     
     .runners-display svg {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
     }
     
     /* Compact message */
     .message {
-        font-size: 0.9rem;
-        padding: 8px;
-        min-height: 50px;
+        font-size: 0.85rem;
+        padding: 6px;
+        min-height: 40px;
     }
     
     /* Compact controls */
     .game-area {
-        gap: 8px;
+        gap: 4px;
+        margin-bottom: 2px;
     }
     
     .controls-container {
+        gap: 4px;
+        padding: 6px;
+    }
+    
+    /* Tighter pitch input sections */
+    .pitch-input, .quality-input {
+        padding: 10px;
+        margin-bottom: 8px;
+    }
+    
+    .pitch-header {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+    
+    .pitch-options {
         gap: 8px;
-        padding: 8px;
+        margin-bottom: 6px;
     }
     
     .pitch-btn,
@@ -1396,17 +1413,17 @@ header h1 {
     
     .contact-grid,
     .action-grid {
-        gap: 8px;
+        gap: 6px;
     }
     
     .manual-controls {
         width: 100%;
-        gap: 8px;
-        padding: 8px;
+        gap: 6px;
+        padding: 6px;
     }
     
     .manual-row {
-        gap: 8px;
+        gap: 6px;
     }
     
     .icon-btn {
@@ -1421,18 +1438,28 @@ header h1 {
         font-size: 0.65rem;
     }
     
+    /* Tighter spacing between advance buttons */
+    .actions {
+        gap: 4px;
+    }
+    
     .action-row {
-        gap: 10px;
+        gap: 6px;
     }
 
     .game-btn {
-        width: 120px;
-        height: 80px;
+        width: 115px;
+        height: 65px;
+        font-size: 0.9rem;
+    }
+    
+    .game-btn .icon {
+        font-size: 1.3rem;
     }
 
     .game-info {
-        gap: 30px;
-        padding: 15px 20px;
+        gap: 20px;
+        padding: 10px 15px;
     }
 }
 
