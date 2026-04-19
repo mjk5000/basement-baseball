@@ -1962,7 +1962,7 @@ function foulBall() {
     }
     
     if (gameState.strikes < 2) {
-        playSound('strike'); // Strike sound for foul ball
+        playSound('foul'); // Simple strike sound for foul ball (not verbal strike calls)
         gameState.strikes++;
         incrementStrikeCount();
     }
