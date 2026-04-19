@@ -2877,10 +2877,10 @@ function announceScore(isGameOver = false, playEndOfInningSound = true) {
         // Queue sounds in order with delays between parts
         if (isGameOver) {
             playSound('scoreThatsTheBallgame');
-            setTimeout(() => playSound(leadStatus), 300); // Home/Visitor team wins
+            setTimeout(() => playSound(leadStatus), 500); // Home/Visitor team wins
         }
         
-        setTimeout(() => playSound('scoreTheScoreIs'), isGameOver ? 600 : 0);
+        setTimeout(() => playSound('scoreTheScoreIs'), isGameOver ? 1000 : 0);
         
         // Leading score
         setTimeout(() => {
@@ -2889,9 +2889,9 @@ function announceScore(isGameOver = false, playEndOfInningSound = true) {
             } else {
                 playSound(`scoreNum_${leadingScore}`);
             }
-        }, isGameOver ? 900 : 300);
+        }, isGameOver ? 1500 : 500);
         
-        setTimeout(() => playSound('scoreTo'), isGameOver ? 1200 : 600);
+        setTimeout(() => playSound('scoreTo'), isGameOver ? 2100 : 1100);
         
         // Trailing score
         setTimeout(() => {
@@ -2905,10 +2905,10 @@ function announceScore(isGameOver = false, playEndOfInningSound = true) {
             } else {
                 playSound(`scoreNum_${trailingScore}`);
             }
-        }, isGameOver ? 1500 : 900);
+        }, isGameOver ? 2700 : 1700);
         
         if (!isGameOver) {
-            setTimeout(() => playSound(leadStatus), 1500); // Home/Away leads or Tie
+            setTimeout(() => playSound(leadStatus), 2500); // Home/Away leads or Tie
         }
     }, 5000); // 5 second delay to let end of inning sound finish completely
 }
