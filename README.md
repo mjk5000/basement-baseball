@@ -78,8 +78,14 @@ A fun, kid-friendly baseball simulation web app optimized for iPad, Kindle, and 
 
 **YES** - If you add from a **web URL** (recommended for auto-updates):
 - Example: `https://yourusername.github.io/basement-baseball/`
-- Opens from URL → Always fetches latest version when launched
-- Any code pushed to GitHub Pages appears automatically
+- Opens from URL → Fetches latest version when launched
+- Any code pushed to GitHub Pages appears in new sessions
+
+**⚠️ IMPORTANT:** iPhone/iOS caches home screen apps aggressively. To get updates:
+1. **Delete the old home screen icon** (long-press → Remove App)
+2. **Open Safari** and verify you see the new version
+3. **Clear Safari cache** (Settings → Safari → Clear History and Website Data)
+4. **Re-add to home screen** (Share → Add to Home Screen)
 
 **NO** - If you add from **local files**:
 - Example: `file:///storage/emulated/0/Download/index.html`
