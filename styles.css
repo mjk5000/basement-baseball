@@ -795,6 +795,7 @@ header h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .manual-btn:hover {
@@ -904,6 +905,7 @@ header h1 {
     justify-content: center;
     align-items: center;
     gap: 5px;
+    overflow: hidden;
 }
 
 .pitch-btn .icon {
@@ -1286,13 +1288,17 @@ header h1 {
     
     /* Compact game status - horizontal layout for top section */
     .game-status {
-        flex-direction: column;
+        display: grid !important;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
         gap: 8px;
         padding: 8px;
         min-height: auto;
     }
     
     .status-left {
+        grid-column: 1;
+        grid-row: 1;
         width: auto;
         flex-direction: row;
         gap: 12px;
@@ -1301,36 +1307,15 @@ header h1 {
     }
     
     .status-center {
+        grid-column: 1 / -1;
+        grid-row: 2;
         width: 100%;
-        order: 3;
-    }
-    
-    .status-right {
-        width: auto;
-        order: 2;
-    }
-    
-    /* Put diamond next to count display */
-    .game-status {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        grid-template-rows: auto auto;
-        gap: 8px;
-    }
-    
-    .status-left {
-        grid-column: 1;
-        grid-row: 1;
     }
     
     .status-right {
         grid-column: 2;
         grid-row: 1;
-    }
-    
-    .status-center {
-        grid-column: 1 / -1;
-        grid-row: 2;
+        width: auto;
     }
     
     .count-display {
@@ -1394,14 +1379,19 @@ header h1 {
     .pitch-btn,
     .manual-btn {
         height: 50px;
-        font-size: 0.75rem;
-        padding: 6px;
+        font-size: 0.7rem;
+        padding: 4px 2px;
         gap: 2px;
+        overflow: hidden;
+        line-height: 1.1;
     }
     
     /* Fix icon sizes in small screen */
-    .pitch-btn .icon {
-        font-size: 1.2rem;
+    .pitch-btn .icon,
+    .manual-btn .icon {
+        font-size: 1.1rem;
+        line-height: 1;
+        flex-shrink: 0;
     }
     
     .contact-grid,
@@ -1422,7 +1412,8 @@ header h1 {
     .icon-btn {
         width: 36px;
         height: 36px;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        overflow: hidden;
     }
     
     .version-info,
