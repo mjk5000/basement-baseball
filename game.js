@@ -2571,7 +2571,6 @@ function hit(bases, skipMessage = false) {
 // Handle walk - only advance runners on force plays
 function walk() {
     if (gameState.gameOver) return; // Prevent actions after game over
-    cancelAllSounds(); // Cancel any playing sounds
     const batter = getCurrentBatter();
     let runsScored = 0;
     
