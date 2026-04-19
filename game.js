@@ -94,7 +94,7 @@ function preloadCustomSounds() {
             'sounds/Clapping.m4a'
         ],
         'foul': [
-            'sounds/Bunt foul did he just try.m4a'
+            // No sound for foul balls - removed bunt sounds per user request
         ],
         'bunt': [
             'sounds/Bunt.m4a'
