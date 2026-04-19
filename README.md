@@ -54,6 +54,28 @@ A fun, kid-friendly baseball simulation web app optimized for iPad, Kindle, and 
 
 ---
 
+## 📱 iPhone/iOS Setup (Fullscreen Mode)
+
+### For iPhone (iOS/iPadOS) - Best Experience:
+
+**Note:** The browser fullscreen button does NOT work on iPhone due to iOS restrictions. Instead, use "Add to Home Screen" for a true fullscreen, app-like experience!
+
+1. **Open the game in Safari** (recommended) or Chrome
+2. **Tap the Share button** (⬆️ icon at bottom of screen in Safari, or at top in Chrome)
+3. **Scroll down and select "Add to Home Screen"**
+4. **Name it** "Baseball" (or whatever you like)
+5. **Tap "Add"**
+6. **Launch from your home screen** - it now runs fullscreen without browser UI!
+
+### Why Add to Home Screen?
+- ✅ **No address bar** taking up screen space
+- ✅ **No browser controls** cluttering the view
+- ✅ **Launches like a native app** instantly
+- ✅ **Works offline** once loaded
+- ✅ **Custom icon** on your home screen
+
+---
+
 ## 📱 iPad Setup (Email Method)
 
 ### For iPad (iOS/iPadOS):
@@ -159,6 +181,55 @@ Then open `http://localhost:8000` in your browser
 - **OneDrive/Google Drive**: Upload the folder, open in Safari on iPad
 - **Local Network**: Run the HTTP server above, access from iPad using your computer's IP
 - **GitHub Pages**: Push to GitHub, enable Pages for free hosting
+
+---
+
+## 🎨 Customizing the App Icon
+
+The app currently uses a baseball icon (⚾) when added to home screen. To change it:
+
+### Option 1: Use Your Own Image Files
+
+1. **Create icon images**:
+   - `icon-192.png` (192x192 pixels)
+   - `icon-512.png` (512x512 pixels)
+   - Use any image editor (Paint, Photoshop, online tools like Canva)
+
+2. **Place them in the same folder** as `index.html`
+
+3. **Update `manifest.json`**:
+   ```json
+   "icons": [
+     {
+       "src": "icon-192.png",
+       "sizes": "192x192",
+       "type": "image/png"
+     },
+     {
+       "src": "icon-512.png",
+       "sizes": "512x512",
+       "type": "image/png"
+     }
+   ]
+   ```
+
+### Option 2: Use an Online Icon Generator
+
+1. **Visit a free icon generator** (search "PWA icon generator")
+2. **Upload your image** or create one
+3. **Download the generated icons**
+4. **Replace the icon files** and update `manifest.json`
+
+### Current Icon
+The app uses an inline SVG baseball icon. It shows up as a white baseball with red stitching when you add to home screen.
+
+**Tip:** For best results, use:
+- Square images (1:1 aspect ratio)
+- Simple, high-contrast designs
+- PNG format with transparency
+- Recommended sizes: 192x192, 512x512
+
+---
 
 ## How to Play
 
