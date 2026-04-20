@@ -1741,18 +1741,22 @@ function determineOutcome(contact) {
         else if (roll < 0.26) {
             outcome = 'single';
         }
-        // Doubles (2% of grounders - rare but possible)
-        else if (roll < 0.28) {
+        // Doubles (3% of grounders - in the gap)
+        else if (roll < 0.29) {
             outcome = 'double';
         }
-        // Ground outs (rest, ~72%)
+        // Triples (1% of grounders - fast runner, ball in gap)
+        else if (roll < 0.30) {
+            outcome = 'triple';
+        }
+        // Ground outs (rest, ~70%)
         else {
             outcome = 'groundout';
         }
     } else if (contact === 'linedrive') {
         // Real baseball stats: ~68% hits, ~30% outs, ~2% errors
         // Line drives have highest batting average
-        // Hard-hit line drives can be home runs (not too often)
+        // Hard-hit line drives can be home runs or triples
         const roll = Math.random();
         const hardHit = Math.random() > 0.5; // 50% chance of being hard hit
         
@@ -1760,43 +1764,45 @@ function determineOutcome(contact) {
         if (roll < 0.02) {
             outcome = 'error';
         }
-        // Singles (38% of line drives)
-        else if (roll < 0.40) {
+        // Singles (32% of line drives)
+        else if (roll < 0.34) {
             outcome = 'single';
         }
         // Doubles (24% of line drives)
-        else if (roll < 0.64) {
+        else if (roll < 0.58) {
             outcome = 'double';
         }
-        // Triples (2% of line drives)
-        else if (roll < 0.66) {
+        // Triples (6% of line drives - line drive in the gap, hard hit can be higher)
+        else if (roll < (hardHit ? 0.66 : 0.62)) {
             outcome = 'triple';
         }
-        // Home runs - more likely if hard hit
-        // Hard hit: 3% chance, soft: 0.5% chance (avg ~1.75%)
-        else if (roll < (hardHit ? 0.69 : 0.665)) {
+        // Home runs - much more likely on line drives
+        // Hard hit: 8% chance, soft: 3% chance (avg ~5.5%)
+        else if (roll < (hardHit ? 0.74 : 0.65)) {
             outcome = 'homerun';
         }
-        // Line outs (rest, ~30%)
+        // Line outs (rest, ~26%)
         else {
             outcome = 'lineout';
         }
     } else if (contact === 'popup') {
         // Pop flies - rarely home runs but possible
         const roll = Math.random();
-        if (roll < 0.73) {
+        if (roll < 0.70) {
             // Check for sacrifice fly
             if (hasRunners && gameState.runners.third && gameState.outs < 2 && roll < 0.20) {
                 outcome = 'sacrificefly';
             } else {
                 outcome = 'flyout';
             }
-        } else if (roll < 0.88) {
+        } else if (roll < 0.83) {
             outcome = 'single'; // Blooper
-        } else if (roll < 0.98) {
+        } else if (roll < 0.92) {
             outcome = 'double'; // Down the line
+        } else if (roll < 0.95) {
+            outcome = 'triple'; // Deep fly ball down the line
         } else {
-            // Very rare pop fly home run (2% - towering fly ball)
+            // Pop fly home run (5% - towering fly ball or wind-aided)
             outcome = 'homerun';
         }
     }
