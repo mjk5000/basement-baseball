@@ -1785,24 +1785,88 @@ function determineOutcome(contact) {
         else {
             outcome = 'lineout';
         }
-    } else if (contact === 'popup') {
-        // Pop flies - rarely home runs but possible
+    } else if (contact === 'flyball') {
+        // Fly balls (25°-50° launch angle) - high variance based on angle
+        // 25°-35°: Ideal for home runs and extra-base hits (sweet spot)
+        // 35°-50°: Usually flyouts unless hit with extreme velocity
         const roll = Math.random();
-        if (roll < 0.70) {
-            // Check for sacrifice fly
-            if (hasRunners && gameState.runners.third && gameState.outs < 2 && roll < 0.20) {
+        const idealAngle = Math.random() > 0.4; // 60% chance of ideal angle (25-35°), 40% steep (35-50°)
+        
+        if (idealAngle) {
+            // Sweet spot (25°-35°) - great for power
+            // Home runs (35% - ideal launch angle)
+            if (roll < 0.35) {
+                outcome = 'homerun';
+            }
+            // Triples (8% - deep to wall)
+            else if (roll < 0.43) {
+                outcome = 'triple';
+            }
+            // Doubles (20% - off the wall or in gap)
+            else if (roll < 0.63) {
+                outcome = 'double';
+            }
+            // Singles (10% - shallow fly ball drops in)
+            else if (roll < 0.73) {
+                outcome = 'single';
+            }
+            // Sacrifice fly check
+            else if (roll < 0.83 && hasRunners && gameState.runners.third && gameState.outs < 2) {
+                outcome = 'sacrificefly';
+            }
+            // Flyouts (rest, ~17-27%)
+            else {
+                outcome = 'flyout';
+            }
+        } else {
+            // Steep angle (35°-50°) - usually flyouts
+            // Home runs (8% - need extreme velocity)
+            if (roll < 0.08) {
+                outcome = 'homerun';
+            }
+            // Triples (2% - very rare at this angle)
+            else if (roll < 0.10) {
+                outcome = 'triple';
+            }
+            // Doubles (5% - off the wall)
+            else if (roll < 0.15) {
+                outcome = 'double';
+            }
+            // Singles (5% - drops in shallow)
+            else if (roll < 0.20) {
+                outcome = 'single';
+            }
+            // Sacrifice fly check (higher rate at this angle)
+            else if (roll < 0.35 && hasRunners && gameState.runners.third && gameState.outs < 2) {
+                outcome = 'sacrificefly';
+            }
+            // Flyouts (rest, ~65-80%)
+            else {
+                outcome = 'flyout';
+            }
+        }
+    } else if (contact === 'popup') {
+        // Pop-ups (Over 50° launch angle) - almost always an out
+        const roll = Math.random();
+        // Flyouts/popouts (92% - infield or shallow outfield pop)
+        if (roll < 0.92) {
+            // Check for sacrifice fly (rare on pop-ups but possible)
+            if (hasRunners && gameState.runners.third && gameState.outs < 2 && roll < 0.05) {
                 outcome = 'sacrificefly';
             } else {
                 outcome = 'flyout';
             }
-        } else if (roll < 0.83) {
-            outcome = 'single'; // Blooper
-        } else if (roll < 0.92) {
-            outcome = 'double'; // Down the line
-        } else if (roll < 0.95) {
-            outcome = 'triple'; // Deep fly ball down the line
-        } else {
-            // Pop fly home run (5% - towering fly ball or wind-aided)
+        } 
+        // Singles (5% - blooper/Texas leaguer that drops)
+        else if (roll < 0.97) {
+            outcome = 'single';
+        }
+        // Doubles (2% - rare, down the line or wind-aided)
+        else if (roll < 0.99) {
+            outcome = 'double';
+        }
+        // Home runs (1% - extremely rare, must be towering with wind)
+        else {
             outcome = 'homerun';
         }
     }
