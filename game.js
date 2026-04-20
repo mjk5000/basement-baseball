@@ -43,11 +43,13 @@ function preloadCustomSounds() {
         'strike': [
             'sounds/Strike.m4a',
             'sounds/Swing miss - serious.m4a',
-            'sounds/Swing miss what is that.m4a',
-            'sounds/Turn belly button missed swing.m4a'
+            'sounds/Swing miss what is that.m4a'
         ],
         'strikeout': [
             'sounds/Strike 3.m4a',
+            'sounds/Strike 3 - 1.m4a',
+            'sounds/Strike 3 - 2.m4a',
+            'sounds/Strike 3 - 3.m4a',
             'sounds/Struck out swinging.m4a',
             'sounds/Swing and miss kid doesn\'t play baseball.m4a',
             'sounds/Take a seat.m4a'
