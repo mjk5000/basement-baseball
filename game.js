@@ -1846,28 +1846,38 @@ function determineOutcome(contact) {
             }
         }
     } else if (contact === 'popup') {
-        // Pop-ups (Over 50° launch angle) - almost always an out
+        // Pop-ups (Over 50° launch angle) - can drop for hits due to miscommunication or shallow outfield
+        // About 25% result in hits (blooper, dropped, falls between fielders)
         const roll = Math.random();
-        // Flyouts/popouts (92% - infield or shallow outfield pop)
-        if (roll < 0.92) {
-            // Check for sacrifice fly (rare on pop-ups but possible)
-            if (hasRunners && gameState.runners.third && gameState.outs < 2 && roll < 0.05) {
+        
+        // Singles (20% - blooper/Texas leaguer, dropped, miscommunication)
+        if (roll < 0.20) {
+            outcome = 'single';
+        }
+        // Doubles (3% - blooper down the line)
+        else if (roll < 0.23) {
+            outcome = 'double';
+        }
+        // Triples (1% - rare, deep blooper in gap)
+        else if (roll < 0.24) {
+            outcome = 'triple';
+        }
+        // Home runs (1% - extremely rare, must be towering with wind)
+        else if (roll < 0.25) {
+            outcome = 'homerun';
+        }
+        // Flyouts/popouts (70% - infield or shallow outfield pop caught)
+        else if (roll < 0.95) {
+            // Check for sacrifice fly (on deep pop-ups)
+            if (hasRunners && gameState.runners.third && gameState.outs < 2 && roll < 0.30) {
                 outcome = 'sacrificefly';
             } else {
                 outcome = 'flyout';
             }
-        } 
-        // Singles (5% - blooper/Texas leaguer that drops)
-        else if (roll < 0.97) {
-            outcome = 'single';
         }
-        // Doubles (2% - rare, down the line or wind-aided)
-        else if (roll < 0.99) {
-            outcome = 'double';
-        }
-        // Home runs (1% - extremely rare, must be towering with wind)
+        // Error (5% - dropped by fielder)
         else {
-            outcome = 'homerun';
+            outcome = 'error';
         }
     }
     
