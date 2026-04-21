@@ -816,14 +816,14 @@ function generateBothLineups(homeTeamName = 'Home', awayTeamName = 'Away', homeG
     // (Skip Mo/Maureen/Kajewski as they're already handled above)
     if (homeTeamName !== 'Home' && homeTeamName !== 'home' && 
         homeTeamName !== 'Mo' && homeTeamName !== 'Maureen' && homeTeamName !== 'Kajewski' &&
-        homeNamePool.includes(homeTeamName) && !usedNames.has(homeTeamName)) {
+        !usedNames.has(homeTeamName)) {
         homeReservedPlayers.push(homeTeamName);
         usedNames.add(homeTeamName);
     }
     
     if (awayTeamName !== 'Away' && awayTeamName !== 'away' && 
         awayTeamName !== 'Mo' && awayTeamName !== 'Maureen' && awayTeamName !== 'Kajewski' &&
-        awayNamePool.includes(awayTeamName) && !usedNames.has(awayTeamName)) {
+        !usedNames.has(awayTeamName)) {
         awayReservedPlayers.push(awayTeamName);
         usedNames.add(awayTeamName);
     }
