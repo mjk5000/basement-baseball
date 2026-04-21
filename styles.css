@@ -1619,12 +1619,15 @@ header h1 {
         padding: 4px;
         gap: 3px;
         width: 100%;
+        order: 1;
     }
     
     .manual-controls {
         padding: 4px;
         gap: 3px;
         width: 100%;
+        order: 2;
+        display: block !important; /* Ensure manual controls are visible */
     }
     
     .pitch-input,
