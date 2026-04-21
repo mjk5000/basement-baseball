@@ -750,9 +750,11 @@ function generateBothLineups(homeTeamName = 'Home', awayTeamName = 'Away', homeG
         }
     }
     
-    // Handle Maureen/Mo - only if at least one girls team exists
+    // Handle Maureen/Mo - appears if team name is Mo/Maureen OR if at least one girls team exists
     const hasGirlsTeam = homeGirlsNames || awayGirlsNames;
-    if (hasGirlsTeam) {
+    const eitherTeamIsMaureen = homeIsMaureen || awayIsMaureen;
+    
+    if (eitherTeamIsMaureen || hasGirlsTeam) {
         if (homeIsMaureen && awayIsMaureen) {
             // Both teams named Mo/Maureen - one gets Mo, one gets Maureen
             homeReservedPlayers.push('Maureen');
@@ -760,12 +762,12 @@ function generateBothLineups(homeTeamName = 'Home', awayTeamName = 'Away', homeG
             usedNames.add('Maureen');
             usedNames.add('Mo');
         } else if (homeIsMaureen) {
-            // Home team is named Mo or Maureen - use that exact name
+            // Home team is named Mo or Maureen - use that exact name (works for boys or girls teams)
             homeReservedPlayers.push(homeTeamName); // Use exact team name (Mo or Maureen)
             usedNames.add('Maureen');
             usedNames.add('Mo'); // Block both variants
         } else if (awayIsMaureen) {
-            // Away team is named Mo or Maureen - use that exact name
+            // Away team is named Mo or Maureen - use that exact name (works for boys or girls teams)
             awayReservedPlayers.push(awayTeamName); // Use exact team name (Mo or Maureen)
             usedNames.add('Maureen');
             usedNames.add('Mo'); // Block both variants
