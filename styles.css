@@ -1455,12 +1455,12 @@ header h1 {
     .pitch-btn,
     .manual-btn {
         height: 58px;
-        font-size: 0.75rem;
+        font-size: 0.68rem;
         font-weight: 700;
         padding: 6px 4px;
         gap: 3px;
         overflow: hidden;
-        line-height: 1.15;
+        line-height: 1.1;
         word-wrap: break-word;
         text-overflow: clip;
     }
