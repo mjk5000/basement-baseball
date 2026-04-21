@@ -2012,12 +2012,15 @@ header {
     width: 20px;
     height: 20px;
     cursor: pointer;
+    margin: 0;
+    vertical-align: middle;
 }
 
 .radio-label span {
     font-size: 1.1rem;
     font-weight: 600;
     color: #1f2937;
+    line-height: 20px;
 }
 
 .help-text {
