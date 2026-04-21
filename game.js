@@ -109,7 +109,7 @@ function preloadCustomSounds() {
             'sounds/Strike 3 - 2.m4a',
             'sounds/Strike 3 - 3.m4a',
             'sounds/Struck out swinging.m4a',
-            'sounds/Swing and miss kid doesn\'t play baseball.m4a',
+            'sounds/Swing miss - kid doesn\'t play baseball.m4a',
             'sounds/Take a seat.m4a'
         ],
         'out': [
@@ -177,7 +177,7 @@ function preloadCustomSounds() {
         'error': [
             'sounds/Error.m4a',
             'sounds/Error.m4a',
-            'sounds/Error - what is that.m4a'
+            'sounds/Error - miss what is that.m4a'
         ],
         'endInning': [
             'sounds/End of inning.m4a'
