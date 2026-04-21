@@ -727,43 +727,72 @@ function generateBothLineups(homeTeamName = 'Home', awayTeamName = 'Away', homeG
     const awayReservedPlayers = [];
     const usedNames = new Set(); // Track all used names to prevent duplicates
     
-    // Handle Kajewski - always in game, randomly on home or away
-    const kajewskiOnHome = Math.random() < 0.5;
-    if (kajewskiOnHome) {
+    // Check if team names are Mo or Maureen (they're the same person)
+    const homeIsMaureen = (homeTeamName === 'Mo' || homeTeamName === 'Maureen');
+    const awayIsMaureen = (awayTeamName === 'Mo' || awayTeamName === 'Maureen');
+    
+    // Handle Kajewski - always in game, but if team is named Kajewski, must be on that team
+    if (homeTeamName === 'Kajewski') {
         homeReservedPlayers.push('Kajewski');
         usedNames.add('Kajewski');
-    } else {
+    } else if (awayTeamName === 'Kajewski') {
         awayReservedPlayers.push('Kajewski');
         usedNames.add('Kajewski');
+    } else {
+        // Randomly assign if not a team name
+        const kajewskiOnHome = Math.random() < 0.5;
+        if (kajewskiOnHome) {
+            homeReservedPlayers.push('Kajewski');
+            usedNames.add('Kajewski');
+        } else {
+            awayReservedPlayers.push('Kajewski');
+            usedNames.add('Kajewski');
+        }
     }
     
     // Handle Maureen/Mo - only if at least one girls team exists
     const hasGirlsTeam = homeGirlsNames || awayGirlsNames;
     if (hasGirlsTeam) {
-        // Randomly choose "Mo" or "Maureen"
-        const maureenName = Math.random() < 0.5 ? 'Mo' : 'Maureen';
-        
-        // Randomly assign to home or away
-        const maureenOnHome = Math.random() < 0.5;
-        
-        if (maureenOnHome && homeGirlsNames) {
-            homeReservedPlayers.push(maureenName);
-            usedNames.add('Maureen');
-            usedNames.add('Mo'); // Block both variants
-        } else if (!maureenOnHome && awayGirlsNames) {
-            awayReservedPlayers.push(maureenName);
-            usedNames.add('Maureen');
-            usedNames.add('Mo'); // Block both variants
-        } else if (homeGirlsNames) {
-            // If random picked away but away isn't girls, put on home
-            homeReservedPlayers.push(maureenName);
+        if (homeIsMaureen && awayIsMaureen) {
+            // Both teams named Mo/Maureen - one gets Mo, one gets Maureen
+            homeReservedPlayers.push('Maureen');
+            awayReservedPlayers.push('Mo');
             usedNames.add('Maureen');
             usedNames.add('Mo');
+        } else if (homeIsMaureen) {
+            // Home team is named Mo or Maureen - use that exact name
+            homeReservedPlayers.push(homeTeamName); // Use exact team name (Mo or Maureen)
+            usedNames.add('Maureen');
+            usedNames.add('Mo'); // Block both variants
+        } else if (awayIsMaureen) {
+            // Away team is named Mo or Maureen - use that exact name
+            awayReservedPlayers.push(awayTeamName); // Use exact team name (Mo or Maureen)
+            usedNames.add('Maureen');
+            usedNames.add('Mo'); // Block both variants
         } else {
-            // If random picked home but home isn't girls, put on away
-            awayReservedPlayers.push(maureenName);
-            usedNames.add('Maureen');
-            usedNames.add('Mo');
+            // Neither team is named Mo/Maureen, randomly choose variant and team
+            const maureenName = Math.random() < 0.5 ? 'Mo' : 'Maureen';
+            const maureenOnHome = Math.random() < 0.5;
+            
+            if (maureenOnHome && homeGirlsNames) {
+                homeReservedPlayers.push(maureenName);
+                usedNames.add('Maureen');
+                usedNames.add('Mo'); // Block both variants
+            } else if (!maureenOnHome && awayGirlsNames) {
+                awayReservedPlayers.push(maureenName);
+                usedNames.add('Maureen');
+                usedNames.add('Mo'); // Block both variants
+            } else if (homeGirlsNames) {
+                // If random picked away but away isn't girls, put on home
+                homeReservedPlayers.push(maureenName);
+                usedNames.add('Maureen');
+                usedNames.add('Mo');
+            } else {
+                // If random picked home but home isn't girls, put on away
+                awayReservedPlayers.push(maureenName);
+                usedNames.add('Maureen');
+                usedNames.add('Mo');
+            }
         }
     }
     
@@ -784,12 +813,17 @@ function generateBothLineups(homeTeamName = 'Home', awayTeamName = 'Away', homeG
     }
     
     // Check if team names match any player names and add to correct team
-    if (homeTeamName !== 'Home' && homeTeamName !== 'home' && homeNamePool.includes(homeTeamName) && !usedNames.has(homeTeamName)) {
+    // (Skip Mo/Maureen/Kajewski as they're already handled above)
+    if (homeTeamName !== 'Home' && homeTeamName !== 'home' && 
+        homeTeamName !== 'Mo' && homeTeamName !== 'Maureen' && homeTeamName !== 'Kajewski' &&
+        homeNamePool.includes(homeTeamName) && !usedNames.has(homeTeamName)) {
         homeReservedPlayers.push(homeTeamName);
         usedNames.add(homeTeamName);
     }
     
-    if (awayTeamName !== 'Away' && awayTeamName !== 'away' && awayNamePool.includes(awayTeamName) && !usedNames.has(awayTeamName)) {
+    if (awayTeamName !== 'Away' && awayTeamName !== 'away' && 
+        awayTeamName !== 'Mo' && awayTeamName !== 'Maureen' && awayTeamName !== 'Kajewski' &&
+        awayNamePool.includes(awayTeamName) && !usedNames.has(awayTeamName)) {
         awayReservedPlayers.push(awayTeamName);
         usedNames.add(awayTeamName);
     }
