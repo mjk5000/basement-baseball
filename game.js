@@ -919,6 +919,7 @@ function startNewGame() {
     updateTeamNames();
     
     hideGameSettings();
+    hidePlayAgainButton(); // Hide the play again button when starting new game
     updateDisplay();
     updateUndoButton();
     showMessage('New game started! Play Ball! ⚾️');
