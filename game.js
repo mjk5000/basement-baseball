@@ -34,7 +34,9 @@ const POPULAR_NAMES = [
     'Diesel', 'Blaze', 'Storm', 'Wolf', 'Bear', 'Tiger', 'Cobra', 'Viper', 'Falcon', 'Eagle',
     'Colt', 'Bronco', 'Mustang', 'Racer', 'Dash', 'Zoom', 'Bolt', 'Rush', 'Chase', 'Hunter',
     'Rex', 'Max', 'Chance', 'Lucky', 'Ace', 'King', 'Prince', 'Royal', 'Noble', 'Chief',
-    'Boss', 'Cap', 'Major', 'Colonel', 'General', 'Admiral', 'Duke', 'Baron', 'Earl', 'Knight'
+    'Boss', 'Cap', 'Major', 'Colonel', 'General', 'Admiral', 'Duke', 'Baron', 'Earl', 'Knight',
+    // Game of Thrones names
+    'Jon', 'Tyrion', 'Jaime', 'Robb', 'Bran', 'Theon', 'Joffrey', 'Ramsay', 'Oberyn', 'Sandor'
 ];
 
 // Popular girls names
@@ -69,7 +71,9 @@ const GIRLS_NAMES = [
     'Tex', 'Dallas', 'Montana', 'Georgia', 'Savannah', 'Brooklyn', 'Aspen', 'Denver', 'Vienna', 'Paris',
     'Rio', 'Berlin', 'London', 'Milan', 'Sydney', 'Dakota', 'Austin', 'Cheyenne', 'Madison', 'Sierra',
     'Nevada', 'Alaska', 'Arizona', 'Indiana', 'Carolina', 'Virginia', 'Olympia', 'Cordelia', 'Geneva', 'Florence',
-    'Maverick', 'Rogue', 'Colt', 'Duke', 'King', 'Prince', 'Royal', 'Noble', 'Queenie', 'Princess'
+    'Maverick', 'Rogue', 'Colt', 'Duke', 'King', 'Prince', 'Royal', 'Noble', 'Queenie', 'Princess',
+    // Game of Thrones names
+    'Daenerys', 'Arya', 'Sansa', 'Cersei', 'Brienne', 'Catelyn', 'Margaery', 'Melisandre', 'Yara', 'Missandei'
 ];
 
 // Sound effects using Web Audio API
