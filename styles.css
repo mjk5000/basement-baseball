@@ -2002,6 +2002,16 @@ header {
     flex-direction: column;
     align-items: center;
     gap: 6px;
+    text-align: center;
+}
+
+.radio-group.horizontal .radio-label input[type="radio"] {
+    align-self: center;
+}
+
+.radio-group.horizontal .radio-label span {
+    text-align: center;
+    width: 100%;
 }
 
 .radio-group.horizontal .radio-label:hover {
