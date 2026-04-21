@@ -37,6 +37,41 @@ const POPULAR_NAMES = [
     'Boss', 'Cap', 'Major', 'Colonel', 'General', 'Admiral', 'Duke', 'Baron', 'Earl', 'Knight'
 ];
 
+// Popular girls names
+const GIRLS_NAMES = [
+    // Required names for girls teams
+    'Maureen', 'Kajewski',
+    // Top 200 popular girls names (mixed from 2015-2025)
+    'Olivia', 'Emma', 'Charlotte', 'Amelia', 'Sophia', 'Isabella', 'Ava', 'Mia', 'Evelyn', 'Luna',
+    'Harper', 'Camila', 'Sofia', 'Scarlett', 'Eleanor', 'Elizabeth', 'Ella', 'Emily', 'Chloe', 'Mila',
+    'Violet', 'Penelope', 'Gianna', 'Aria', 'Abigail', 'Madison', 'Ellie', 'Hazel', 'Nora', 'Lily',
+    'Aurora', 'Zoey', 'Hannah', 'Lucy', 'Eliana', 'Lillian', 'Addison', 'Natalie', 'Layla', 'Grace',
+    'Stella', 'Zoe', 'Audrey', 'Riley', 'Leah', 'Savannah', 'Brooklyn', 'Bella', 'Claire', 'Skylar',
+    'Paisley', 'Everly', 'Anna', 'Caroline', 'Nova', 'Genesis', 'Emilia', 'Kennedy', 'Maya', 'Willow',
+    'Victoria', 'Madelyn', 'Adeline', 'Delilah', 'Isla', 'Ivy', 'Quinn', 'Naomi', 'Aaliyah', 'Gabriella',
+    'Elena', 'Sarah', 'Ariana', 'Allison', 'Gabriella', 'Alice', 'Madeline', 'Cora', 'Ruby', 'Eva',
+    'Serenity', 'Autumn', 'Leilani', 'Athena', 'Eloise', 'Kinsley', 'Paisley', 'Valentina', 'Brielle', 'Emery',
+    'Josephine', 'Aubrey', 'Samantha', 'Melody', 'Morgan', 'Iris', 'Rose', 'Piper', 'Lydia', 'Reagan',
+    'Jade', 'Peyton', 'Rylee', 'Sophie', 'Elise', 'Vivian', 'Annabelle', 'Jasmine', 'Remi', 'Sloane',
+    'Julia', 'Bailey', 'Katherine', 'Eden', 'Amy', 'Sawyer', 'Rowan', 'Raelynn', 'River', 'Hailey',
+    'Arya', 'Arabella', 'Juliette', 'Alina', 'Daisy', 'Juniper', 'Khloe', 'Margaret', 'Sienna', 'Paige',
+    'Brooke', 'Oakley', 'Gemma', 'Teagan', 'Liliana', 'Harmony', 'Sage', 'Alaia', 'Josephine', 'Lyla',
+    'Rachel', 'Marley', 'June', 'Dakota', 'Sadie', 'Blake', 'Ember', 'Willow', 'Scout', 'Harley',
+    'Journey', 'Lennon', 'Stevie', 'Indie', 'Cameron', 'Reign', 'Winter', 'Wren', 'Phoenix', 'Collins',
+    // Fun baseball nicknames for girls
+    'Ace', 'Roxy', 'Frankie', 'Charlie', 'Joey', 'Casey', 'Riley', 'Max', 'Sam', 'Alex',
+    'Drew', 'Blake', 'Parker', 'Quinn', 'Reese', 'Taylor', 'Jordan', 'Morgan', 'Jamie', 'Dylan',
+    'Scout', 'Harley', 'Dakota', 'Skylar', 'Phoenix', 'River', 'Storm', 'Blaze', 'Jet', 'Rocket',
+    'Flash', 'Dash', 'Spike', 'Rebel', 'Justice', 'Liberty', 'Star', 'Luna', 'Nova', 'Sky',
+    'Rain', 'Sunny', 'Cricket', 'Pepper', 'Ginger', 'Honey', 'Dusty', 'Rocky', 'Lucky', 'Chance',
+    'Bree', 'Jazz', 'Raven', 'Jade', 'Ruby', 'Pearl', 'Diamond', 'Tiger', 'Falcon', 'Hawk',
+    'Blue', 'Red', 'Goldie', 'Sparky', 'Flame', 'Angel', 'Chief', 'Captain', 'Major', 'Ranger',
+    'Tex', 'Dallas', 'Montana', 'Georgia', 'Savannah', 'Brooklyn', 'Aspen', 'Denver', 'Vienna', 'Paris',
+    'Rio', 'Berlin', 'London', 'Milan', 'Sydney', 'Dakota', 'Austin', 'Cheyenne', 'Madison', 'Sierra',
+    'Nevada', 'Alaska', 'Arizona', 'Indiana', 'Carolina', 'Virginia', 'Olympia', 'Cordelia', 'Geneva', 'Florence',
+    'Maverick', 'Rogue', 'Colt', 'Duke', 'King', 'Prince', 'Royal', 'Noble', 'Queenie', 'Princess'
+];
+
 // Sound effects using Web Audio API
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 let soundMuted = true;
@@ -671,72 +706,71 @@ function shuffleArray(array) {
 
 // Generate lineup with required names guaranteed
 // Generate both lineups with required names distributed across teams
-function generateBothLineups(homeTeamName = 'Home', awayTeamName = 'Away') {
-    const requiredNames = ['Harry', 'Jude', 'Hugh', 'Kajewski'];
+function generateBothLineups(homeTeamName = 'Home', awayTeamName = 'Away', homeGirlsNames = false, awayGirlsNames = false) {
+    // Determine which name pools to use
+    const homeNamePool = homeGirlsNames ? GIRLS_NAMES : POPULAR_NAMES;
+    const awayNamePool = awayGirlsNames ? GIRLS_NAMES : POPULAR_NAMES;
     
-    // Get all available names (excluding required ones initially)
-    const availableNames = POPULAR_NAMES.filter(name => !requiredNames.includes(name));
+    // Required names based on gender selection
+    const homeRequiredNames = homeGirlsNames ? ['Maureen', 'Kajewski'] : ['Harry', 'Jude', 'Hugh', 'Kajewski'];
+    const awayRequiredNames = awayGirlsNames ? ['Maureen', 'Kajewski'] : ['Harry', 'Jude', 'Hugh', 'Kajewski'];
     
     // Check if team names match any player names and force them to correct team
     const homeReservedPlayers = [];
     const awayReservedPlayers = [];
-    const allPlayerNames = [...requiredNames, ...availableNames];
     
     // Always add team name as a player on that team (if not 'Home' or 'Away')
-    if (homeTeamName !== 'Home' && homeTeamName !== 'home') {
+    if (homeTeamName !== 'Home' && homeTeamName !== 'home' && homeNamePool.includes(homeTeamName)) {
         homeReservedPlayers.push(homeTeamName);
     }
     
     // Always add away team name as a player on that team (if not 'Home' or 'Away')
-    if (awayTeamName !== 'Away' && awayTeamName !== 'away') {
+    if (awayTeamName !== 'Away' && awayTeamName !== 'away' && awayNamePool.includes(awayTeamName)) {
         awayReservedPlayers.push(awayTeamName);
     }
     
-    // Get remaining required names (not already reserved)
-    const remainingRequiredNames = requiredNames.filter(
-        name => !homeReservedPlayers.includes(name) && !awayReservedPlayers.includes(name)
-    );
+    // Get remaining required names (not already reserved)  
+    const homeRemainingRequired = homeRequiredNames.filter(name => !homeReservedPlayers.includes(name));
+    const awayRemainingRequired = awayRequiredNames.filter(name => !awayReservedPlayers.includes(name));
     
-    // Calculate how many random players we need
-    // Total: 18 players (9 per team)
-    // Already reserved: homeReservedPlayers.length + awayReservedPlayers.length
-    // Still need from required: remainingRequiredNames.length
-    const totalReserved = homeReservedPlayers.length + awayReservedPlayers.length;
-    const randomNeeded = 18 - totalReserved - remainingRequiredNames.length;
+    // Calculate how many random players each team needs
+    const homeRandomNeeded = 9 - homeReservedPlayers.length - homeRemainingRequired.length;
+    const awayRandomNeeded = 9 - awayReservedPlayers.length - awayRemainingRequired.length;
     
-    // Get random names (excluding any reserved players)
-    const excludedNames = [...requiredNames, ...homeReservedPlayers, ...awayReservedPlayers];
-    const availableForRandom = POPULAR_NAMES.filter(name => !excludedNames.includes(name));
-    const randomNames = [];
-    const usedIndices = new Set();
+    // Get random names for home team (excluding reserved and required)
+    const homeExcluded = [...homeRequiredNames, ...homeReservedPlayers];
+    const homeAvailableForRandom = homeNamePool.filter(name => !homeExcluded.includes(name));
+    const homeRandomNames = [];
+    const homeUsedIndices = new Set();
     
-    while (randomNames.length < randomNeeded) {
-        const randomIndex = Math.floor(Math.random() * availableForRandom.length);
-        if (!usedIndices.has(randomIndex)) {
-            usedIndices.add(randomIndex);
-            randomNames.push(availableForRandom[randomIndex]);
+    while (homeRandomNames.length < homeRandomNeeded && homeRandomNames.length < homeAvailableForRandom.length) {
+        const randomIndex = Math.floor(Math.random() * homeAvailableForRandom.length);
+        if (!homeUsedIndices.has(randomIndex)) {
+            homeUsedIndices.add(randomIndex);
+            homeRandomNames.push(homeAvailableForRandom[randomIndex]);
         }
     }
     
-    // Combine remaining required names and random names, then shuffle
-    const poolNames = [...remainingRequiredNames, ...randomNames];
-    shuffleArray(poolNames);
+    // Get random names for away team (excluding reserved and required)
+    const awayExcluded = [...awayRequiredNames, ...awayReservedPlayers];
+    const awayAvailableForRandom = awayNamePool.filter(name => !awayExcluded.includes(name));
+    const awayRandomNames = [];
+    const awayUsedIndices = new Set();
     
-    // Build teams starting with reserved players
-    const homeNames = [...homeReservedPlayers];
-    const awayNames = [...awayReservedPlayers];
-    
-    // Distribute remaining players
-    poolNames.forEach(name => {
-        if (homeNames.length < 9) {
-            homeNames.push(name);
-        } else {
-            awayNames.push(name);
+    while (awayRandomNames.length < awayRandomNeeded && awayRandomNames.length < awayAvailableForRandom.length) {
+        const randomIndex = Math.floor(Math.random() * awayAvailableForRandom.length);
+        if (!awayUsedIndices.has(randomIndex)) {
+            awayUsedIndices.add(randomIndex);
+            awayRandomNames.push(awayAvailableForRandom[randomIndex]);
         }
-    });
+    }
     
-    // Shuffle each team's lineup
+    // Build home team lineup
+    const homeNames = [...homeReservedPlayers, ...homeRemainingRequired, ...homeRandomNames];
     shuffleArray(homeNames);
+    
+    // Build away team lineup
+    const awayNames = [...awayReservedPlayers, ...awayRemainingRequired, ...awayRandomNames];
     shuffleArray(awayNames);
     
     // Shuffle positions for each team
@@ -875,9 +909,11 @@ function startNewGame() {
     
     const gameMode = document.querySelector('input[name="gameMode"]:checked')?.value || '2player';
     const totalInnings = parseInt(document.querySelector('input[name="innings"]:checked')?.value || '6');
+    const homeGirlsNames = document.getElementById('homeGirlsNames')?.checked || false;
+    const awayGirlsNames = document.getElementById('awayGirlsNames')?.checked || false;
     
     // Generate both lineups with required names distributed
-    const lineups = generateBothLineups(homeTeam, awayTeam);
+    const lineups = generateBothLineups(homeTeam, awayTeam, homeGirlsNames, awayGirlsNames);
     
     // Reset game state completely
     gameState = {
