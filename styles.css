@@ -1474,15 +1474,6 @@ header h1 {
         margin-bottom: 1px;
     }
     
-    /* Ensure text doesn't wrap awkwardly */
-    .pitch-btn span:not(.icon),
-    .manual-btn span:not(.icon) {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-    }
-    
     .contact-grid,
     .action-grid {
         gap: 6px;
