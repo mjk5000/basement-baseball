@@ -1000,12 +1000,15 @@ function startNewGame() {
     
     // Update team name displays
     updateTeamNames();
+    updateGameTitle();
     
     hideGameSettings();
     hidePlayAgainButton(); // Hide the play again button when starting new game
     updateDisplay();
     updateUndoButton();
-    showMessage('New game started! Play Ball! ⚾️');
+    
+    const ballEmoji = (homeGirlsNames && awayGirlsNames) ? '🥎' : '⚾️';
+    showMessage(`New game started! Play Ball! ${ballEmoji}`);
     
     // Start computer simulation if in 1-player mode
     if (gameState.gameMode === '1player') {
@@ -1022,6 +1025,22 @@ function updateTeamNames() {
     
     homeNameEls.forEach(el => el.textContent = gameState.homeTeamName);
     awayNameEls.forEach(el => el.textContent = gameState.awayTeamName);
+}
+
+// Update game title based on gender selection
+function updateGameTitle() {
+    const titleElement = document.getElementById('gameTitle');
+    const pageTitle = document.querySelector('title');
+    
+    if (gameState.homeGirlsNames && gameState.awayGirlsNames) {
+        // Both teams are girls - change to Softball
+        if (titleElement) titleElement.textContent = '🥎 Basement Softball 🥎';
+        if (pageTitle) pageTitle.textContent = '🥎 Basement Softball';
+    } else {
+        // At least one boys team - keep Baseball
+        if (titleElement) titleElement.textContent = '⚾️ Basement Baseball ⚾️';
+        if (pageTitle) pageTitle.textContent = '⚾️ Basement Baseball';
+    }
 }
 
 // Fullscreen functions
@@ -3750,9 +3769,13 @@ function newGame() {
         // Set first inning for away to 0
         gameState.awayInnings[0] = 0;
         hidePlayAgainButton(); // Hide the play again button
-        showMessage('New game started! Play Ball! ⚾️');
+        
+        const ballEmoji = (homeGirlsNames && awayGirlsNames) ? '🥎' : '⚾️';
+        showMessage(`New game started! Play Ball! ${ballEmoji}`);
+        
         updateDisplay();
         updateTeamNames();
+        updateGameTitle();
         
         // Start computer if in 1-player mode
         if (gameState.gameMode === '1player') {
