@@ -3988,3 +3988,42 @@ function randomOutcome() {
 
 // Initialize display
 updateDisplay();
+
+// Auto-lock orientation based on device type
+function lockOrientation() {
+    if (!screen.orientation) return; // Orientation API not supported
+    
+    const screenWidth = window.screen.width;
+    const screenHeight = window.screen.height;
+    const maxDimension = Math.max(screenWidth, screenHeight);
+    
+    try {
+        // Phone: < 768px max dimension → portrait
+        if (maxDimension < 768) {
+            screen.orientation.lock('portrait').catch(() => {
+                // Lock failed (not in fullscreen or not supported)
+                console.log('Portrait lock not available - continuing without lock');
+            });
+        }
+        // Tablet: 768px - 1024px max dimension → landscape  
+        else if (maxDimension >= 768 && maxDimension <= 1024) {
+            screen.orientation.lock('landscape').catch(() => {
+                // Lock failed (not in fullscreen or not supported)
+                console.log('Landscape lock not available - continuing without lock');
+            });
+        }
+        // Desktop: do nothing, allow any orientation
+    } catch (err) {
+        console.log('Orientation lock not supported');
+    }
+}
+
+// Try to lock orientation when entering fullscreen
+document.addEventListener('fullscreenchange', () => {
+    if (document.fullscreenElement) {
+        lockOrientation();
+    }
+});
+
+// Try to lock on page load (will fail if not in fullscreen, which is fine)
+lockOrientation();
