@@ -1998,21 +1998,25 @@ header {
     border: none;
     padding: 8px 12px;
     background: transparent;
-    justify-content: flex-start;
-    flex-direction: row;
-    align-items: center;
+    justify-content: flex-start !important;
+    flex-direction: row !important;
+    align-items: center !important;
     gap: 8px;
     text-align: left;
 }
 
 .radio-group.horizontal .radio-label input[type="radio"] {
     margin: 0;
+.radio-group.horizontal .radio-label input[type="radio"] {
+    margin: 0;
     flex-shrink: 0;
+    order: 1;
 }
 
 .radio-group.horizontal .radio-label span {
     text-align: left;
     line-height: 1;
+    order: 2;
 }
 
 .radio-group.horizontal .radio-label:hover {
