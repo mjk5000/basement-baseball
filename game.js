@@ -566,6 +566,8 @@ let gameState = {
     awayTeamName: 'Away',
     gameMode: '2player', // '2player' or '1player'
     totalInnings: 6, // 3, 6, or 9
+    homeGirlsNames: false, // Use girls names for home team
+    awayGirlsNames: false, // Use girls names for away team
     gameOver: false // Track if game has ended
 };
 
@@ -711,35 +713,67 @@ function generateBothLineups(homeTeamName = 'Home', awayTeamName = 'Away', homeG
     const homeNamePool = homeGirlsNames ? GIRLS_NAMES : POPULAR_NAMES;
     const awayNamePool = awayGirlsNames ? GIRLS_NAMES : POPULAR_NAMES;
     
-    // Required names based on gender selection
-    const homeRequiredNames = homeGirlsNames ? ['Maureen', 'Kajewski'] : ['Harry', 'Jude', 'Hugh', 'Kajewski'];
-    const awayRequiredNames = awayGirlsNames ? ['Maureen', 'Kajewski'] : ['Harry', 'Jude', 'Hugh', 'Kajewski'];
+    // Build required names with special rules:
+    // 1. Kajewski always appears (on one team only)
+    // 2. Maureen only appears if at least one girls team exists
+    // 3. If both teams are girls, Maureen can only be on one team
     
-    // Check if team names match any player names and force them to correct team
     const homeReservedPlayers = [];
     const awayReservedPlayers = [];
     
-    // Always add team name as a player on that team (if not 'Home' or 'Away')
-    if (homeTeamName !== 'Home' && homeTeamName !== 'home' && homeNamePool.includes(homeTeamName)) {
+    // Handle Kajewski - always in game, on one team only
+    const kajewskiOnHome = Math.random() < 0.5;
+    if (kajewskiOnHome) {
+        homeReservedPlayers.push('Kajewski');
+    } else {
+        awayReservedPlayers.push('Kajewski');
+    }
+    
+    // Handle Maureen - only if at least one girls team
+    const hasGirlsTeam = homeGirlsNames || awayGirlsNames;
+    if (hasGirlsTeam) {
+        if (homeGirlsNames && awayGirlsNames) {
+            // Both teams are girls - Maureen goes on one team only
+            const maureenOnHome = Math.random() < 0.5;
+            if (maureenOnHome) {
+                homeReservedPlayers.push('Maureen');
+            } else {
+                awayReservedPlayers.push('Maureen');
+            }
+        } else if (homeGirlsNames) {
+            // Only home team is girls
+            homeReservedPlayers.push('Maureen');
+        } else {
+            // Only away team is girls
+            awayReservedPlayers.push('Maureen');
+        }
+    }
+    
+    // Add boys-specific required names
+    if (!homeGirlsNames) {
+        // Add Harry, Jude, Hugh to home team
+        homeReservedPlayers.push('Harry', 'Jude', 'Hugh');
+    }
+    if (!awayGirlsNames) {
+        // Add Harry, Jude, Hugh to away team
+        awayReservedPlayers.push('Harry', 'Jude', 'Hugh');
+    }
+    
+    // Check if team names match any player names and add to correct team
+    if (homeTeamName !== 'Home' && homeTeamName !== 'home' && homeNamePool.includes(homeTeamName) && !homeReservedPlayers.includes(homeTeamName)) {
         homeReservedPlayers.push(homeTeamName);
     }
     
-    // Always add away team name as a player on that team (if not 'Home' or 'Away')
-    if (awayTeamName !== 'Away' && awayTeamName !== 'away' && awayNamePool.includes(awayTeamName)) {
+    if (awayTeamName !== 'Away' && awayTeamName !== 'away' && awayNamePool.includes(awayTeamName) && !awayReservedPlayers.includes(awayTeamName)) {
         awayReservedPlayers.push(awayTeamName);
     }
     
-    // Get remaining required names (not already reserved)  
-    const homeRemainingRequired = homeRequiredNames.filter(name => !homeReservedPlayers.includes(name));
-    const awayRemainingRequired = awayRequiredNames.filter(name => !awayReservedPlayers.includes(name));
-    
     // Calculate how many random players each team needs
-    const homeRandomNeeded = 9 - homeReservedPlayers.length - homeRemainingRequired.length;
-    const awayRandomNeeded = 9 - awayReservedPlayers.length - awayRemainingRequired.length;
+    const homeRandomNeeded = 9 - homeReservedPlayers.length;
+    const awayRandomNeeded = 9 - awayReservedPlayers.length;
     
-    // Get random names for home team (excluding reserved and required)
-    const homeExcluded = [...homeRequiredNames, ...homeReservedPlayers];
-    const homeAvailableForRandom = homeNamePool.filter(name => !homeExcluded.includes(name));
+    // Get random names for home team (excluding reserved players)
+    const homeAvailableForRandom = homeNamePool.filter(name => !homeReservedPlayers.includes(name));
     const homeRandomNames = [];
     const homeUsedIndices = new Set();
     
@@ -751,9 +785,8 @@ function generateBothLineups(homeTeamName = 'Home', awayTeamName = 'Away', homeG
         }
     }
     
-    // Get random names for away team (excluding reserved and required)
-    const awayExcluded = [...awayRequiredNames, ...awayReservedPlayers];
-    const awayAvailableForRandom = awayNamePool.filter(name => !awayExcluded.includes(name));
+    // Get random names for away team (excluding reserved players)
+    const awayAvailableForRandom = awayNamePool.filter(name => !awayReservedPlayers.includes(name));
     const awayRandomNames = [];
     const awayUsedIndices = new Set();
     
@@ -766,11 +799,11 @@ function generateBothLineups(homeTeamName = 'Home', awayTeamName = 'Away', homeG
     }
     
     // Build home team lineup
-    const homeNames = [...homeReservedPlayers, ...homeRemainingRequired, ...homeRandomNames];
+    const homeNames = [...homeReservedPlayers, ...homeRandomNames];
     shuffleArray(homeNames);
     
     // Build away team lineup
-    const awayNames = [...awayReservedPlayers, ...awayRemainingRequired, ...awayRandomNames];
+    const awayNames = [...awayReservedPlayers, ...awayRandomNames];
     shuffleArray(awayNames);
     
     // Shuffle positions for each team
@@ -954,7 +987,9 @@ function startNewGame() {
         homeTeamName: homeTeam,
         awayTeamName: awayTeam,
         gameMode: gameMode,
-        totalInnings: totalInnings
+        totalInnings: totalInnings,
+        homeGirlsNames: homeGirlsNames,
+        awayGirlsNames: awayGirlsNames
     };
     
     // Clear history
@@ -3659,8 +3694,10 @@ function newGame() {
         const awayTeamName = gameState.awayTeamName;
         const gameMode = gameState.gameMode;
         const totalInnings = gameState.totalInnings;
+        const homeGirlsNames = gameState.homeGirlsNames || false;
+        const awayGirlsNames = gameState.awayGirlsNames || false;
         // Generate both lineups with required names distributed
-        const lineups = generateBothLineups(homeTeamName, awayTeamName);
+        const lineups = generateBothLineups(homeTeamName, awayTeamName, homeGirlsNames, awayGirlsNames);
         
         // Reset game state
         gameState = {
@@ -3702,6 +3739,8 @@ function newGame() {
             awayTeamName: awayTeamName,
             gameMode: gameMode,
             totalInnings: totalInnings,
+            homeGirlsNames: homeGirlsNames,
+            awayGirlsNames: awayGirlsNames,
             gameOver: false // Reset game over flag
         };
         
