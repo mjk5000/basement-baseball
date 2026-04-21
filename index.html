@@ -12,7 +12,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="manifest" href="manifest.json">
     <title>⚾️ Basement Baseball</title>
-    <link rel="stylesheet" href="styles.css?v=1.14.0">
+    <link rel="stylesheet" href="styles.css?v=1.14.1">
 </head>
 <body>
     <div class="container">
@@ -296,8 +296,8 @@
                                 <button class="manual-btn hit-btn" onclick="manualTriple()">
                                     <span class="label">Triple</span>
                                 </button>
-                                <button class="manual-btn hit-btn" onclick="manualHomeRun()">
-                                    <span class="label">Home Run</span>
+                                <button class="manual-btn hit-btn" onclick="processBunt()">
+                                    <span class="label">Bunt</span>
                                 </button>
                             </div>
                             <div class="manual-group">
@@ -316,10 +316,7 @@
                             </div>
                             <div class="manual-group">
                                 <button class="manual-btn hit-btn" onclick="advanceAllRunners()">
-                                    <span class="label">Advance Runner</span>
-                                </button>
-                                <button class="manual-btn hit-btn" onclick="processBunt()">
-                                    <span class="label">Bunt</span>
+                                    <span class="label">Balk</span>
                                 </button>
                                 <button class="manual-btn undo-btn" id="undoBtn" onclick="undoLastAction()" disabled>
                                     <span class="icon">↩️</span>
@@ -356,7 +353,7 @@
                 </button>
             </div>
             <div class="version-info">
-                <span>v1.14.0 • Apr 21, 2026</span>
+                <span>v1.14.1 • Apr 21, 2026</span>
             </div>
             </div>
 
@@ -476,7 +473,7 @@
         <div id="settingsModal" class="modal">
             <div class="modal-content">
                 <h2>⚾ Game Setup</h2>
-                <div class="modal-version-info">v1.14.0 • Apr 21, 2026</div>
+                <div class="modal-version-info">v1.14.1 • Apr 21, 2026</div>
                 
                 <div class="settings-section">
                     <label for="awayTeamName">Away Team Name:</label>
@@ -533,6 +530,6 @@
         </div>
     </div>
 
-    <script src="game.js?v=1.14.0"></script>
+    <script src="game.js?v=1.14.1"></script>
 </body>
 </html>
