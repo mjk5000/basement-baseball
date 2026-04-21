@@ -12,7 +12,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="manifest" href="manifest.json">
     <title>⚾️ Basement Baseball</title>
-    <link rel="stylesheet" href="styles.css?v=1.14.4">
+    <link rel="stylesheet" href="styles.css?v=1.15.0">
 </head>
 <body>
     <div class="container">
@@ -144,17 +144,34 @@
                     <div class="status-right">
                         <div class="runners-display">
                             <svg width="180" height="180" viewBox="0 0 100 100">
-                                <!-- Diamond outline -->
-                                <line x1="50" y1="80" x2="80" y2="50" stroke="#666" stroke-width="2"/>
-                                <line x1="80" y1="50" x2="50" y2="20" stroke="#666" stroke-width="2"/>
-                                <line x1="50" y1="20" x2="20" y2="50" stroke="#666" stroke-width="2"/>
-                                <line x1="20" y1="50" x2="50" y2="80" stroke="#666" stroke-width="2"/>
+                                <!-- Green outfield background -->
+                                <rect x="0" y="0" width="100" height="100" fill="#2d5016"/>
                                 
-                                <!-- Bases -->
-                                <rect x="43" y="13" width="14" height="14" class="base-indicator" id="base2-indicator" rx="2"/>
-                                <rect x="73" y="43" width="14" height="14" class="base-indicator" id="base1-indicator" rx="2"/>
-                                <rect x="43" y="73" width="14" height="14" class="base-indicator home-indicator" id="home-indicator" rx="2"/>
-                                <rect x="13" y="43" width="14" height="14" class="base-indicator" id="base3-indicator" rx="2"/>
+                                <!-- Outfield fence (dark green arc) -->
+                                <path d="M 5 85 Q 50 5, 95 85" stroke="#1a3d0a" stroke-width="2.5" fill="none"/>
+                                
+                                <!-- Lighter green grass behind infield -->
+                                <path d="M 20 50 L 50 20 L 80 50 L 50 80 Z" fill="#3f6b1f"/>
+                                
+                                <!-- Brown dirt infield (diamond shape) -->
+                                <path d="M 50 82 L 82 50 L 50 18 L 18 50 Z" fill="#8b6f47" stroke="#6b5735" stroke-width="1.5"/>
+                                
+                                <!-- Pitcher's mound (slightly darker circle) -->
+                                <circle cx="50" cy="50" r="6" fill="#7a5f3a" stroke="#6b5735" stroke-width="1"/>
+                                
+                                <!-- Grass cutouts (quarter circles from each base) -->
+                                <path d="M 50 80 Q 45 75, 50 70 Q 55 75, 50 80 Z" fill="#3f6b1f"/>
+                                <path d="M 80 50 Q 75 45, 70 50 Q 75 55, 80 50 Z" fill="#3f6b1f"/>
+                                <path d="M 50 20 Q 45 25, 50 30 Q 55 25, 50 20 Z" fill="#3f6b1f"/>
+                                <path d="M 20 50 Q 25 45, 30 50 Q 25 55, 20 50 Z" fill="#3f6b1f"/>
+                                
+                                <!-- White bases (squares rotated 45 degrees) -->
+                                <rect x="43" y="13" width="14" height="14" fill="white" stroke="#ddd" stroke-width="1" rx="1" class="base-indicator" id="base2-indicator"/>
+                                <rect x="73" y="43" width="14" height="14" fill="white" stroke="#ddd" stroke-width="1" rx="1" class="base-indicator" id="base1-indicator"/>
+                                <rect x="13" y="43" width="14" height="14" fill="white" stroke="#ddd" stroke-width="1" rx="1" class="base-indicator" id="base3-indicator"/>
+                                
+                                <!-- Home plate (white pentagon shape) -->
+                                <path d="M 50 87 L 44 81 L 44 75 L 56 75 L 56 81 Z" fill="white" stroke="#ddd" stroke-width="1" class="base-indicator home-indicator" id="home-indicator"/>
                                 
                                 <!-- Out X markers at bases -->
                                 <g id="base1-out" class="out-marker">
@@ -353,7 +370,7 @@
                 </button>
             </div>
             <div class="version-info">
-                <span>v1.14.4 • Apr 21, 2026</span>
+                <span>v1.15.0 • Apr 21, 2026</span>
             </div>
             </div>
 
@@ -473,7 +490,7 @@
         <div id="settingsModal" class="modal">
             <div class="modal-content">
                 <h2>⚾ Game Setup</h2>
-                <div class="modal-version-info">v1.14.4 • Apr 21, 2026</div>
+                <div class="modal-version-info">v1.15.0 • Apr 21, 2026</div>
                 
                 <div class="settings-section">
                     <label for="awayTeamName">Away Team Name:</label>
@@ -530,6 +547,6 @@
         </div>
     </div>
 
-    <script src="game.js?v=1.14.4"></script>
+    <script src="game.js?v=1.15.0"></script>
 </body>
 </html>

@@ -434,33 +434,37 @@ header h1 {
 }
 
 .base-indicator {
-    fill: #444;
+    /* Bases are white by default in SVG, turn yellow when runner on */
     transition: fill 0.3s;
 }
 
 .base-indicator.runner-on.away-batting {
-    fill: #22c55e;
+    fill: #22c55e !important;
     stroke: #ffffff;
-    stroke-width: 1;
+    stroke-width: 2;
 }
 
 .base-indicator.runner-on.home-batting {
-    fill: #3b82f6;
+    fill: #3b82f6 !important;
+    stroke: #ffffff;
+    stroke-width: 2;
 }
 
 .home-indicator {
-    fill: #666;
+    /* Home plate is white by default in SVG */
     transition: fill 0.3s;
 }
 
 .home-indicator.runner-on.away-batting {
-    fill: #22c55e;
+    fill: #22c55e !important;
     stroke: #ffffff;
-    stroke-width: 1;
+    stroke-width: 2;
 }
 
 .home-indicator.runner-on.home-batting {
-    fill: #3b82f6;
+    fill: #3b82f6 !important;
+    stroke: #ffffff;
+    stroke-width: 2;
 }
 
 /* Flash animation for base indicators */
