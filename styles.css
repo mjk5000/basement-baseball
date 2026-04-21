@@ -434,7 +434,9 @@ header h1 {
 }
 
 .base-indicator {
-    /* Bases are white by default in SVG, turn yellow when runner on */
+    fill: #ffffff;
+    stroke: #ddd;
+    stroke-width: 1;
     transition: fill 0.3s;
 }
 
@@ -451,7 +453,9 @@ header h1 {
 }
 
 .home-indicator {
-    /* Home plate is white by default in SVG */
+    fill: #ffffff;
+    stroke: #ddd;
+    stroke-width: 1;
     transition: fill 0.3s;
 }
 

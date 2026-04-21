@@ -12,7 +12,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="manifest" href="manifest.json">
     <title>⚾️ Basement Baseball</title>
-    <link rel="stylesheet" href="styles.css?v=1.15.1">
+    <link rel="stylesheet" href="styles.css?v=1.15.2">
 </head>
 <body>
     <div class="container">
@@ -144,94 +144,75 @@
                     <div class="status-right">
                         <div class="runners-display">
                             <svg width="180" height="180" viewBox="0 0 100 100">
-                                <!-- Green striped outfield grass -->
-                                <defs>
-                                    <pattern id="grassStripes" x="0" y="0" width="10" height="100" patternUnits="userSpaceOnUse">
-                                        <rect x="0" y="0" width="5" height="100" fill="#2d7a1f"/>
-                                        <rect x="5" y="0" width="5" height="100" fill="#3a9428"/>
-                                    </pattern>
-                                </defs>
+                                <!-- Brown dirt diamond background -->
+                                <path d="M 50 80 L 80 50 L 50 20 L 20 50 Z" fill="#d4a574" stroke="#8b6f47" stroke-width="2"/>
                                 
-                                <!-- Outfield background with stripes -->
-                                <path d="M 0 100 L 0 50 Q 50 0, 100 50 L 100 100 Z" fill="url(#grassStripes)"/>
-                                
-                                <!-- Dirt infield (tan/brown arc) -->
-                                <path d="M 50 100 L 30 70 Q 50 40, 70 70 Z" fill="#d4a574" stroke="#c49563" stroke-width="1"/>
-                                
-                                <!-- Inner dirt diamond area -->
-                                <path d="M 50 70 L 42 62 Q 50 54, 58 62 Z" fill="#c49563"/>
-                                
-                                <!-- Grass infield (inside the dirt) -->
-                                <path d="M 50 62 L 44 56 L 50 50 L 56 56 Z" fill="#2d7a1f"/>
-                                
-                                <!-- Pitcher's mound -->
-                                <circle cx="50" cy="58" r="3" fill="#b88a5a" stroke="#a67a4a" stroke-width="0.5"/>
-                                
-                                <!-- White bases as circles -->
-                                <circle cx="50" cy="50" r="4" fill="white" stroke="#ddd" stroke-width="0.8" class="base-indicator" id="base2-indicator"/>
-                                <circle cx="58" cy="58" r="4" fill="white" stroke="#ddd" stroke-width="0.8" class="base-indicator" id="base1-indicator"/>
-                                <circle cx="42" cy="58" r="4" fill="white" stroke="#ddd" stroke-width="0.8" class="base-indicator" id="base3-indicator"/>
-                                
-                                <!-- Home plate (small white pentagon at bottom) -->
-                                <path d="M 50 72 L 48 70 L 48 68 L 52 68 L 52 70 Z" fill="white" stroke="#ddd" stroke-width="0.8" class="base-indicator home-indicator" id="home-indicator"/>
-                                
-                                <!-- Baselines (white lines in dirt) -->
-                                <line x1="50" y1="70" x2="42" y2="58" stroke="white" stroke-width="0.5" opacity="0.6"/>
-                                <line x1="50" y1="70" x2="58" y2="58" stroke="white" stroke-width="0.5" opacity="0.6"/>
+                                <!-- Bases -->
+                                <rect x="43" y="13" width="14" height="14" class="base-indicator" id="base2-indicator" rx="2"/>
+                                <rect x="73" y="43" width="14" height="14" class="base-indicator" id="base1-indicator" rx="2"/>
+                                <rect x="43" y="73" width="14" height="14" class="base-indicator home-indicator" id="home-indicator" rx="2"/>
+                                <rect x="13" y="43" width="14" height="14" class="base-indicator" id="base3-indicator" rx="2"/>
                                 
                                 <!-- Out X markers at bases -->
                                 <g id="base1-out" class="out-marker">
-                                    <line x1="54" y1="54" x2="62" y2="62" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
-                                    <line x1="62" y1="54" x2="54" y2="62" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
+                                    <line x1="74" y1="44" x2="86" y2="56" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="86" y1="44" x2="74" y2="56" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
                                 </g>
                                 <g id="base2-out" class="out-marker">
-                                    <line x1="46" y1="46" x2="54" y2="54" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
-                                    <line x1="54" y1="46" x2="46" y2="54" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
+                                    <line x1="44" y1="14" x2="56" y2="26" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="56" y1="14" x2="44" y2="26" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
                                 </g>
                                 <g id="base3-out" class="out-marker">
-                                    <line x1="38" y1="54" x2="46" y2="62" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
-                                    <line x1="46" y1="54" x2="38" y2="62" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
+                                    <line x1="14" y1="44" x2="26" y2="56" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="26" y1="44" x2="14" y2="56" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
                                 </g>
                                 <g id="home-out" class="out-marker">
-                                    <line x1="46" y1="68" x2="54" y2="76" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
-                                    <line x1="54" y1="68" x2="46" y2="76" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
+                                    <line x1="44" y1="74" x2="56" y2="86" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="56" y1="74" x2="44" y2="86" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
                                 </g>
                                 
                                 <!-- Out X markers at field positions -->
+                                <!-- Pitcher (center of diamond) -->
                                 <g id="P-out" class="out-marker">
-                                    <line x1="47" y1="55" x2="53" y2="61" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
-                                    <line x1="53" y1="55" x2="47" y2="61" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
+                                    <line x1="45" y1="48" x2="55" y2="58" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="55" y1="48" x2="45" y2="58" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
                                 </g>
+                                <!-- Shortstop (between 2nd and 3rd) -->
                                 <g id="SS-out" class="out-marker">
-                                    <line x1="41" y1="51" x2="47" y2="57" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
-                                    <line x1="47" y1="51" x2="41" y2="57" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
+                                    <line x1="28" y1="28" x2="38" y2="38" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="38" y1="28" x2="28" y2="38" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
                                 </g>
+                                <!-- Second baseman (between 1st and 2nd) -->
                                 <g id="2B-out" class="out-marker">
-                                    <line x1="53" y1="51" x2="59" y2="57" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
-                                    <line x1="59" y1="51" x2="53" y2="57" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
+                                    <line x1="62" y1="28" x2="72" y2="38" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="72" y1="28" x2="62" y2="38" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
                                 </g>
+                                <!-- Left field -->
                                 <g id="LF-out" class="out-marker">
-                                    <line x1="18" y1="28" x2="26" y2="36" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
-                                    <line x1="26" y1="28" x2="18" y2="36" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
+                                    <line x1="8" y1="18" x2="18" y2="28" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="18" y1="18" x2="8" y2="28" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
                                 </g>
+                                <!-- Center field -->
                                 <g id="CF-out" class="out-marker">
-                                    <line x1="46" y1="18" x2="54" y2="26" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
-                                    <line x1="54" y1="18" x2="46" y2="26" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
+                                    <line x1="45" y1="3" x2="55" y2="13" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="55" y1="3" x2="45" y2="13" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
                                 </g>
+                                <!-- Right field -->
                                 <g id="RF-out" class="out-marker">
-                                    <line x1="74" y1="28" x2="82" y2="36" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
-                                    <line x1="82" y1="28" x2="74" y2="36" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
+                                    <line x1="82" y1="18" x2="92" y2="28" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="92" y1="18" x2="82" y2="28" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
                                 </g>
+                                <!-- Catcher (at home plate) -->
                                 <g id="C-out" class="out-marker">
-                                    <line x1="46" y1="78" x2="54" y2="86" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
-                                    <line x1="54" y1="78" x2="46" y2="86" stroke="#ff0000" stroke-width="4" stroke-linecap="round"/>
+                                    <line x1="44" y1="86" x2="56" y2="96" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="56" y1="86" x2="44" y2="96" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
                                 </g>
                                 
-                                <!-- Hit type labels -->
-                                <text id="base1-label" class="hit-label" x="62" y="58" text-anchor="middle" dominant-baseline="middle" font-size="9" font-weight="bold" fill="#22c55e" stroke="#000" stroke-width="1.5" paint-order="stroke">1B</text>
-                                <text id="base2-label" class="hit-label" x="50" y="46" text-anchor="middle" dominant-baseline="middle" font-size="9" font-weight="bold" fill="#22c55e" stroke="#000" stroke-width="1.5" paint-order="stroke">2B</text>
-                                <text id="base3-label" class="hit-label" x="38" y="58" text-anchor="middle" dominant-baseline="middle" font-size="9" font-weight="bold" fill="#22c55e" stroke="#000" stroke-width="1.5" paint-order="stroke">3B</text>
-                                <text id="home-label" class="hit-label hit-label-hr" x="50" y="78" text-anchor="middle" dominant-baseline="middle" font-size="9" font-weight="bold" fill="#fbbf24" stroke="#000" stroke-width="1.5" paint-order="stroke">HR</text>
+                                <!-- Hit type labels (placed last to render on top) -->
+                                <text id="base1-label" class="hit-label" x="80" y="52" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="bold" fill="#22c55e" stroke="#000" stroke-width="2" paint-order="stroke">1B</text>
+                                <text id="base2-label" class="hit-label" x="50" y="22" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="bold" fill="#22c55e" stroke="#000" stroke-width="2" paint-order="stroke">2B</text>
+                                <text id="base3-label" class="hit-label" x="20" y="52" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="bold" fill="#22c55e" stroke="#000" stroke-width="2" paint-order="stroke">3B</text>
+                                <text id="home-label" class="hit-label hit-label-hr" x="50" y="82" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="bold" fill="#fbbf24" stroke="#000" stroke-width="2" paint-order="stroke">HR</text>
                             </svg>
                         </div>
                     </div>
@@ -369,7 +350,7 @@
                 </button>
             </div>
             <div class="version-info">
-                <span>v1.15.1 • Apr 21, 2026</span>
+                <span>v1.15.2 • Apr 21, 2026</span>
             </div>
             </div>
 
@@ -489,7 +470,7 @@
         <div id="settingsModal" class="modal">
             <div class="modal-content">
                 <h2>⚾ Game Setup</h2>
-                <div class="modal-version-info">v1.15.1 • Apr 21, 2026</div>
+                <div class="modal-version-info">v1.15.2 • Apr 21, 2026</div>
                 
                 <div class="settings-section">
                     <label for="awayTeamName">Away Team Name:</label>
@@ -546,6 +527,6 @@
         </div>
     </div>
 
-    <script src="game.js?v=1.15.1"></script>
+    <script src="game.js?v=1.15.2"></script>
 </body>
 </html>
