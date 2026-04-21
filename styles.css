@@ -1195,6 +1195,41 @@ header h1 {
     background: linear-gradient(135deg, #8b5cf6, #7c3aed);
 }
 
+.play-again-btn {
+    margin-top: 15px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.play-again-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, #059669, #047857);
+}
+
+.play-again-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.play-again-btn .icon {
+    font-size: 1.3rem;
+}
+
 /* Tablet and Mobile Adjustments */
 @media (max-width: 768px) {
     .game-area {
@@ -1436,6 +1471,17 @@ header h1 {
     .version-info,
     .modal-version-info {
         font-size: 0.65rem;
+    }
+    
+    /* Play again button on mobile */
+    .play-again-btn {
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    
+    .play-again-btn .icon {
+        font-size: 1.2rem;
     }
     
     /* Tighter spacing between advance buttons */

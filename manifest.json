@@ -1,9 +1,9 @@
 {
   "name": "Basement Baseball",
   "short_name": "Baseball",
-  "version": "1.13.1",
+  "version": "1.14.0",
   "description": "Interactive baseball simulation game",
-  "start_url": "./index.html?v=1.13.1",
+  "start_url": "./index.html?v=1.14.0",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#3b82f6",

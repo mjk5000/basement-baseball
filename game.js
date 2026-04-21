@@ -1661,6 +1661,20 @@ function showMessage(text) {
     }, 10);
 }
 
+function showPlayAgainButton() {
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    if (playAgainBtn) {
+        playAgainBtn.style.display = 'flex';
+    }
+}
+
+function hidePlayAgainButton() {
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    if (playAgainBtn) {
+        playAgainBtn.style.display = 'none';
+    }
+}
+
 // Pitch input handlers
 function processContact(type) {
     if (gameState.gameOver) return; // Prevent actions after game over
@@ -2437,6 +2451,7 @@ function sacrificeFly() {
                 const timeoutId = setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
                     showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off sacrifice fly! 🎊`);
+                    showPlayAgainButton(); // Show play again button
                 }, 1000);
                 announcementTimeouts.push(timeoutId);
                 return; // Walk-off!
@@ -2733,6 +2748,7 @@ function walk() {
                 const timeoutId = setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
                     showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off victory! 🎊`);
+                    showPlayAgainButton(); // Show play again button
                 }, 1000);
                 announcementTimeouts.push(timeoutId);
                 return;
@@ -2855,6 +2871,7 @@ function homeRun() {
                 const timeoutId = setTimeout(() => {
                     announceScore(true, false); // true = game over, false = don't play end of inning sound
                     showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off HOME RUN! 🎇🎊`);
+                    showPlayAgainButton(); // Show play again button
                 }, 1000);
                 announcementTimeouts.push(timeoutId);
                 return; // Walk-off!
@@ -2889,6 +2906,7 @@ function checkWalkOff() {
             const timeoutId = setTimeout(() => {
                 announceScore(true); // true = game over
                 showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! Walk-off victory! 🎊`);
+                showPlayAgainButton(); // Show play again button
             }, 1000);
             announcementTimeouts.push(timeoutId);
             return true;
@@ -2906,6 +2924,7 @@ function checkWalkOff() {
             const timeoutId = setTimeout(() => {
                 announceScore(true); // true = game over
                 showMessage(`🎉 GAME OVER! ${winner} wins ${finalScore}! 🎊`);
+                showPlayAgainButton(); // Show play again button
             }, 1000);
             announcementTimeouts.push(timeoutId);
             return true;
@@ -3063,6 +3082,7 @@ function recordOut(skipSound = false) {
                     const timeoutId = setTimeout(() => {
                         announceScore(true); // true = game over
                         showMessage(`🎉 GAME OVER! ${gameState.homeTeamName} wins ${gameState.homeScore}-${gameState.awayScore}! 🎊`);
+                        showPlayAgainButton(); // Show play again button
                     }, 1500);
                     announcementTimeouts.push(timeoutId);
                     return; // Game over, home team doesn't need to bat
@@ -3088,6 +3108,7 @@ function recordOut(skipSound = false) {
                     const timeoutId = setTimeout(() => {
                         announceScore(true); // true = game over
                         showMessage(`🎉 GAME OVER! ${gameState.awayTeamName} wins ${gameState.awayScore}-${gameState.homeScore}! 🎊`);
+                        showPlayAgainButton(); // Show play again button
                     }, 1500);
                     announcementTimeouts.push(timeoutId);
                     return; // Game over!
@@ -3612,6 +3633,7 @@ function newGame() {
         
         // Set first inning for away to 0
         gameState.awayInnings[0] = 0;
+        hidePlayAgainButton(); // Hide the play again button
         showMessage('New game started! Play Ball! ⚾️');
         updateDisplay();
         updateTeamNames();
