@@ -22,7 +22,19 @@ const POPULAR_NAMES = [
     'Calvin', 'Karter', 'Richard', 'Hayden', 'Griffin', 'Ivan', 'Jesse', 'Marcus', 'Camden', 'Judah',
     'Peter', 'Felix', 'Timothy', 'Eduardo', 'Rylan', 'Steven', 'Preston', 'Oscar', 'Lukas', 'George',
     'Harrison', 'Patrick', 'Kyrie', 'Louis', 'Emmanuel', 'Bruce', 'Kingston', 'Cody', 'Graham', 'Callum',
-    'Jensen', 'Johnny', 'Crew', 'Legend', 'Brayden', 'Atlas', 'Phoenix', 'Jax', 'Messiah', 'Myles'
+    'Jensen', 'Johnny', 'Crew', 'Legend', 'Brayden', 'Atlas', 'Phoenix', 'Jax', 'Messiah', 'Myles',
+    // Fun baseball nicknames (100+ additions)
+    'Tex', 'Ringo', 'Skip', 'Buster', 'Chipper', 'Moose', 'Duke', 'Scooter', 'Ozzie', 'Pepper',
+    'Crash', 'Spike', 'Flash', 'Rocket', 'Tank', 'Lefty', 'Slider', 'Dizzy', 'Dusty', 'Rusty',
+    'Bucky', 'Whitey', 'Sparky', 'Red', 'Smoky', 'Pee Wee', 'Catfish', 'Goose', 'Peanuts', 'Cookie',
+    'Yogi', 'Satchel', 'Dizzy', 'Mudcat', 'Blue', 'Hawk', 'Razor', 'Boom-Boom', 'Ducky', 'Pudge',
+    'Bobo', 'Daffy', 'Gabby', 'Schoolboy', 'Babe', 'Chico', 'Turk', 'Butch', 'Buddy', 'Rocky',
+    'Ty', 'Hank', 'Mickey', 'Willie', 'Jackie', 'Stan', 'Honus', 'Cy', 'Nolan', 'Cal',
+    'Rudy', 'Champ', 'Zeus', 'Thor', 'Maverick', 'Gunner', 'Ranger', 'Steele', 'Stone', 'Blade',
+    'Diesel', 'Blaze', 'Storm', 'Wolf', 'Bear', 'Tiger', 'Cobra', 'Viper', 'Falcon', 'Eagle',
+    'Colt', 'Bronco', 'Mustang', 'Racer', 'Dash', 'Zoom', 'Bolt', 'Rush', 'Chase', 'Hunter',
+    'Rex', 'Max', 'Chance', 'Lucky', 'Ace', 'King', 'Prince', 'Royal', 'Noble', 'Chief',
+    'Boss', 'Cap', 'Major', 'Colonel', 'General', 'Admiral', 'Duke', 'Baron', 'Earl', 'Knight'
 ];
 
 // Sound effects using Web Audio API
