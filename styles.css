@@ -1996,22 +1996,25 @@ header {
 
 .radio-group.horizontal .radio-label {
     border: none;
-    padding: 8px 12px;
+    padding: 8px 0;
     background: transparent;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     gap: 6px;
     text-align: center;
+    min-width: 50px;
 }
 
 .radio-group.horizontal .radio-label input[type="radio"] {
-    align-self: center;
+    margin: 0 auto;
+    display: block;
 }
 
 .radio-group.horizontal .radio-label span {
     text-align: center;
     width: 100%;
+    display: block;
 }
 
 .radio-group.horizontal .radio-label:hover {
