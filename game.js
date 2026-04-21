@@ -93,8 +93,7 @@ function preloadCustomSounds() {
     const soundFiles = {
         'strike': [
             'sounds/Strike.m4a',
-            'sounds/Swing miss - serious.m4a',
-            'sounds/Error.m4a'
+            'sounds/Swing miss - serious.m4a'
         ],
         'strikeout': [
             'sounds/Strike 3.m4a',
@@ -168,7 +167,9 @@ function preloadCustomSounds() {
             'sounds/Bunt successful hit.m4a'
         ],
         'error': [
-            'sounds/Error.m4a'
+            'sounds/Error.m4a',
+            'sounds/Error.m4a',
+            'sounds/Error - what is that.m4a'
         ],
         'endInning': [
             'sounds/End of inning.m4a'
