@@ -1683,6 +1683,7 @@ function processContact(type) {
     saveState(); // Save state before action
     stopHomeRunAnimation();
     incrementPitchCount();
+    incrementStrikeCount();
     // Directly process the contact without quality selection
     let outcome = determineOutcome(type);
     executeOutcome(outcome);
@@ -1695,6 +1696,7 @@ function backWallHomeRun() {
     saveState(); // Save state before action
     stopHomeRunAnimation();
     incrementPitchCount();
+    incrementStrikeCount();
     gameState.lastPlay = 'Back Wall Home Run';
     homeRun();
     resetCount();
@@ -1990,6 +1992,7 @@ function foulBall() {
     saveState(); // Save state before action
     stopHomeRunAnimation();
     incrementPitchCount();
+    incrementStrikeCount();
     playSound('foul'); // Sound effect
     
     // ~17% of foul balls are caught for an out
@@ -3277,6 +3280,7 @@ function processBunt() {
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     incrementPitchCount();
+    incrementStrikeCount();
     playSound('bunt'); // Play general bunt sound
     
     const roll = Math.random();
@@ -3518,6 +3522,7 @@ function manualSingle() {
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     incrementPitchCount();
+    incrementStrikeCount();
     gameState.lastPlay = 'Single';
     hit(1);
     recordAtBat('hit');
@@ -3529,6 +3534,7 @@ function manualDouble() {
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     incrementPitchCount();
+    incrementStrikeCount();
     gameState.lastPlay = 'Double';
     hit(2);
     recordAtBat('hit');
@@ -3540,6 +3546,7 @@ function manualTriple() {
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     incrementPitchCount();
+    incrementStrikeCount();
     gameState.lastPlay = 'Triple';
     hit(3);
     recordAtBat('hit');
@@ -3551,6 +3558,7 @@ function manualHomeRun() {
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     incrementPitchCount();
+    incrementStrikeCount();
     gameState.lastPlay = 'Home Run';
     homeRun();
     resetCount();
@@ -3565,6 +3573,7 @@ function manualOut() {
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
     incrementPitchCount();
+    incrementStrikeCount();
     gameState.lastPlay = 'Out at first';
     showMessage('Out at first base! 🧤');
     showOutX(1); // Show X at first base
