@@ -1342,6 +1342,12 @@ function showHitLabel(hitType) {
     if (labelId) {
         const label = document.getElementById(labelId);
         if (label) {
+            // Set color based on batting team (not for HR which stays gold)
+            if (hitType !== 4) {
+                const teamColor = gameState.inningHalf === 'top' ? '#22c55e' : '#3b82f6'; // Green for away, blue for home
+                label.setAttribute('fill', teamColor);
+            }
+            
             label.classList.remove('show');
             // Force reflow to restart animation
             void label.offsetWidth;
@@ -3207,7 +3213,13 @@ function manualWalk() {
     if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
-    incrementPitchCount();
+    
+    // Add remaining balls to pitch count (4 - current balls)
+    const remainingBalls = 4 - gameState.balls;
+    for (let i = 0; i < remainingBalls; i++) {
+        incrementPitchCount();
+    }
+    
     gameState.lastPlay = 'Walk';
     playSound('walk'); // Play walk sound
     showMessage('Ball 4! Walk! Take your base! 🚶');
