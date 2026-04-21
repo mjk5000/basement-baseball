@@ -12,7 +12,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="manifest" href="manifest.json">
     <title>⚾️ Basement Baseball</title>
-    <link rel="stylesheet" href="styles.css?v=1.16.3">
+    <link rel="stylesheet" href="styles.css?v=1.16.4">
 </head>
 <body>
     <div class="container">
@@ -153,7 +153,7 @@
                                 <!-- Bases -->
                                 <rect x="43" y="13" width="14" height="14" class="base-indicator" id="base2-indicator" rx="2"/>
                                 <rect x="73" y="43" width="14" height="14" class="base-indicator" id="base1-indicator" rx="2"/>
-                                <rect x="43" y="73" width="14" height="14" class="base-indicator home-indicator" id="home-indicator" rx="2"/>
+                                <polygon points="50,73 57,76.5 57,87 43,87 43,76.5" class="base-indicator home-indicator" id="home-indicator"/>
                                 <rect x="13" y="43" width="14" height="14" class="base-indicator" id="base3-indicator" rx="2"/>
                                 
                                 <!-- Out X markers at bases -->
@@ -170,8 +170,8 @@
                                     <line x1="26" y1="44" x2="14" y2="56" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
                                 </g>
                                 <g id="home-out" class="out-marker">
-                                    <line x1="44" y1="74" x2="56" y2="86" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
-                                    <line x1="56" y1="74" x2="44" y2="86" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="44" y1="75" x2="56" y2="87" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
+                                    <line x1="56" y1="75" x2="44" y2="87" stroke="#ff0000" stroke-width="5" stroke-linecap="round"/>
                                 </g>
                                 
                                 <!-- Out X markers at field positions -->
@@ -353,7 +353,7 @@
                 </button>
             </div>
             <div class="version-info">
-                <span>v1.16.3 • Apr 21, 2026</span>
+                <span>v1.16.4 • Apr 21, 2026</span>
             </div>
             </div>
 
@@ -473,7 +473,7 @@
         <div id="settingsModal" class="modal">
             <div class="modal-content">
                 <h2>⚾ Game Setup</h2>
-                <div class="modal-version-info">v1.16.3 • Apr 21, 2026</div>
+                <div class="modal-version-info">v1.16.4 • Apr 21, 2026</div>
                 
                 <div class="settings-section">
                     <label for="awayTeamName">Away Team Name:</label>
@@ -530,6 +530,6 @@
         </div>
     </div>
 
-    <script src="game.js?v=1.16.3"></script>
+    <script src="game.js?v=1.16.4"></script>
 </body>
 </html>
