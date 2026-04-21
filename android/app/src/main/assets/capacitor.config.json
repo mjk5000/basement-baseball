@@ -1,0 +1,15 @@
+{
+	"appId": "com.mjk5000.basementbaseball",
+	"appName": "Basement Baseball",
+	"webDir": "www",
+	"server": {
+		"androidScheme": "https"
+	},
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 2000,
+			"backgroundColor": "#3b82f6",
+			"showSpinner": false
+		}
+	}
+}

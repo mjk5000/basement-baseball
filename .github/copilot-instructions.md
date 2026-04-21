@@ -1,78 +1,172 @@
-<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
-- [x] Verify that the copilot-instructions.md file in the .github directory is created.
+﻿<!-- Project: Basement Baseball / Basement Softball -->
+<!-- Interactive baseball/softball simulation web app for kids -->
+<!-- Hosted on GitHub Pages: https://mjk5000.github.io/basement-baseball/ -->
 
-- [x] Clarify Project Requirements
-	<!-- Web app for iPad - Baseball simulation game for kids -->
+## Project Status: Ô£à COMPLETE & DEPLOYED
 
-- [x] Scaffold the Project
-	<!-- Created HTML, CSS, and JavaScript files for web app -->
+This is a fully functional web application deployed to GitHub Pages.
+Current version: v1.17.9 (April 21, 2026)
 
-- [x] Customize the Project
-	<!-- Created kid-friendly baseball game with scoring, innings, interactive buttons, and sound effects -->
+### Project Overview
+- **Type**: Progressive Web App (PWA)
+- **Platform**: Web-based (HTML/CSS/JavaScript)
+- **Target Devices**: iPad, Kindle Fire, tablets, phones, desktop
+- **Hosting**: GitHub Pages (auto-deploys on push to main)
+- **URL**: https://mjk5000.github.io/basement-baseball/
 
-- [x] Install Required Extensions
-	<!-- No extensions required - runs in any web browser -->
+### Technology Stack
+- Pure HTML5, CSS3, JavaScript (no frameworks)
+- No build process required
+- No external dependencies
+- Runs directly in browser
 
-- [x] Compile the Project
-	<!-- No compilation needed - runs directly in browser -->
+### Key Features (v1.17.9)
+- Ô£à Custom team names (max 11 characters, must be unique)
+- Ô£à Boys names (310+) and Girls names (220+) with per-team toggle
+- Ô£à Dynamic branding (Baseball ÔÜ¥ / Softball ­ƒÑÄ)
+- Ô£à Unique lineups - no duplicate names across teams
+- Ô£à Special players: Kajewski, Hugh, Harry, Jude, Mo, Maureen
+- Ô£à Game of Thrones character names
+- Ô£à Baseball nicknames (Tex, Ace, Ringo, Duke, etc.)
+- Ô£à Team names appear as players in lineups
+- Ô£à MLB-style scoreboard with inning-by-inning tracking
+- Ô£à Pitch-by-pitch mode for whiffle ball
+- Ô£à Advanced manual controls
+- Ô£à Pitcher statistics tracking
+- Ô£à Pentagon home plate design
+- Ô£à Sound effects with mute/unmute
+- Ô£à Fullscreen mode
+- Ô£à PWA installable to home screen
 
-- [x] Create and Run Task
-	<!-- No build task needed - open index.html directly -->
+### File Structure
+```
+BasementBaseball/
+Ôö£ÔöÇÔöÇ index.html       # Main page (~500 lines)
+Ôö£ÔöÇÔöÇ game.js          # Game logic (~3500 lines)
+Ôö£ÔöÇÔöÇ styles.css       # Styling (~1500 lines)
+Ôö£ÔöÇÔöÇ manifest.json    # PWA manifest
+Ôö£ÔöÇÔöÇ sounds/          # Sound effects folder
+Ôö£ÔöÇÔöÇ README.md        # User documentation
+Ôö£ÔöÇÔöÇ Setup.txt        # Quick setup guide
+ÔööÔöÇÔöÇ .github/
+    ÔööÔöÇÔöÇ copilot-instructions.md  # This file
+```
 
-- [x] Launch the Project
-	<!-- Open index.html in web browser or use Live Server -->
+## Development Guidelines
 
-- [x] Ensure Documentation is Complete
-	<!-- README.md and copilot-instructions.md are complete with web app instructions -->
+### Making Changes
+1. Edit files locally (index.html, game.js, styles.css)
+2. Test in browser (open index.html or use Live Server)
+3. Update version numbers when releasing:
+   - index.html: CSS/JS links, version displays (3 locations)
+   - manifest.json: version and start_url (2 locations)
+4. Commit and push:
+   ```bash
+   git add .
+   git commit -m "v1.X.X: Description of changes"
+   git push origin main
+   ```
+5. GitHub Pages auto-deploys within 1-2 minutes
 
-<!--
-## Execution Guidelines
-PROGRESS TRACKING:
-- If any tools are available to manage the above todo list, use it to track progress through this checklist.
-- After completing each step, mark it complete and add a summary.
-- Read current todo list status before starting each new step.
+### Version Numbering
+- Format: v1.X.Y
+- Major features: increment X (e.g., v1.17.0 ÔåÆ v1.18.0)
+- Minor fixes: increment Y (e.g., v1.17.9 ÔåÆ v1.17.10)
+- Always update all 5 version strings in sync
 
-COMMUNICATION RULES:
-- Avoid verbose explanations or printing full command outputs.
-- If a step is skipped, state that briefly (e.g. "No extensions needed").
-- Do not explain project structure unless asked.
-- Keep explanations concise and focused.
+### Code Organization
+**game.js** key sections:
+- POPULAR_NAMES array: 310+ boys names
+- GIRLS_NAMES array: 220+ girls names
+- generateBothLineups(): Lineup generation with name rules
+- startNewGame(): Game initialization and validation
+- processHit(): Outcome probability calculations
+- incrementPitchCount(), incrementStrikeCount(): Pitcher stats
 
-DEVELOPMENT RULES:
-- Use '.' as the working directory unless user specifies otherwise.
-- Avoid adding media or external links unless explicitly requested.
-- Use placeholders only with a note that they should be replaced.
-- Use VS Code API tool only for VS Code extension projects.
-- Once the project is created, it is already opened in Visual Studio Code—do not suggest commands to open this project in Visual Studio again.
-- If the project setup information has additional rules, follow them strictly.
+**index.html** key sections:
+- Settings modal: Team names, girls/boys checkboxes
+- Game title: Dynamically changes Baseball ÔÜ¥ Ôåö Softball ­ƒÑÄ
+- SVG diamond: Visual base runners display
+- Pentagon home plate: Realistic proportions
 
-FOLDER CREATION RULES:
-- Always use the current directory as the project root.
-- If you are running any terminal commands, use the '.' argument to ensure that the current working directory is used ALWAYS.
-- Do not create a new folder unless the user explicitly requests it besides a .vscode folder for a tasks.json file.
-- If any of the scaffolding commands mention that the folder name is not correct, let the user know to create a new folder with the correct name and then reopen it again in vscode.
+**styles.css** key sections:
+- Panel gradients: Scoreboard, lineups, game status
+- Checkbox styling: Girls/boys name toggles
+- Responsive breakpoints: Mobile, tablet, desktop
+- Button styling: Contact type, quality, manual controls
 
-EXTENSION INSTALLATION RULES:
-- Only install extension specified by the get_project_setup_info tool. DO NOT INSTALL any other extensions.
+### Testing Checklist
+- [ ] Test boys team + boys team (should show "Baseball")
+- [ ] Test girls team + girls team (should show "Softball")
+- [ ] Test mixed (boys + girls teams, should show "Baseball")
+- [ ] Verify no duplicate names across lineups
+- [ ] Check Kajewski appears exactly once
+- [ ] Check Hugh, Harry, Jude appear on boys teams only
+- [ ] Check Mo/Maureen appears on girls teams (or when team named Mo/Maureen)
+- [ ] Test custom team name appears in lineup
+- [ ] Test same team name validation (should be blocked)
+- [ ] Test max name length (11 characters)
+- [ ] Test on mobile device (touch controls)
+- [ ] Test fullscreen mode
+- [ ] Test sound mute/unmute
+- [ ] Test PWA installation
 
-PROJECT CONTENT RULES:
-- If the user has not specified project details, assume they want a "Hello World" project as a starting point.
-- Avoid adding links of any type (URLs, files, folders, etc.) or integrations that are not explicitly required.
-- Avoid generating images, videos, or any other media files unless explicitly requested.
-- If you need to use any media assets as placeholders, let the user know that these are placeholders and should be replaced with the actual assets later.
-- Ensure all generated components serve a clear purpose within the user's requested workflow.
-- If a feature is assumed but not confirmed, prompt the user for clarification before including it.
-- If you are working on a VS Code extension, use the VS Code API tool with a query to find relevant VS Code API references and samples related to that query.
+### Deployment Status
+Ô£à GitHub repository: https://github.com/mjk5000/basement-baseball
+Ô£à GitHub Pages enabled: main branch, root directory
+Ô£à Live URL: https://mjk5000.github.io/basement-baseball/
+Ô£à PWA manifest configured
+Ô£à Offline caching enabled
+Ô£à Documentation complete (README.md, Setup.txt)
 
-TASK COMPLETION RULES:
-- Your task is complete when:
-  - Project is successfully scaffolded and compiled without errors
-  - copilot-instructions.md file in the .github directory exists in the project
-  - README.md file exists and is up to date
-  - User is provided with clear instructions to debug/launch the project
+### Support & Issues
+- Report bugs: https://github.com/mjk5000/basement-baseball/issues
+- Current version displayed at bottom of game screen
+- Version history in README.md
 
-Before starting a new task in the above plan, update progress in the plan.
--->
-- Work through each checklist item systematically.
-- Keep communication concise and focused.
-- Follow development best practices.
+---
+
+## Instructions for AI Assistants
+
+When working on this project:
+1. **Maintain existing architecture** - Pure HTML/CSS/JS, no frameworks
+2. **Update version numbers** - All 5 locations when releasing
+3. **Test thoroughly** - Name generation logic is complex
+4. **Preserve features** - Don't break existing functionality
+5. **Keep documentation updated** - README.md and Setup.txt
+6. **Use cache busting** - Version query strings on CSS/JS links
+7. **Commit message format**: "vX.X.X: Brief description"
+8. **Keep it kid-friendly** - Simple UI, fun features
+
+### Common Tasks
+
+**Add new names:**
+```javascript
+// In game.js
+const POPULAR_NAMES = [...existing..., 'NewName1', 'NewName2'];
+const GIRLS_NAMES = [...existing..., 'NewGirlName1', 'NewGirlName2'];
+```
+
+**Adjust probabilities:**
+```javascript
+// In game.js ÔåÆ processHit() function
+case 'grounder':
+    if (quality === 'hard') {
+        return Math.random() < 0.70 ? 'single' : 'out';
+    }
+```
+
+**Change styling:**
+```css
+/* In styles.css */
+.scoreboard-panel {
+    background: linear-gradient(...);
+}
+```
+
+**Update version:**
+1. index.html: 3 locations (CSS link, JS link, version display)
+2. manifest.json: 2 locations (version, start_url)
+
+This project is stable and production-ready. Focus on enhancements and bug fixes.
+

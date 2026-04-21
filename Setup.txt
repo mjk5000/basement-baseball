@@ -1,102 +1,161 @@
-BASEMENT BASEBALL - SETUP INSTRUCTIONS
-=======================================
+﻿ÔÜ¥´©Å BASEMENT BASEBALL / ­ƒÑÄ BASEMENT SOFTBALL - SETUP GUIDE
+=========================================================
 
-ACCESSING THE GAME
-------------------
-The game is hosted on GitHub Pages and can be accessed from any device:
+­ƒÄ« PLAY NOW
+-----------
+Open your browser and visit:
 
-Website URL: https://mjk5000.github.io/basement-baseball/
+    https://mjk5000.github.io/basement-baseball/
 
-This works on:
-- iPad (Safari, Chrome)
-- Kindle Fire (Silk Browser, Chrome)
-- Desktop/Laptop computers
+That's it! Works on all devices:
+- iPad/iPhone (Safari recommended)
 - Android tablets and phones
-- iPhones
-
-No installation required - just open the URL in your browser!
-
-
-GITHUB PAGES SETUP (Already Complete)
---------------------------------------
-The game is already deployed and live. If you need to update it in the future:
-
-1. Make changes to the files locally
-2. Commit and push changes:
-   git add .
-   git commit -m "Description of changes"
-   git push origin main
-
-3. GitHub Pages will automatically update within 1-2 minutes
+- Kindle Fire (Chrome or Silk Browser)
+- Desktop/Laptop (any modern browser)
 
 
-OFFLINE USE (PWA - Progressive Web App)
-----------------------------------------
-You can install the game as an app on your device:
+­ƒô▒ INSTALL AS APP (RECOMMENDED)
+--------------------------------
+For the best experience, install to your home screen:
 
-On iPad/iPhone:
-1. Open https://mjk5000.github.io/basement-baseball/ in Safari
-2. Tap the Share button
-3. Tap "Add to Home Screen"
-4. Name it "Basement Baseball"
-5. Tap "Add"
+iPhone/iPad:
+1. Open Safari ÔåÆ Visit https://mjk5000.github.io/basement-baseball/
+2. Tap Share button (Ô¼å´©Å) at bottom
+3. Select "Add to Home Screen"
+4. Name it "Baseball" ÔåÆ Tap "Add"
+5. Launch from home screen - fullscreen, no browser UI!
 
-On Android/Kindle Fire:
-1. Open the URL in Chrome
-2. Tap the menu (3 dots)
-3. Tap "Add to Home screen" or "Install app"
+Android/Kindle Fire:
+1. Open Chrome ÔåÆ Visit https://mjk5000.github.io/basement-baseball/
+2. Tap menu (Ôï« three dots)
+3. Select "Add to Home screen" or "Install app"
 4. Confirm installation
+5. Launch from home screen or app drawer!
 
-On Desktop (Windows/Mac/Linux):
-
-Using Chrome:
-1. Open https://mjk5000.github.io/basement-baseball/ in Chrome
-2. Look for the install icon (⊕ or computer icon) in the address bar (right side)
-   - OR click the three dots menu → "Install Basement Baseball..."
-3. Click "Install" in the popup
-4. The app will open in its own window
-5. A desktop shortcut and Start Menu entry will be created
-
-Using Microsoft Edge:
-1. Open the URL in Edge
-2. Click the install icon (+) in the address bar
-   - OR click the three dots menu → "Apps" → "Install this site as an app"
-3. Click "Install"
-4. The app appears in your Start Menu and taskbar
-
-Using Safari (Mac):
-1. Open the URL in Safari
-2. Click "File" → "Add to Dock"
-3. The game will be added as a web app in your Dock
-
-Once installed, the desktop app will:
-- Open in its own window (no browser tabs/address bar)
-- Have its own icon in Start Menu/Dock/Applications
-- Work offline after first load
-- Feel like a native desktop application
-- Support keyboard shortcuts and notifications
-
-To uninstall desktop app:
-- Windows: Right-click the app → "Uninstall"
-- Mac: Right-click in Dock → "Options" → "Remove from Dock"
-- Or use browser settings → Apps → Remove
+Desktop (Windows/Mac/Linux):
+1. Open Chrome or Edge ÔåÆ Visit https://mjk5000.github.io/basement-baseball/
+2. Click install icon (Ôèò) in address bar
+3. Or: Menu ÔåÆ "Install Basement Baseball..."
+4. App opens in its own window with desktop shortcut!
 
 
-RECOMMENDED SETTINGS FOR TABLETS
----------------------------------
-1. Use landscape orientation for best experience
-2. Enable sound for the full experience (unmute button in game)
-3. Adjust brightness to comfortable level for extended play
-4. Consider enabling full-screen mode (icon button in-game)
+Ô£¿ FEATURES
+-----------
+- Custom team names (up to 11 characters)
+- Boys names (310+ names) or Girls names (220+ names) - choose per team
+- Automatic "Softball" branding when both teams use girls names
+- Unique lineups - no duplicate names across teams
+- Special players: Kajewski, Hugh, Harry, Jude, Mo, Maureen
+- Fun nicknames (Tex, Ace, Ringo) and Game of Thrones characters
+- MLB-style scoreboard with inning-by-inning tracking
+- Pitch-by-pitch mode for whiffle ball machines
+- Advanced manual controls for quick scoring
+- Pitcher stats (pitch count, strikes, strikeouts)
+- 3, 6, 7, or 9 inning games
+- 1-player (vs computer) or 2-player modes
+- Sound effects (mute/unmute button)
+- Fullscreen mode
+- Works offline after first load (when installed)
 
 
-GAME REPOSITORY
----------------
+­ƒöä GETTING UPDATES
+------------------
+The app automatically gets updates when you launch it from the web URL.
+
+If your installed app shows an old version:
+1. Delete the home screen icon (long-press ÔåÆ Remove)
+2. Clear browser cache:
+   - Safari: Settings ÔåÆ Safari ÔåÆ Clear History and Website Data
+   - Chrome: Settings ÔåÆ Privacy ÔåÆ Clear Browsing Data
+3. Visit https://mjk5000.github.io/basement-baseball/ in browser
+4. Re-add to home screen
+
+Current version: v1.17.9 (April 21, 2026)
+
+
+­ƒÄ« HOW TO PLAY
+--------------
+Pitch-by-Pitch Mode (for basement whiffle ball):
+1. Pitcher throws from machine
+2. Batter swings (or doesn't)
+3. Report what happened:
+   - Contact made? ÔåÆ Select type (grounder/line drive/pop up) + quality (hard/soft)
+   - No contact? ÔåÆ Select swing & miss / no swing / foul ball
+4. App calculates realistic outcome
+5. Runners advance automatically
+6. 3 outs = half inning complete
+7. Play your chosen number of innings!
+
+Manual Controls Mode:
+- Click "Show Advanced Controls"
+- Directly input singles, doubles, walks, strikes, outs, etc.
+- Perfect for manual scorekeeping
+
+
+­ƒÄ» GAME SETTINGS
+----------------
+Team Names:
+- Name your teams anything you want (11 characters max)
+- Team names must be different from each other
+- If you name a team after a player (e.g., "Hugh", "Arya"), that player appears in lineup
+
+Girls/Boys Names:
+- Toggle checkbox for each team independently
+- Girls: 220+ names (popular names, nicknames, Game of Thrones)
+- Boys: 310+ names (popular names, baseball nicknames, Game of Thrones)
+- When both teams use girls names ÔåÆ game becomes "Basement Softball ­ƒÑÄ"
+
+Special Players:
+- Kajewski: Always appears in one lineup
+- Hugh, Harry, Jude: Each appears in one boys lineup
+- Mo/Maureen: Appears in girls lineups or when team named Mo/Maureen
+- No duplicates: Every player is unique across both teams
+
+
+­ƒöº TROUBLESHOOTING
+------------------
+Fullscreen not working on iPhone?
+ÔåÆ iOS doesn't support browser fullscreen. Use "Add to Home Screen" instead.
+
+Sound not playing?
+ÔåÆ Tap mute/unmute button in game. Mobile devices may need a tap to activate audio.
+
+App won't load?
+ÔåÆ Try a different browser or clear cache. Check internet connection.
+
+
+­ƒôè REPOSITORY & UPDATES
+-----------------------
 GitHub Repository: https://github.com/mjk5000/basement-baseball
-- View source code
-- Report issues
-- Download files
-- See update history
+Live App: https://mjk5000.github.io/basement-baseball/
+
+Updates are pushed automatically via GitHub Pages.
+Check version number at bottom of game screen.
+
+
+­ƒôØ VERSION HISTORY
+------------------
+v1.17.9 - Hugh, Harry, Jude, Kajewski unique players; team name validation
+v1.17.8 - Max team name length 11 characters
+v1.17.7 - Mo/Maureen work as boys team names
+v1.17.6 - Custom team names in lineups
+v1.17.5 - Mo/Maureen team name enforcement
+v1.17.4 - Game of Thrones character names
+v1.17.3 - Duplicate prevention
+v1.17.2 - Softball branding for all-girls games
+v1.17.0 - Girls names feature
+v1.16.6 - Baseball nicknames added
+v1.16.5 - Pentagon home plate design
+
+
+­ƒñØ SUPPORT
+----------
+Issues or suggestions? Visit:
+https://github.com/mjk5000/basement-baseball/issues
+
+
+Enjoy the game! ÔÜ¥­ƒÑÄ
+
 
 
 TROUBLESHOOTING

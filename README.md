@@ -1,391 +1,221 @@
-# ⚾️ Basement Baseball
+﻿# ÔÜ¥´©Å Basement Baseball / ­ƒÑÄ Basement Softball
 
-A fun, kid-friendly baseball simulation web app optimized for iPad, Kindle, and all devices - perfect for basement whiffle ball!
+A fun, kid-friendly baseball and softball simulation web app optimized for iPad, Kindle, and all devices - perfect for basement whiffle ball!
 
-> **🔥 Kindle Fire Users**: See [KINDLE_SETUP.txt](KINDLE_SETUP.txt) for quick setup instructions!
+**­ƒÄ« Play Now:** [https://mjk5000.github.io/basement-baseball/](https://mjk5000.github.io/basement-baseball/)
 
-## Features
+## Ô£¿ Features
 
-- **MLB-Style Scoreboard**: Traditional 9-inning scoreboard with away/home teams
+### Game Mechanics
+- **MLB-Style Scoreboard**: Traditional 9-inning scoreboard with customizable team names
 - **TV Broadcast Display**: Professional chiron-style outs, balls, strikes, and runner indicators
-- **Inning Tracking**: Top and bottom halves with proper scoring by team
-- **Interactive Gameplay**: Pitch-by-pitch tracking based on contact type and quality
+- **Realistic Gameplay**: Pitch-by-pitch tracking based on contact type and quality
 - **Advanced Manual Controls**: Direct buttons for singles, doubles, triples, home runs, walks, balls, strikes
-- **Realistic Outcomes**: Smart probability-based results for grounders, line drives, and pop-ups
+- **Smart Outcomes**: Probability-based results for grounders, line drives, and pop-ups
+- **Flexible Innings**: Choose 3, 6, 7, or 9 inning games
+- **Game Modes**: 2-player or 1-player (vs computer)
+
+### Customization & Names
+- **Custom Team Names**: Name your teams anything you want (up to 11 characters)
+- **Boys & Girls Names**: Toggle between boys names (310+ names) and girls names (220+ names) for each team independently
+- **Dynamic Branding**: Game automatically changes to "­ƒÑÄ Basement Softball ­ƒÑÄ" when both teams use girls names
+- **Special Players**: Hugh, Harry, Jude, Kajewski, Mo, and Maureen have special appearances in lineups
+- **Unique Lineups**: No duplicate names across both teams - every player is unique
+- **Fun Nicknames**: Includes 110+ baseball nicknames (Tex, Ace, Ringo, Duke, Flash) and Game of Thrones characters
+
+### User Experience
 - **Tablet Optimized**: Full-screen mode on iPad and Kindle for immersive gameplay
 - **Touch-Friendly**: Large buttons and responsive touch controls
 - **Responsive Design**: Works on iPad, tablet, phone, or desktop
 - **No Installation**: Runs directly in any web browser
+- **Progressive Web App**: Install to home screen for offline play and app-like experience
+- **Sound Effects**: Optional audio feedback (mute/unmute button)
 
-## 📱 Kindle Fire Setup (SharePoint Method)
+## ­ƒÜÇ Quick Start
 
-### Step 1: Upload Files to SharePoint (From PC)
+### Play in Browser (Easiest)
+Just visit: **[https://mjk5000.github.io/basement-baseball/](https://mjk5000.github.io/basement-baseball/)**
 
-1. **Zip the 4 game files** on your PC:
-   - `index.html`
-   - `game.js`
-   - `styles.css`
-   - `manifest.json`
-2. **Upload the zip file** to your SharePoint site
-3. **Share the link** or make accessible to yourself
-
-### Step 2: Download to Kindle Fire
-
-1. **On Kindle**, open Silk browser or Chrome
-2. **Navigate to SharePoint** and sign in
-3. **Download the zip file** - it goes to `/storage/emulated/0/Download/`
-4. **Extract the zip file** using:
-   - "ES File Explorer" (from Amazon Appstore), or
-   - Built-in file manager
-5. **All 4 files should be in** `/storage/emulated/0/Download/`
-
-### Step 3: Open in Chrome and Bookmark
-
-1. **Install Chrome** from Amazon Appstore (if not installed)
-2. **Open Chrome** on Kindle
-3. **Type in address bar**: `file://storage/emulated/0/Download/index.html`
-4. **Tap the star icon** to bookmark
-5. **Name it** "Baseball Game"
-6. **Done!** Open Chrome → Bookmarks → Baseball Game anytime
-
-### Quick Access Tip
-- Keep Chrome open with the bookmark visible
-- Or try: Chrome menu (⋮) → "Add to Home screen" (if available)
+Works on any device with a modern browser!
 
 ---
 
-## 📱 iPhone/iOS Setup (Fullscreen Mode)
+## ­ƒô▒ Install as App (Recommended)
 
-### For iPhone (iOS/iPadOS) - Best Experience:
+### iPhone/iPad (iOS)
 
-**Note:** The browser fullscreen button does NOT work on iPhone due to iOS restrictions. Instead, use "Add to Home Screen" for a true fullscreen, app-like experience!
-
-1. **Open the game in Safari** (recommended) or Chrome
-2. **Tap the Share button** (⬆️ icon at bottom of screen in Safari, or at top in Chrome)
-3. **Scroll down and select "Add to Home Screen"**
-4. **Name it** "Baseball" (or whatever you like)
+1. **Open Safari** and visit [https://mjk5000.github.io/basement-baseball/](https://mjk5000.github.io/basement-baseball/)
+2. **Tap Share button** (Ô¼å´©Å icon at bottom)
+3. **Select "Add to Home Screen"**
+4. **Name it** "Basement Baseball" (or "Softball")
 5. **Tap "Add"**
-6. **Launch from your home screen** - it now runs fullscreen without browser UI!
+6. **Launch from home screen** - runs fullscreen like a native app!
 
-### Why Add to Home Screen?
-- ✅ **No address bar** taking up screen space
-- ✅ **No browser controls** cluttering the view
-- ✅ **Launches like a native app** instantly
-- ✅ **Works offline** once loaded
-- ✅ **Custom icon** on your home screen
+**Benefits:**
+- Ô£à No browser UI taking up screen space
+- Ô£à Launches instantly from home screen
+- Ô£à Works offline after first load
+- Ô£à Custom baseball icon
 
-### 🔄 Will It Auto-Update?
-
-**YES** - If you add from a **web URL** (recommended for auto-updates):
-- Example: `https://yourusername.github.io/basement-baseball/`
-- Opens from URL → Fetches latest version when launched
-- Any code pushed to GitHub Pages appears in new sessions
-
-**⚠️ IMPORTANT:** iPhone/iOS caches home screen apps aggressively. To get updates:
-1. **Delete the old home screen icon** (long-press → Remove App)
-2. **Open Safari** and verify you see the new version
-3. **Clear Safari cache** (Settings → Safari → Clear History and Website Data)
-4. **Re-add to home screen** (Share → Add to Home Screen)
-
-**NO** - If you add from **local files**:
-- Example: `file:///storage/emulated/0/Download/index.html`
-- Opens from device storage → Shows saved version only
-- Must manually replace files to update
-
-**Recommendation:** Host on GitHub Pages (free!) for automatic updates. See "Hosting for Auto-Updates" section below.
+**Updates:** To get latest version, delete icon, clear Safari cache (Settings ÔåÆ Safari ÔåÆ Clear History), then re-add.
 
 ---
 
-## 📱 iPad Setup (Email Method)
+### Android/Kindle Fire
 
-### For iPad (iOS/iPadOS):
-
-1. **Email yourself** the 4 files as attachments
-2. **On iPad**, open the email in Mail app
-3. **Tap `index.html` attachment** - it opens in Safari
-4. **Tap Share button** (square with arrow) → "Add to Home Screen"
-5. **Done!** Launches like a native app from home screen
+1. **Open Chrome** and visit [https://mjk5000.github.io/basement-baseball/](https://mjk5000.github.io/basement-baseball/)
+2. **Tap menu** (Ôï« three dots)
+3. **Select "Add to Home screen"** or **"Install app"**
+4. **Confirm** installation
+5. **Launch from home screen** or app drawer!
 
 ---
 
-## 📱 Android Tablet Setup
+### Desktop (Windows/Mac/Linux)
 
-1. **Copy files** to tablet storage (Downloads folder)
-2. **Open Chrome** browser
-3. **Navigate to**: `file:///storage/emulated/0/Download/index.html`
-4. **Chrome menu** (⋮) → "Add to Home screen"
-5. **Done!** App icon on home screen
+**Chrome:**
+1. Visit [https://mjk5000.github.io/basement-baseball/](https://mjk5000.github.io/basement-baseball/)
+2. Click **install icon** (Ôèò) in address bar
+3. Or: Menu (Ôï«) ÔåÆ **"Install Basement Baseball..."**
+4. App opens in its own window with desktop shortcut!
 
-## How It Works
+**Microsoft Edge:**
+1. Visit the URL in Edge
+2. Click **install icon** (+) in address bar
+3. Or: Menu (Ôï») ÔåÆ **Apps** ÔåÆ **"Install this site as an app"**
+
+**Safari (Mac):**
+1. Visit the URL in Safari
+2. **File** ÔåÆ **"Add to Dock"**
+
+**Benefits:**
+- Opens in dedicated window (no browser tabs)
+- Start Menu/Dock icon
+- Works offline
+- Feels like native desktop app
+
+---
+
+## ­ƒÄ« How to Play
 
 ### Pitch-by-Pitch Mode (Default)
 
-Perfect for basement whiffle ball machines! After each pitch:
+Perfect for basement whiffle ball machines!
 
-1. **Report Contact Type**:
-   - Grounder ⚾
-   - Line Drive ➡️
-   - Pop Up ⬆️
+1. **Pitcher throws** from machine
+2. **Batter swings** (or watches)
+3. **Report what happened**:
 
-2. **Then Select Quality**:
-   - Hard Hit 💪
-   - Soft Hit 🤚
+   **If contact was made:**
+   - Select **Contact Type**: Grounder ÔÜ¥ / Line Drive Ô×í´©Å / Pop Up Ô¼å´©Å
+   - Then select **Quality**: Hard Hit ­ƒÆ¬ / Soft Hit ­ƒñÜ
+   - App calculates realistic outcome (single, double, out, etc.)
 
-**OR Report No Contact**:
-- Swing & Miss (adds strike)
-- No Swing (random ball or strike)
-- Foul Ball (adds strike, max 2)
+   **If no contact:**
+   - **Swing & Miss**: Adds strike
+   - **No Swing**: Random ball or strike
+   - **Foul Ball**: Adds strike (max 2)
 
-The app calculates realistic outcomes based on MLB probabilities!
+4. **Watch the magic**:
+   - Runners advance automatically
+   - Runs scored and tallied
+   - Count updates (balls, strikes, outs)
+
+5. **3 outs = half inning complete**
+6. **Play 3, 6, 7, or 9 innings**!
 
 ### Advanced Manual Controls
 
-Click "Show Advanced Controls" for direct input:
-- Single / Double / Triple / Home Run
-- Ball / Strike / Walk / Out
-
-Perfect for quick scoring or manual game tracking.
-
-## Game Rules
-
-- ⚾ **Innings**: 9 innings standard (extendable)
-- 🔄 **Half Innings**: Away bats top, Home bats bottom
-- ❌ **Outs**: 3 outs per half inning
-- 📊 **Scoring**: Runs added to correct team based on inning half
-- 🏃 **Runners**: Visual indicators on bases and TV-style diamond display
-- 💯 **Count**: Balls (4 = walk), Strikes (3 = out)
-
-## Requirements
-
-- Any modern web browser (Safari, Chrome, Firefox, Edge)
-- No installation or build tools needed!
-
-## How to Run
-
-### Option 1: Open Directly (Simplest)
-
-1. **Double-click** `index.html` in File Explorer
-2. **OR** Right-click `index.html` → Open with → Your browser
-
-### Option 2: Using Live Server (Recommended for Development)
-
-1. **Open this folder in VS Code**
-2. **Install Live Server extension** (if not installed):
-   - Click Extensions icon in VS Code
-   - Search for "Live Server"
-   - Install it
-3. **Right-click** on `index.html` → "Open with Live Server"
-4. **App opens** automatically in your browser
-
-### Option 3: Simple HTTP Server
-
-Using PowerShell in this directory:
-```powershell
-python -m http.server 8000
-```
-Then open `http://localhost:8000` in your browser
-
-## Installing on iPad
-
-### As a Web App (No App Store Needed!)
-
-1. **Open** `index.html` in Safari on the iPad (upload to cloud storage or host on local network)
-2. **Tap the Share button** (square with arrow)
-3. **Scroll down** and tap "Add to Home Screen"
-4. **Tap "Add"**
-5. **Launch** from home screen like a real app!
-
-### Hosting Options for iPad Access
-
-**Easy sharing methods:**
-- **OneDrive/Google Drive**: Upload the folder, open in Safari on iPad
-- **Local Network**: Run the HTTP server above, access from iPad using your computer's IP
-- **GitHub Pages**: Push to GitHub, enable Pages for free hosting (best for auto-updates!)
+Click **"Show Advanced Controls"** for direct scoring:
+- Single / Double / Triple / Home Run buttons
+- Ball / Strike / Walk / Out buttons
+- Perfect for manual scorekeeping or quick games
 
 ---
 
-## 🌐 Hosting for Auto-Updates (Recommended)
+## ­ƒÄ» Game Settings
 
-To ensure your home screen app always shows the **latest version**, host it on the web instead of using local files.
+### Team Names & Gender Selection
 
-### Option 1: GitHub Pages (Free & Easy)
+- **Custom Names**: Name your teams anything up to 11 characters
+- **Girls Names Toggle**: Check the box to use girls names (220+ names) for that team
+- **Boys Names**: Uncheck to use boys names (310+ names)
+- **Softball Mode**: When both teams use girls names, game title automatically changes to "­ƒÑÄ Basement Softball ­ƒÑÄ"
 
-**One-time setup:**
+### Special Name Features
 
-1. **Push this code to GitHub** (if not already done):
-   ```powershell
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/yourusername/basement-baseball.git
-   git push -u origin main
-   ```
+The game includes fun Easter eggs:
 
-2. **Enable GitHub Pages**:
-   - Go to your repo on GitHub
-   - Click **Settings** → **Pages**
-   - Under "Source", select **main** branch
-   - Click **Save**
-   - Wait 1-2 minutes for deployment
+- **Kajewski**: Always appears in exactly one lineup (random team unless team is named "Kajewski")
+- **Hugh, Harry, Jude**: Each appears in exactly one lineup (only on boys teams)
+- **Mo / Maureen**: Appears on girls teams or when team is named "Mo" or "Maureen" (works for boys teams too!)
+- **No Duplicates**: Every player name is unique - no name appears twice across both teams
+- **Team Names in Lineups**: If you name your team "Hugh" or "Arya" or "Cat", that player will appear in your lineup!
+- **Same Team Names Blocked**: Can't have both teams with the same name
 
-3. **Your app is now live at**:
-   `https://yourusername.github.io/basement-baseball/`
+### Name Collections
 
-4. **Add to home screen from this URL** - it will auto-update!
-
-**To update the app later:**
-```powershell
-git add .
-git commit -m "Update game"
-git push
-```
-Within 1-2 minutes, anyone who opens the app gets the latest version automatically!
-
-### Option 2: Other Free Hosting
-
-- **Netlify**: Drag & drop folder, instant deployment
-- **Vercel**: Connect GitHub repo, auto-deploys on push
-- **Cloudflare Pages**: Similar to GitHub Pages
-
-### How Updates Work
-
-- **Hosted URL** (https://...): Browser checks server for latest files each launch
-- **Local files** (file:///...): Browser reads saved files, never updates
-- **Best practice**: Always use a web URL for production use
+- **310+ Boys Names**: Popular names, baseball nicknames (Tex, Ace, Ringo, Duke), and Game of Thrones characters (Jon, Tyrion, Arya)
+- **220+ Girls Names**: Popular names, nicknames (Scout, Phoenix, Dakota), and  Game of Thrones characters (Daenerys, Sansa, Brienne)
 
 ---
 
-## 🔧 Troubleshooting
+## ­ƒÅå Game Rules & Stats
 
-### Home Screen App Shows Old Version
+### Scoring
+- **Innings**: Choose 3, 6, 7, or 9 innings
+- **Half Innings**: Away team bats top Ôû▓, Home team bats bottom Ôû╝
+- **3 Outs**: End of half inning, runs tallied
+- **MLB-Style Scoreboard**: Shows runs by inning (1-9)
 
-**Problem:** Browser shows v1.12.2 but home screen app shows v1.11.4
+### Count Tracking
+- **Balls**: 4 balls = walk
+- **Strikes**: 3 strikes = strikeout
+- **Fouls**: Count as strikes (max 2)
+- **Runners**: Visual diamond shows who's on base
 
-**Cause:** iOS/Android caches the home screen app files
+### Pitcher Stats
+- **Pitch Count**: Tracks total pitches thrown
+- **Strikes Thrown**: Includes called strikes, swing-and-miss, and fouls
+- **Strikeouts**: Total K's
+- **Hits Allowed**: Singles, doubles, triples, home runs
 
-**Solution:**
-1. **Delete the home screen icon** (long-press → Remove/Delete)
-2. **Open in Safari/Chrome browser** and verify you see the new version
-3. **Clear browser cache** (optional but recommended):
-   - Safari: Settings → Safari → Clear History and Website Data
-   - Chrome: Settings → Privacy → Clear Browsing Data
-4. **Re-add to home screen** (Share → Add to Home Screen)
-5. **Launch from home screen** - should now show current version
+---
 
-**Prevention:** Always access via a **web URL** (not local files) so the app checks for updates each launch
+## ­ƒöº Troubleshooting
 
-### Game Not Loading or Broken
+### App Shows Old Version
 
-- Check browser console for errors (F12 → Console tab)
-- Verify all 4 files are in the same folder
-- Try a different browser
-- Ensure sounds folder is present (optional for sound effects)
+**If your installed app isn't showing the latest updates:**
+
+1. **Delete the home screen icon** (long-press ÔåÆ Remove)
+2. **Open browser** (Safari/Chrome) and visit [https://mjk5000.github.io/basement-baseball/](https://mjk5000.github.io/basement-baseball/)
+3. **Verify** you see the current version (check version number at bottom)
+4. **Clear browser cache**:
+   - Safari: Settings ÔåÆ Safari ÔåÆ Clear History and Website Data
+   - Chrome: Settings ÔåÆ Privacy ÔåÆ Clear Browsing Data
+5. **Re-add to home screen** (Share ÔåÆ Add to Home Screen)
+
+The app checks for updates each launch when installed from the GitHub Pages URL.
 
 ### Fullscreen Not Working
 
-- **iPhone/iOS:** Browser fullscreen is not supported - use "Add to Home Screen" instead (see iPhone Setup section)
-- **Android/Desktop:** Click the fullscreen button (⛶) in the header
+- **iPhone/iPad**: iOS doesn't support browser fullscreen. Use "Add to Home Screen" instead for true fullscreen.
+- **Android/Desktop**: Click the fullscreen button (ÔøÂ) in the header, or press F11.
+
+### Sound Not Playing
+
+- Check that sound is enabled (unmute button in game)
+- On mobile, you may need to tap the screen once for audio to activate
+- Some devices block autoplay audio - try tapping the mute/unmute button
 
 ---
 
-## 🎨 Customizing the App Icon
-
-The app currently uses a baseball icon (⚾) when added to home screen. To change it:
-
-### Option 1: Use Your Own Image Files
-
-1. **Create icon images**:
-   - `icon-192.png` (192x192 pixels)
-   - `icon-512.png` (512x512 pixels)
-   - Use any image editor (Paint, Photoshop, online tools like Canva)
-
-2. **Place them in the same folder** as `index.html`
-
-3. **Update `manifest.json`**:
-   ```json
-   "icons": [
-     {
-       "src": "icon-192.png",
-       "sizes": "192x192",
-       "type": "image/png"
-     },
-     {
-       "src": "icon-512.png",
-       "sizes": "512x512",
-       "type": "image/png"
-     }
-   ]
-   ```
-
-### Option 2: Use an Online Icon Generator
-
-1. **Visit a free icon generator** (search "PWA icon generator")
-2. **Upload your image** or create one
-3. **Download the generated icons**
-4. **Replace the icon files** and update `manifest.json`
-
-### Current Icon
-The app uses an inline SVG baseball icon. It shows up as a white baseball with red stitching when you add to home screen.
-
-**Tip:** For best results, use:
-- Square images (1:1 aspect ratio)
-- Simple, high-contrast designs
-- PNG format with transparency
-- Recommended sizes: 192x192, 512x512
-
----
-
-## How to Play
-
-### Basement Whiffle Ball Mode
-
-1. **Set up your whiffle ball machine** in the basement
-2. **Pitcher throws** from the machine
-3. **Kid hits the ball** (or misses/fouls)
-4. **Report the result**:
-   - Did they make contact? → Select grounder/line drive/pop up, then hard/soft
-   - Miss/foul/no swing? → Select the appropriate button
-5. **App calculates outcome** - single, double, out, etc.
-6. **Watch runners advance** on the bases
-7. **3 outs = end of half inning** - runs are tallied
-8. **Continue through 9 innings**!
-
-### Manual Scoring Mode
-
-- Click "Show Advanced Controls"
-- Directly enter any outcome (single, double, walk, strike, etc.)
-- Perfect for manual scorekeeping or quick games
-
-## Game Stats Displayed
-
-- **MLB Scoreboard**: Inning-by-inning runs (1-9)
-- **Total Runs**: Home and Away
-- **Current Inning**: With top ▲ / bottom ▼ indicator
-- **Count**: Balls, Strikes, Outs
-- **Runners**: Visual diamond showing who's on base
-
-## Files
-
-- `index.html` - Main game page
-- `styles.css` - Styling and animations
-- `game.js` - Game logic and interactivity
-
-## Customization Ideas
-
-- Edit outcome probabilities in `game.js` `processHit()` function
-- Adjust colors and styling in `styles.css`
-- Add team names and logos
-- Track player statistics
-- Add pitch speed tracking
-- Include video replay integration
-- Export game stats to CSV
-
-## Technical Details
+## ­ƒôè Technical Details
 
 ### Outcome Probabilities
 
-Based on contact type and quality:
+Game uses MLB-based probabilities:
 
 **Grounders:**
 - Hard: 70% single, 30% out
@@ -396,17 +226,127 @@ Based on contact type and quality:
 - Soft: 50% single, 20% double, 30% caught
 
 **Pop Ups:**
-- Hard: 60% caught, 30% single, 10% double
+- Hard: 60% caught, 30% single, 10% double  
 - Soft: 95% caught, 5% single (blooper)
 
-## Browser Compatibility
+### Browser Compatibility
 
 Works on all modern browsers:
-- ✅ Safari (iOS/macOS)
-- ✅ Chrome
-- ✅ Firefox
-- ✅ Edge
+- Ô£à Safari (iOS/macOS)
+- Ô£à Chrome/Chromium
+- Ô£à Firefox
+- Ô£à Edge
+- Ô£à Kindle Fire Silk Browser
 
-## License
+### Progressive Web App (PWA)
+
+The game meets PWA standards:
+- Installable to home screen
+- Works offline after first load
+- Responsive design for all screen sizes
+- Fast loading with service worker caching
+- Custom app icon and branding
+
+---
+
+## ­ƒøá´©Å For Developers
+
+### Local Development
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/mjk5000/basement-baseball.git
+   cd basement-baseball
+   ```
+
+2. **Open in browser**:
+   - Double-click `index.html`, or
+   - Use Live Server in VS Code, or
+   - Run `python -m http.server 8000` and visit `http://localhost:8000`
+
+3. **Make changes** to `index.html`, `game.js`, or `styles.css`
+
+4. **Test** in browser (refresh to see changes)
+
+### Deploying Updates
+
+**This project is hosted on GitHub Pages:**
+
+```bash
+git add .
+git commit -m "Description of changes"
+git push origin main
+```
+
+Changes go live automatically within 1-2 minutes at [https://mjk5000.github.io/basement-baseball/](https://mjk5000.github.io/basement-baseball/)
+
+### File Structure
+
+```
+basement-baseball/
+Ôö£ÔöÇÔöÇ index.html       # Main page and UI
+Ôö£ÔöÇÔöÇ game.js          # Game logic (~3500 lines)
+Ôö£ÔöÇÔöÇ styles.css       # Styling and animations
+Ôö£ÔöÇÔöÇ manifest.json    # PWA configuration
+Ôö£ÔöÇÔöÇ sounds/          # Sound effects (optional)
+Ôö£ÔöÇÔöÇ README.md        # This file
+ÔööÔöÇÔöÇ Setup.txt        # Setup instructions
+```
+
+### Customization Ideas
+
+- Adjust probabilities in `game.js` ÔåÆ `processHit()` function
+- Modify colors/styling in `styles.css`
+- Add new names to `POPULAR_NAMES` or `GIRLS_NAMES` arrays
+- Track additional player statistics
+- Add pitch speed tracking
+- Export game logs to CSV
+
+---
+
+## ­ƒôØ Version History
+
+**Current Version: v1.17.9** (April 21, 2026)
+
+Recent updates:
+- **v1.17.9**: Hugh, Harry, Jude, and Kajewski can only appear on one team; team names must be different
+- **v1.17.8**: Max team name length reduced to 11 characters
+- **v1.17.7**: Mo/Maureen can work as boys team names
+- **v1.17.6**: Custom team names always appear in lineups
+- **v1.17.5**: Mo/Maureen team name enforcement
+- **v1.17.4**: Added Game of Thrones character names
+- **v1.17.3**: Duplicate prevention, Mo/Maureen variants
+- **v1.17.2**: Softball branding for all-girls games
+- **v1.17.1**: Required names distribution logic
+- **v1.17.0**: Girls names feature with 220+ names
+- **v1.16.6**: Added 110 baseball nicknames
+- **v1.16.5**: Pentagon home plate design
+- **v1.16.0**: Enhanced panel backgrounds and UX
+
+---
+
+## ­ƒñØ Contributing
+
+This is a personal project, but suggestions and bug reports are welcome!
+
+- **Report bugs**: Open an issue on [GitHub](https://github.com/mjk5000/basement-baseball/issues)
+- **Suggest features**: Create a feature request issue
+- **Share feedback**: Let us know how you're using the app!
+
+---
+
+## ­ƒôä License
 
 Free to use and modify for personal use.
+
+---
+
+## ­ƒÄë Credits
+
+Built with ÔØñ´©Å for basement whiffle ball games!
+
+**Repository**: [https://github.com/mjk5000/basement-baseball](https://github.com/mjk5000/basement-baseball)  
+**Live App**: [https://mjk5000.github.io/basement-baseball/](https://mjk5000.github.io/basement-baseball/)
+
+Enjoy the game! ÔÜ¥­ƒÑÄ
+
