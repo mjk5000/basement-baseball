@@ -3204,6 +3204,7 @@ function manualWalk() {
     if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
+    incrementPitchCount();
     gameState.lastPlay = 'Walk';
     playSound('walk'); // Play walk sound
     showMessage('Ball 4! Walk! Take your base! 🚶');
@@ -3275,6 +3276,7 @@ function processBunt() {
     if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
+    incrementPitchCount();
     playSound('bunt'); // Play general bunt sound
     
     const roll = Math.random();
@@ -3515,6 +3517,7 @@ function manualSingle() {
     if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
+    incrementPitchCount();
     gameState.lastPlay = 'Single';
     hit(1);
     recordAtBat('hit');
@@ -3525,6 +3528,7 @@ function manualDouble() {
     if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
+    incrementPitchCount();
     gameState.lastPlay = 'Double';
     hit(2);
     recordAtBat('hit');
@@ -3535,6 +3539,7 @@ function manualTriple() {
     if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
+    incrementPitchCount();
     gameState.lastPlay = 'Triple';
     hit(3);
     recordAtBat('hit');
@@ -3545,6 +3550,7 @@ function manualHomeRun() {
     if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
+    incrementPitchCount();
     gameState.lastPlay = 'Home Run';
     homeRun();
     resetCount();
@@ -3558,6 +3564,7 @@ function manualOut() {
     
     cancelAllSounds(); // Cancel any playing sounds
     saveState(); // Save state before action
+    incrementPitchCount();
     gameState.lastPlay = 'Out at first';
     showMessage('Out at first base! 🧤');
     showOutX(1); // Show X at first base
