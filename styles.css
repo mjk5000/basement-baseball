@@ -1607,10 +1607,10 @@ header h1 {
         line-height: 1.1 !important;
     }
     
-    /* Compact controls - side by side layout */
+    /* Compact controls - vertical stack layout */
     .game-area {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display: flex;
+        flex-direction: column;
         gap: 3px;
         margin-bottom: 2px;
     }
@@ -1618,11 +1618,13 @@ header h1 {
     .controls-container {
         padding: 4px;
         gap: 3px;
+        width: 100%;
     }
     
     .manual-controls {
         padding: 4px;
         gap: 3px;
+        width: 100%;
     }
     
     .pitch-input,
