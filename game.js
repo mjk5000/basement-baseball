@@ -93,6 +93,14 @@ function preloadCustomSounds() {
     const soundFiles = {
         'strike': [
             'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
             'sounds/Swing miss - serious.m4a'
         ],
         'strikeout': [
