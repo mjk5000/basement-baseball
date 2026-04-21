@@ -798,20 +798,46 @@ function generateBothLineups(homeTeamName = 'Home', awayTeamName = 'Away', homeG
         }
     }
     
-    // Add boys-specific required names
-    if (!homeGirlsNames) {
-        // Add Harry, Jude, Hugh to home team
-        homeReservedPlayers.push('Harry', 'Jude', 'Hugh');
-        usedNames.add('Harry');
-        usedNames.add('Jude');
-        usedNames.add('Hugh');
-    }
-    if (!awayGirlsNames) {
-        // Add Harry, Jude, Hugh to away team
-        awayReservedPlayers.push('Harry', 'Jude', 'Hugh');
-        usedNames.add('Harry');
-        usedNames.add('Jude');
-        usedNames.add('Hugh');
+    // Add boys-specific required names (Hugh, Harry, Jude)
+    // These can only appear on ONE team, not both
+    // Handle team name overrides first, then random assignment
+    const boysRequiredNames = ['Hugh', 'Harry', 'Jude'];
+    const hasBoysTeam = !homeGirlsNames || !awayGirlsNames;
+    
+    if (hasBoysTeam) {
+        for (const name of boysRequiredNames) {
+            if (homeTeamName === name) {
+                // Team is named this, must be on home team
+                if (!homeGirlsNames) {
+                    homeReservedPlayers.push(name);
+                    usedNames.add(name);
+                }
+            } else if (awayTeamName === name) {
+                // Team is named this, must be on away team
+                if (!awayGirlsNames) {
+                    awayReservedPlayers.push(name);
+                    usedNames.add(name);
+                }
+            } else if (!usedNames.has(name)) {
+                // Randomly assign to one boys team
+                const randomlyOnHome = Math.random() < 0.5;
+                if (randomlyOnHome && !homeGirlsNames) {
+                    homeReservedPlayers.push(name);
+                    usedNames.add(name);
+                } else if (!randomlyOnHome && !awayGirlsNames) {
+                    awayReservedPlayers.push(name);
+                    usedNames.add(name);
+                } else if (!homeGirlsNames) {
+                    // Fall back to home if away is girls
+                    homeReservedPlayers.push(name);
+                    usedNames.add(name);
+                } else if (!awayGirlsNames) {
+                    // Fall back to away if home is girls
+                    awayReservedPlayers.push(name);
+                    usedNames.add(name);
+                }
+            }
+        }
     }
     
     // Check if team names match any player names and add to correct team
@@ -1004,6 +1030,12 @@ function startNewGame() {
     }
     if (awayTeam.length > 0) {
         awayTeam = awayTeam.charAt(0).toUpperCase() + awayTeam.slice(1);
+    }
+    
+    // Validate team names are not the same
+    if (homeTeam === awayTeam) {
+        alert('Team names cannot be the same! Please choose different names for Home and Away teams.');
+        return;
     }
     
     const gameMode = document.querySelector('input[name="gameMode"]:checked')?.value || '2player';
