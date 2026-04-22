@@ -2333,6 +2333,111 @@ function executeOutcome(outcome) {
             break;
         case 'groundout':
             gameState.lastPlay = 'Ground out';
+            
+            // Check for runner advancement on groundout (non-force situations)
+            const hasRunnerOnThird = gameState.runners.third && !gameState.runners.second && !gameState.runners.first;
+            const hasRunnerOnSecond = gameState.runners.second && !gameState.runners.first;
+            
+            // Runner on third (no force) - may try to score on throw to first
+            if (hasRunnerOnThird && gameState.outs < 2) {
+                const thirdAdvanceRoll = Math.random();
+                if (thirdAdvanceRoll < 0.40) {
+                    // 40% - Runner scores successfully
+                    const groundOutAdvanceMessages = [
+                        { msg: 'Ground ball to short!<br>Out at first! Runner scores from third! ⚾', pos: 'SS' },
+                        { msg: 'Grounder to second!<br>Throws to first. Runner scores on the play! ⚾', pos: '2B' },
+                        { msg: 'Ground ball to third!<br>Long throw to first. Runner scores! ⚾', pos: 'base3' },
+                        { msg: 'Slow roller!<br>Out at first. Runner crosses the plate! ⚾', pos: 'SS' }
+                    ];
+                    const advanceMsg = groundOutAdvanceMessages[Math.floor(Math.random() * groundOutAdvanceMessages.length)];
+                    showMessage(advanceMsg.msg);
+                    showOutX(advanceMsg.pos);
+                    flashHomePlate();
+                    gameState.runners.third = false;
+                    
+                    if (gameState.inningHalf === 'top') {
+                        gameState.awayScore += 1;
+                        gameState.currentInningRuns += 1;
+                        flashScoreboardRuns(1);
+                    } else {
+                        gameState.homeScore += 1;
+                        gameState.currentInningRuns += 1;
+                        flashScoreboardRuns(1);
+                    }
+                    
+                    recordAtBat('out');
+                    recordOut();
+                    break;
+                } else if (thirdAdvanceRoll < 0.50) {
+                    // 10% - Runner caught trying to score
+                    const groundOutCaughtMessages = [
+                        { msg: 'Ground ball!<br>Out at first. Runner tries to score... TAGGED OUT at home! ⚾', pos: 'SS' },
+                        { msg: 'Grounder!<br>Throw to first. Runner caught at the plate! ⚾', pos: '2B' },
+                        { msg: 'Ground ball!<br>Out at first. Great throw home! Runner OUT! ⚾', pos: 'base3' }
+                    ];
+                    const caughtMsg = groundOutCaughtMessages[Math.floor(Math.random() * groundOutCaughtMessages.length)];
+                    showMessage(caughtMsg.msg);
+                    showOutX(caughtMsg.pos);
+                    showOutX('home');
+                    gameState.runners.third = false;
+                    gameState.outs += 2; // Both batter and runner out
+                    recordAtBat('out');
+                    
+                    if (gameState.outs >= 3) {
+                        recordOut();
+                    } else {
+                        updateDisplay();
+                        recordPitcherOut();
+                    }
+                    break;
+                }
+                // 50% - Runner stays (falls through to normal groundout)
+            }
+            
+            // Runner on second (no force) - may try to advance to third
+            if (hasRunnerOnSecond && gameState.outs < 2 && !hasRunnerOnThird) {
+                const secondAdvanceRoll = Math.random();
+                if (secondAdvanceRoll < 0.35) {
+                    // 35% - Runner advances to third
+                    const groundOutMsg = [
+                        { msg: 'Ground ball to short!<br>Out at first! Runner advances to third! ⚾', pos: 'SS' },
+                        { msg: 'Grounder to second!<br>Throws to first. Runner takes third! ⚾', pos: '2B' },
+                        { msg: 'Ground ball!<br>Out at first. Runner moves up to third! ⚾', pos: 'SS' }
+                    ];
+                    const advMsg = groundOutMsg[Math.floor(Math.random() * groundOutMsg.length)];
+                    showMessage(advMsg.msg);
+                    showOutX(advMsg.pos);
+                    gameState.runners.second = false;
+                    gameState.runners.third = true;
+                    recordAtBat('out');
+                    recordOut();
+                    break;
+                } else if (secondAdvanceRoll < 0.40) {
+                    // 5% - Runner caught trying to advance
+                    const caughtMsg = [
+                        { msg: 'Ground ball!<br>Out at first. Runner tries for third... TAGGED OUT! ⚾', pos: 'SS' },
+                        { msg: 'Grounder!<br>Throw to first. Runner caught at third! ⚾', pos: '2B' }
+                    ];
+                    const msg = caughtMsg[Math.floor(Math.random() * caughtMsg.length)];
+                    showMessage(msg.msg);
+                    showOutX(msg.pos);
+                    showOutX(3);
+                    gameState.runners.second = false;
+                    gameState.outs += 2;
+                    recordAtBat('out');
+                    
+                    if (gameState.outs >= 3) {
+                        recordOut();
+                    } else {
+                        updateDisplay();
+                        recordPitcherOut();
+                    }
+                    break;
+                }
+                // 60% - Runner stays (falls through to normal groundout)
+            }
+            
+            // Normal groundout (no advancement)
             const groundOutData = [
                 { msg: 'Ground ball to short!<br>Out at first! ⚾', pos: 'SS' },
                 { msg: 'Grounder to second!<br>Throws to first for the out! ⚾', pos: '2B' },
