@@ -1964,14 +1964,12 @@ header {
     accent-color: #3b82f6;
     margin: 0;
     flex-shrink: 0;
-    align-self: center;
+    vertical-align: middle;
 }
 
 .checkbox-label span {
     font-weight: 500;
-    line-height: 18px;
-    display: flex;
-    align-items: center;
+    vertical-align: middle;
 }
 
 .radio-group {
@@ -2018,15 +2016,14 @@ header {
     margin: 0;
     flex-shrink: 0;
     order: 1;
+    vertical-align: middle;
 }
 
 .radio-group.horizontal .radio-label span {
     text-align: left;
-    line-height: 20px;
     order: 2;
     white-space: nowrap;
-    display: flex;
-    align-items: center;
+    vertical-align: middle;
 }
 
 .radio-group.horizontal .radio-label:hover {
