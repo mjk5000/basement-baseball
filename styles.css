@@ -1961,10 +1961,13 @@ header {
     height: 18px;
     cursor: pointer;
     accent-color: #3b82f6;
+    margin: 0;
+    flex-shrink: 0;
 }
 
 .checkbox-label span {
     font-weight: 500;
+    line-height: 18px;
 }
 
 .radio-group {
@@ -2005,8 +2008,6 @@ header {
     text-align: left;
 }
 
-.radio-group.horizontal .radio-label input[type="radio"] {
-    margin: 0;
 .radio-group.horizontal .radio-label input[type="radio"] {
     margin: 0;
     flex-shrink: 0;
