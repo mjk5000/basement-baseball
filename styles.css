@@ -1536,8 +1536,8 @@ header h1 {
         padding: 10px 15px;
     }
 
-    /* Force "(vs Computer)" to new line in compact mode */
-    .vs-computer {
+    /* Force game mode details to new line in compact mode */
+    .game-mode-detail {
         display: block;
     }
 }
