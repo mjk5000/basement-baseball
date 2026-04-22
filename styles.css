@@ -2211,7 +2211,7 @@ header {
     border-radius: 20px;
     padding: 20px;
     max-width: 90%;
-    max-height: 85%;
+    max-height: 90%;
     overflow-y: auto;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     animation: slideUp 0.3s ease-out;
@@ -2226,36 +2226,6 @@ header {
         transform: translateY(0);
         opacity: 1;
     }
-}
-
-.lineup-overlay-header {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #e5e7eb;
-}
-
-.close-btn {
-    background: #ef4444;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-    flex-shrink: 0;
-}
-
-.close-btn:hover {
-    background: #dc2626;
-    transform: scale(1.1);
 }
 
 .lineup-overlay-body {
