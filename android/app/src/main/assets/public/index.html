@@ -12,7 +12,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="manifest" href="manifest.json">
     <title>⚾️ Basement Baseball</title>
-    <link rel="stylesheet" href="styles.css?v=1.18.24">
+    <link rel="stylesheet" href="styles.css?v=1.18.25">
 </head>
 <body>
     <div class="container">
@@ -24,7 +24,6 @@
         <div class="lineup-overlay" id="lineupOverlay" onclick="hideCompactLineups()">
             <div class="lineup-overlay-content" onclick="event.stopPropagation()">
                 <div class="lineup-overlay-header">
-                    <h3 id="lineupModalTitle">Team Lineup</h3>
                     <button class="close-btn" onclick="hideCompactLineups()">✕</button>
                 </div>
                 <div class="lineup-overlay-body" id="lineupOverlayBody">
@@ -328,26 +327,22 @@
                                 </button>
                             </div>
                             <div class="manual-group">
+                                <button class="manual-btn lineup-away-btn" onclick="showAwayLineup()">
+                                    <span class="label">Away</span>
+                                </button>
                                 <button class="manual-btn hit-btn" onclick="advanceAllRunners()">
                                     <span class="label">Balk</span>
                                 </button>
                                 <button class="manual-btn undo-btn" id="undoBtn" onclick="undoLastAction()" disabled>
                                     <span class="icon">↩️</span>
                                 </button>
+                                <button class="manual-btn lineup-home-btn" onclick="showHomeLineup()">
+                                    <span class="label">Home</span>
+                                </button>
                             </div>
                             <div class="manual-group">
                                 <button class="manual-btn simulate-btn" onclick="manualSimulateBatter()">
                                     <span class="label">Simulate Batter</span>
-                                </button>
-                            </div>
-                            <div class="manual-group lineup-buttons-group">
-                                <button class="manual-btn lineup-away-btn" onclick="showAwayLineup()">
-                                    <span class="icon">👥</span>
-                                    <span class="label">Away Lineup</span>
-                                </button>
-                                <button class="manual-btn lineup-home-btn" onclick="showHomeLineup()">
-                                    <span class="icon">👥</span>
-                                    <span class="label">Home Lineup</span>
                                 </button>
                             </div>
                         </div>
@@ -376,7 +371,7 @@
                 </button>
             </div>
             <div class="version-info">
-                <span>v1.18.24 • Apr 22, 2026</span>
+                <span>v1.18.25 • Apr 22, 2026</span>
             </div>
             </div>
 
@@ -496,7 +491,7 @@
         <div id="settingsModal" class="modal">
             <div class="modal-content">
                 <h2>⚾ Game Setup</h2>
-                <div class="modal-version-info">v1.18.24 • Apr 22, 2026</div>
+                <div class="modal-version-info">v1.18.25 • Apr 22, 2026</div>
                 
                 <div class="settings-section">
                     <label for="awayTeamName">Away Team Name:</label>
@@ -561,6 +556,6 @@
         </div>
     </div>
 
-    <script src="game.js?v=1.18.24"></script>
+    <script src="game.js?v=1.18.25"></script>
 </body>
 </html>

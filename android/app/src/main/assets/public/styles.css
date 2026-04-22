@@ -2230,17 +2230,11 @@ header {
 
 .lineup-overlay-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 2px solid #e5e7eb;
-}
-
-.lineup-overlay-header h3 {
-    color: #1f2937;
-    font-size: 1.5rem;
-    margin: 0;
 }
 
 .close-btn {
@@ -2327,18 +2321,11 @@ header {
     box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
 }
 
-/* Lineup buttons in manual controls */
-.lineup-buttons-group {
-    display: none; /* Hidden on desktop */
-}
-
+/* Lineup buttons in manual controls - hidden on desktop, shown in compact mode */
 .lineup-away-btn,
 .lineup-home-btn {
+    display: none;
     background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
 }
 
 .lineup-away-btn:hover,
@@ -2346,22 +2333,11 @@ header {
     background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
 }
 
-.lineup-away-btn .icon,
-.lineup-home-btn .icon {
-    font-size: 1rem;
-}
-
 /* Show lineup buttons only in compact mode */
 @media (max-width: 480px) {
-    .lineup-buttons-group {
-        display: flex;
-        gap: 8px;
-        width: 100%;
-    }
-    
     .lineup-away-btn,
     .lineup-home-btn {
-        flex: 1;
+        display: block;
     }
     
     /* Adjust overlay for single lineup on small screens */

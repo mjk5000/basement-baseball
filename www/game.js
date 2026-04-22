@@ -4043,14 +4043,10 @@ function showHomeLineup() {
 function showSingleLineup(team) {
     const overlay = document.getElementById('lineupOverlay');
     const overlayBody = document.getElementById('lineupOverlayBody');
-    const modalTitle = document.getElementById('lineupModalTitle');
     
     // Get team name and score
     const teamName = document.querySelector(`.${team}-team-name`).textContent;
     const teamScore = document.getElementById(`${team}-lineup-score`).textContent;
-    
-    // Update modal title
-    modalTitle.textContent = `${teamName} Lineup`;
     
     // Build lineup HTML
     let lineupHTML = `
