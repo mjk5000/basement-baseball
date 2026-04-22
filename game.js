@@ -4033,32 +4033,58 @@ lockOrientation();
 // ============================================
 
 function showAwayLineup() {
-    showSingleLineup('away');
+    showBothLineups();
 }
 
 function showHomeLineup() {
-    showSingleLineup('home');
+    showBothLineups();
 }
 
-function showSingleLineup(team) {
+function showBothLineups() {
     const overlay = document.getElementById('lineupOverlay');
     const overlayBody = document.getElementById('lineupOverlayBody');
     
-    // Get team name and score
-    const teamName = document.querySelector(`.${team}-team-name`).textContent;
-    const teamScore = document.getElementById(`${team}-lineup-score`).textContent;
+    // Build HTML for both lineups
+    let lineupHTML = '';
     
-    // Build lineup HTML
-    let lineupHTML = `
-        <div class="overlay-lineup single-lineup ${team}-overlay-lineup">
-            <div class="overlay-lineup-title ${team}-team-name">${teamName}</div>
-            <div class="overlay-lineup-score">${teamScore}</div>
-            <div class="overlay-lineup-list" id="${team}OverlayLineup">
+    // Away lineup
+    const awayTeamName = document.querySelector('.away-team-name').textContent;
+    const awayTeamScore = document.getElementById('away-lineup-score').textContent;
+    
+    lineupHTML += `
+        <div class="overlay-lineup away-overlay-lineup">
+            <div class="overlay-lineup-title away-team-name">${awayTeamName}</div>
+            <div class="overlay-lineup-score">${awayTeamScore}</div>
+            <div class="overlay-lineup-list">
     `;
     
-    // Add batters
     for (let i = 1; i <= 9; i++) {
-        const originalBatter = document.getElementById(`${team}-batter-${i}`);
+        const originalBatter = document.getElementById(`away-batter-${i}`);
+        if (originalBatter) {
+            const batterText = originalBatter.innerHTML;
+            const battingNow = originalBatter.classList.contains('batting-now') ? ' batting-now' : '';
+            lineupHTML += `<div class="batter-spot${battingNow}">${batterText}</div>`;
+        }
+    }
+    
+    lineupHTML += `
+            </div>
+        </div>
+    `;
+    
+    // Home lineup
+    const homeTeamName = document.querySelector('.home-team-name').textContent;
+    const homeTeamScore = document.getElementById('home-lineup-score').textContent;
+    
+    lineupHTML += `
+        <div class="overlay-lineup home-overlay-lineup">
+            <div class="overlay-lineup-title home-team-name">${homeTeamName}</div>
+            <div class="overlay-lineup-score">${homeTeamScore}</div>
+            <div class="overlay-lineup-list">
+    `;
+    
+    for (let i = 1; i <= 9; i++) {
+        const originalBatter = document.getElementById(`home-batter-${i}`);
         if (originalBatter) {
             const batterText = originalBatter.innerHTML;
             const battingNow = originalBatter.classList.contains('batting-now') ? ' batting-now' : '';

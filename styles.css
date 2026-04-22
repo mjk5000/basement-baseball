@@ -2232,6 +2232,8 @@ header {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
 .overlay-lineup {
@@ -2239,12 +2241,8 @@ header {
     border-radius: 12px;
     padding: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 400px;
-}
-
-.overlay-lineup.single-lineup {
-    width: 100%;
+    flex: 1;
+    min-width: 280px;
     max-width: 400px;
 }
 
@@ -2310,13 +2308,19 @@ header {
         display: block;
     }
     
-    /* Adjust overlay for single lineup on small screens */
+    /* Adjust overlay for both lineups on small screens */
     .lineup-overlay-content {
         max-width: 95%;
         max-height: 90%;
     }
     
-    .overlay-lineup.single-lineup {
+    .lineup-overlay-body {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .overlay-lineup {
         max-width: 100%;
+        width: 100%;
     }
 }
