@@ -2191,24 +2191,26 @@ header {
     display: none;
 }
 
+/* Desktop: Normal container behavior */
 .pages-container {
     width: 100%;
-    overflow: hidden;
 }
 
 .page-wrapper {
-    display: flex;
-    width: 300%; /* 3 pages side by side */
-    transition: transform 0.3s ease-out;
-    transform: translateX(-100%); /* Start on middle page (game) */
+    width: 100%;
 }
 
 .page {
-    width: 33.333%; /* Each page takes 1/3 of wrapper */
-    flex-shrink: 0;
+    width: 100%;
 }
 
-/* Page lineup styles */
+/* Hide lineup pages on desktop */
+.away-page,
+.home-page {
+    display: none;
+}
+
+/* Page lineup styles (only used in compact mode) */
 .page-lineup {
     background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
     border-radius: 16px;
@@ -2282,6 +2284,31 @@ header {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
     
+    /* Enable 3-page swipeable layout */
+    .pages-container {
+        width: 100%;
+        overflow: hidden;
+        touch-action: pan-y pinch-zoom;
+    }
+    
+    .page-wrapper {
+        display: flex;
+        width: 300%; /* 3 pages side by side */
+        transition: transform 0.3s ease-out;
+        transform: translateX(-100%); /* Start on middle page (game) */
+    }
+    
+    .page {
+        width: 33.333%; /* Each page takes 1/3 of wrapper */
+        flex-shrink: 0;
+    }
+    
+    /* Show lineup pages in compact mode */
+    .away-page,
+    .home-page {
+        display: block;
+    }
+    
     .nav-arrow {
         background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
         color: white;
@@ -2331,11 +2358,7 @@ header {
         box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
     }
     
-    /* Adjust page layout for compact mode */
-    .pages-container {
-        touch-action: pan-y pinch-zoom;
-    }
-    
+    /* Adjust page lineup sizes for compact mode */
     .page-lineup {
         margin: 15px;
         padding: 15px;
