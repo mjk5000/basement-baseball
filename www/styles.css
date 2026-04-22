@@ -2054,10 +2054,11 @@ header {
     text-align: center;
     font-size: 11px;
     color: #6b7280;
-    margin-top: -15px;
-    margin-bottom: 20px;
+    margin-top: 15px;
+    margin-bottom: 0;
     font-family: monospace;
     user-select: none;
+}
 }
 
 .settings-section {
