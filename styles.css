@@ -1963,6 +1963,8 @@ header {
     flex-shrink: 0;
     cursor: pointer;
     accent-color: #3b82f6;
+    position: relative;
+    top: 2px;
 }
 
 .checkbox-label span {
