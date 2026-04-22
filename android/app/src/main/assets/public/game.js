@@ -4027,3 +4027,65 @@ document.addEventListener('fullscreenchange', () => {
 
 // Try to lock on page load (will fail if not in fullscreen, which is fine)
 lockOrientation();
+
+// ============================================
+// COMPACT MODE LINEUP OVERLAY FUNCTIONS
+// ============================================
+
+function toggleCompactLineups() {
+    const overlay = document.getElementById('lineupOverlay');
+    if (overlay.style.display === 'flex') {
+        hideCompactLineups();
+    } else {
+        showCompactLineups();
+    }
+}
+
+function showCompactLineups() {
+    const overlay = document.getElementById('lineupOverlay');
+    overlay.style.display = 'flex';
+    syncLineupsToOverlay();
+}
+
+function hideCompactLineups() {
+    const overlay = document.getElementById('lineupOverlay');
+    overlay.style.display = 'none';
+}
+
+function syncLineupsToOverlay() {
+    // Sync away lineup
+    const awayLineupList = document.getElementById('awayOverlayLineup');
+    awayLineupList.innerHTML = '';
+    for (let i = 1; i <= 9; i++) {
+        const originalBatter = document.getElementById(`away-batter-${i}`);
+        if (originalBatter) {
+            const batterClone = originalBatter.cloneNode(true);
+            batterClone.id = `away-overlay-batter-${i}`;
+            awayLineupList.appendChild(batterClone);
+        }
+    }
+    
+    // Sync home lineup
+    const homeLineupList = document.getElementById('homeOverlayLineup');
+    homeLineupList.innerHTML = '';
+    for (let i = 1; i <= 9; i++) {
+        const originalBatter = document.getElementById(`home-batter-${i}`);
+        if (originalBatter) {
+            const batterClone = originalBatter.cloneNode(true);
+            batterClone.id = `home-overlay-batter-${i}`;
+            homeLineupList.appendChild(batterClone);
+        }
+    }
+    
+    // Sync scores
+    const awayScore = document.getElementById('away-lineup-score').textContent;
+    const homeScore = document.getElementById('home-lineup-score').textContent;
+    document.getElementById('away-overlay-score').textContent = awayScore;
+    document.getElementById('home-overlay-score').textContent = homeScore;
+    
+    // Sync team names
+    const awayTeamName = document.querySelector('.away-team-name').textContent;
+    const homeTeamName = document.querySelector('.home-team-name').textContent;
+    document.querySelectorAll('.away-overlay-lineup .overlay-lineup-title')[0].textContent = awayTeamName;
+    document.querySelectorAll('.home-overlay-lineup .overlay-lineup-title')[0].textContent = homeTeamName;
+}

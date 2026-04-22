@@ -12,13 +12,38 @@
     <meta http-equiv="Expires" content="0">
     <link rel="manifest" href="manifest.json">
     <title>⚾️ Basement Baseball</title>
-    <link rel="stylesheet" href="styles.css?v=1.18.18">
+    <link rel="stylesheet" href="styles.css?v=1.18.19">
 </head>
 <body>
     <div class="container">
         <header>
             <h1 id="gameTitle">⚾️ Basement Baseball ⚾️</h1>
+            <button class="compact-lineup-toggle" onclick="toggleCompactLineups()">
+                <span class="icon">👥</span> Lineups
+            </button>
         </header>
+
+        <!-- Compact Mode Lineup Overlay -->
+        <div class="lineup-overlay" id="lineupOverlay" onclick="hideCompactLineups()">
+            <div class="lineup-overlay-content" onclick="event.stopPropagation()">
+                <div class="lineup-overlay-header">
+                    <h3>Team Lineups</h3>
+                    <button class="close-btn" onclick="hideCompactLineups()">✕</button>
+                </div>
+                <div class="lineup-overlay-body">
+                    <div class="overlay-lineup away-overlay-lineup">
+                        <div class="overlay-lineup-title away-team-name">Away</div>
+                        <div class="overlay-lineup-score" id="away-overlay-score">0</div>
+                        <div class="overlay-lineup-list" id="awayOverlayLineup"></div>
+                    </div>
+                    <div class="overlay-lineup home-overlay-lineup">
+                        <div class="overlay-lineup-title home-team-name">Home</div>
+                        <div class="overlay-lineup-score" id="home-overlay-score">0</div>
+                        <div class="overlay-lineup-list" id="homeOverlayLineup"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Scoreboard with Lineups -->
         <div class="scoreboard-wrapper">
@@ -353,7 +378,7 @@
                 </button>
             </div>
             <div class="version-info">
-                <span>v1.18.18 • Apr 22, 2026</span>
+                <span>v1.18.19 • Apr 22, 2026</span>
             </div>
             </div>
 
@@ -473,7 +498,7 @@
         <div id="settingsModal" class="modal">
             <div class="modal-content">
                 <h2>⚾ Game Setup</h2>
-                <div class="modal-version-info">v1.18.18 • Apr 22, 2026</div>
+                <div class="modal-version-info">v1.18.19 • Apr 22, 2026</div>
                 
                 <div class="settings-section">
                     <label for="awayTeamName">Away Team Name:</label>
@@ -538,6 +563,6 @@
         </div>
     </div>
 
-    <script src="game.js?v=1.18.18"></script>
+    <script src="game.js?v=1.18.19"></script>
 </body>
 </html>
