@@ -1536,18 +1536,18 @@ header h1 {
         padding: 10px 15px;
     }
 
-    /* Force game mode details to new line in compact mode */
-    .game-mode-detail {
-        display: block;
+    /* Stack game mode radio buttons vertically in compact mode */
+    .radio-group.horizontal {
+        flex-direction: column;
+        gap: 8px;
     }
 
-    /* Adjust radio label alignment for multi-line text in compact mode */
     .radio-group.horizontal .radio-label {
-        align-items: flex-start;
+        align-items: center;
     }
 
     .radio-group.horizontal .radio-label input[type="radio"] {
-        margin-top: 2px;
+        margin-top: 0;
     }
 }
 
