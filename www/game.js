@@ -2342,6 +2342,16 @@ function executeOutcome(outcome) {
         case 'flyout':
             gameState.lastPlay = 'Fly out';
             
+            // Check for fly ball double play (runner caught off base)
+            // ~2.5% of fly outs with runners on become double plays (less common than line drives)
+            const hasRunnersForFlyDP = gameState.runners.first || gameState.runners.second || gameState.runners.third;
+            if (hasRunnersForFlyDP && gameState.outs < 2 && Math.random() < 0.025) {
+                // Fly ball double play!
+                flyBallDoublePlay();
+                recordAtBat('out');
+                break;
+            }
+            
             // Check if runner on third can tag up (60% of fly balls are deep enough)
             if (gameState.runners.third && Math.random() < 0.60) {
                 recordAtBat('out');
@@ -2577,6 +2587,56 @@ function lineDriveDoublePlay() {
     }
     
     showMessage(ldDPMessages[Math.floor(Math.random() * ldDPMessages.length)]);
+    updateDisplay();
+}
+
+// Fly ball double play - catch and runner doubled off base
+function flyBallDoublePlay() {
+    gameState.outs += 2;
+    gameState.lastPlay = 'Fly ball double play';
+    
+    // Determine which runner gets doubled off (prioritize the runner furthest from home)
+    let doubledOffBase = null;
+    
+    if (gameState.runners.third) {
+        doubledOffBase = 3;
+    } else if (gameState.runners.second) {
+        doubledOffBase = 2;
+    } else if (gameState.runners.first) {
+        doubledOffBase = 1;
+    }
+    
+    const flyDPMessages = [
+        'Fly ball caught!<br>Runner too far off the base! Throw doubles them off! DP! 🔄',
+        'Pop fly caught!<br>Quick throw to the base! Runner can\'t get back! DOUBLE PLAY! 🔄',
+        'Fly ball snared!<br>Strong throw! Runner doubled off! 🔄',
+        'Catch made!<br>Fires to the base! Runner off too far! DP! 🔄',
+        'Fly ball caught!<br>Runner was leaning! Toss to base - DOUBLE PLAY! 🔄',
+        'Pop up caught!<br>Throws back! Runner way off! Easy DP! 🔄'
+    ];
+    
+    if (gameState.outs >= 3) {
+        gameState.outs = 3;
+        showMessage('Fly ball caught! Doubles off runner!<br>Inning over! 🔄');
+        recordOut();
+        return;
+    }
+    
+    // Show X where fly ball was caught (outfield positions more likely)
+    const catchPositions = ['LF', 'CF', 'RF', 'CF', 'LF', 'RF', 'SS']; // Weighted toward outfield
+    showOutX(catchPositions[Math.floor(Math.random() * catchPositions.length)]);
+    
+    // Show X at the base where runner was doubled off after a delay
+    if (doubledOffBase) {
+        setTimeout(() => showOutX(doubledOffBase), 500);
+        
+        // Clear the runner who was doubled off
+        if (doubledOffBase === 1) gameState.runners.first = false;
+        else if (doubledOffBase === 2) gameState.runners.second = false;
+        else if (doubledOffBase === 3) gameState.runners.third = false;
+    }
+    
+    showMessage(flyDPMessages[Math.floor(Math.random() * flyDPMessages.length)]);
     updateDisplay();
 }
 
