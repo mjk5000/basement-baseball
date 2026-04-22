@@ -1012,6 +1012,16 @@ function hideGameSettings() {
     }
 }
 
+// Toggle game mode help text visibility
+function toggleGameModeHelp() {
+    const helpText = document.getElementById('gameModeHelp');
+    const onePlayerRadio = document.querySelector('input[name="gameMode"][value="1player"]');
+    
+    if (helpText && onePlayerRadio) {
+        helpText.style.display = onePlayerRadio.checked ? 'block' : 'none';
+    }
+}
+
 // Show rules modal
 function showRules() {
     const modal = document.getElementById('rulesModal');
