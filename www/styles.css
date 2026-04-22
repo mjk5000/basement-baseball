@@ -873,6 +873,35 @@ header h1 {
     justify-content: center;
 }
 
+/* Controls Toggle (hidden on desktop, shown in compact mode) */
+.controls-toggle {
+    display: none;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #64748b;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toggle-btn.active {
+    color: white;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    border-color: #2563eb;
+}
+
+.toggle-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 1);
+    border-color: #94a3b8;
+}
+
 .controls-container {
     flex: 1;
     max-width: 600px;
@@ -1424,13 +1453,35 @@ header h1 {
         line-height: 1.2;
     }
     
-    /* Compact controls */
+    /* Compact controls - accordion style */
     .game-area {
-        gap: 4px;
-        margin-bottom: 2px;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 4px;
+    }
+    
+    /* Show controls toggle in compact mode */
+    .controls-toggle {
+        display: flex;
+        gap: 8px;
+        padding: 0 6px;
+        width: 100%;
+    }
+    
+    .toggle-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    
+    /* Hide inactive panel in compact mode */
+    .controls-container.hidden,
+    .manual-controls.hidden {
+        display: none !important;
     }
     
     .controls-container {
+        width: 100%;
+        max-width: none;
         gap: 4px;
         padding: 6px;
     }
@@ -1442,23 +1493,24 @@ header h1 {
     }
     
     .pitch-header {
-        font-size: 0.95rem;
+        font-size: 1rem;
         margin-bottom: 6px;
         font-weight: 700;
     }
     
     .pitch-options {
-        gap: 6px;
+        gap: 8px;
         margin-bottom: 4px;
     }
     
+    /* Bigger buttons in compact mode with accordion */
     .pitch-btn,
     .manual-btn {
-        height: 58px;
-        font-size: 0.68rem;
+        height: 68px;
+        font-size: 0.75rem;
         font-weight: 700;
-        padding: 6px 4px;
-        gap: 3px;
+        padding: 8px 6px;
+        gap: 4px;
         overflow: hidden;
         line-height: 1.1;
         word-wrap: break-word;
@@ -1468,7 +1520,7 @@ header h1 {
     /* Fix icon sizes in small screen */
     .pitch-btn .icon,
     .manual-btn .icon {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         line-height: 1;
         flex-shrink: 0;
         margin-bottom: 1px;
@@ -1476,17 +1528,31 @@ header h1 {
     
     .contact-grid,
     .action-grid {
-        gap: 6px;
+        gap: 8px;
     }
     
     .manual-controls {
         width: 100%;
-        gap: 6px;
+        max-width: none;
+        gap: 8px;
         padding: 6px;
     }
     
+    .manual-header {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+    
+    .manual-section {
+        gap: 8px;
+    }
+    
+    .manual-group {
+        gap: 8px;
+    }
+    
     .manual-row {
-        gap: 6px;
+        gap: 8px;
     }
     
     .icon-btn {

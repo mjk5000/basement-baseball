@@ -4105,3 +4105,28 @@ function hideCompactLineups() {
     const overlay = document.getElementById('lineupOverlay');
     overlay.style.display = 'none';
 }
+
+// Controls accordion toggle for compact mode
+function showMainControls() {
+    const mainPanel = document.getElementById('mainControlsPanel');
+    const advancedPanel = document.getElementById('advancedControlsPanel');
+    const toggleBtns = document.querySelectorAll('.controls-toggle .toggle-btn');
+    
+    mainPanel.classList.remove('hidden');
+    advancedPanel.classList.add('hidden');
+    
+    toggleBtns[0].classList.add('active');
+    toggleBtns[1].classList.remove('active');
+}
+
+function showAdvancedControls() {
+    const mainPanel = document.getElementById('mainControlsPanel');
+    const advancedPanel = document.getElementById('advancedControlsPanel');
+    const toggleBtns = document.querySelectorAll('.controls-toggle .toggle-btn');
+    
+    mainPanel.classList.add('hidden');
+    advancedPanel.classList.remove('hidden');
+    
+    toggleBtns[0].classList.remove('active');
+    toggleBtns[1].classList.add('active');
+}
