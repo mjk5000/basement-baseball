@@ -2265,9 +2265,9 @@ header {
 }
 
 .lineup-overlay-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .overlay-lineup {
@@ -2275,6 +2275,13 @@ header {
     border-radius: 12px;
     padding: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+.overlay-lineup.single-lineup {
+    width: 100%;
+    max-width: 400px;
 }
 
 .overlay-lineup-title {
@@ -2320,44 +2327,50 @@ header {
     box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
 }
 
-/* Show compact toggle button only in compact mode */
+/* Lineup buttons in manual controls */
+.lineup-buttons-group {
+    display: none; /* Hidden on desktop */
+}
+
+.lineup-away-btn,
+.lineup-home-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.lineup-away-btn:hover,
+.lineup-home-btn:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.lineup-away-btn .icon,
+.lineup-home-btn .icon {
+    font-size: 1rem;
+}
+
+/* Show lineup buttons only in compact mode */
 @media (max-width: 480px) {
-    .compact-lineup-toggle {
+    .lineup-buttons-group {
         display: flex;
-        align-items: center;
         gap: 8px;
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        color: white;
-        border: none;
-        border-radius: 12px;
-        padding: 10px 20px;
-        font-size: 1rem;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-        transition: all 0.2s;
-        margin-top: 10px;
+        width: 100%;
     }
     
-    .compact-lineup-toggle:hover,
-    .compact-lineup-toggle:active {
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
+    .lineup-away-btn,
+    .lineup-home-btn {
+        flex: 1;
     }
     
-    .compact-lineup-toggle .icon {
-        font-size: 1.2rem;
-    }
-    
-    /* Adjust overlay layout for very narrow screens */
-    .lineup-overlay-body {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
+    /* Adjust overlay for single lineup on small screens */
     .lineup-overlay-content {
         max-width: 95%;
         max-height: 90%;
+    }
+    
+    .overlay-lineup.single-lineup {
+        max-width: 100%;
     }
 }
