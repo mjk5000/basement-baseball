@@ -1,5 +1,5 @@
 // Service Worker for Basement Baseball PWA
-const CACHE_VERSION = 'v1.18.42';
+const CACHE_VERSION = 'v1.18.43';
 const CACHE_NAME = `basement-baseball-${CACHE_VERSION}`;
 
 const urlsToCache = [
