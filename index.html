@@ -12,7 +12,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="manifest" href="manifest.json">
     <title>⚾️ Basement Baseball</title>
-    <link rel="stylesheet" href="styles.css?v=1.18.41">
+    <link rel="stylesheet" href="styles.css?v=1.18.42">
 </head>
 <body>
     <div class="container">
@@ -375,7 +375,7 @@
                 </button>
             </div>
             <div class="version-info">
-                <span>v1.18.41 • Apr 22, 2026</span>
+                <span>v1.18.42 • Apr 22, 2026</span>
             </div>
             </div>
 
@@ -495,7 +495,7 @@
         <div id="settingsModal" class="modal">
             <div class="modal-content">
                 <h2>⚾ Game Setup</h2>
-                <div class="modal-version-info">v1.18.41 • Apr 22, 2026</div>
+                <div class="modal-version-info">v1.18.42 • Apr 22, 2026</div>
                 
                 <div class="settings-section">
                     <label for="awayTeamName">Away Team Name:</label>
@@ -560,32 +560,51 @@
         </div>
     </div>
 
-    <script src="game.js?v=1.18.41"></script>
+    <script src="game.js?v=1.18.42"></script>
     
     <!-- Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
+                // Register service worker with cache busting
+                navigator.serviceWorker.register('./sw.js?v=1.18.42', { updateViaCache: 'none' })
                     .then((registration) => {
                         console.log('Service Worker registered successfully:', registration);
                         
-                        // Check for updates every time the page loads
+                        // Force update check immediately
                         registration.update();
+                        
+                        // Check for updates every 10 seconds
+                        setInterval(() => {
+                            registration.update();
+                        }, 10000);
                         
                         // Listen for new service worker waiting to activate
                         registration.addEventListener('updatefound', () => {
                             const newWorker = registration.installing;
+                            console.log('New service worker found, installing...');
+                            
                             newWorker.addEventListener('statechange', () => {
-                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                    // New version available, prompt user or auto-update
-                                    console.log('New version available! Reloading...');
-                                    // Auto-reload after 1 second to apply updates
-                                    setTimeout(() => {
-                                        window.location.reload();
-                                    }, 1000);
+                                console.log('Service Worker state:', newWorker.state);
+                                if (newWorker.state === 'installed') {
+                                    if (navigator.serviceWorker.controller) {
+                                        // New version available, force skip waiting
+                                        console.log('New version available! Activating...');
+                                        newWorker.postMessage({ type: 'SKIP_WAITING' });
+                                        // Reload after new worker takes control
+                                        setTimeout(() => {
+                                            window.location.reload(true);
+                                        }, 500);
+                                    } else {
+                                        console.log('Service Worker installed for first time');
+                                    }
                                 }
                             });
+                        });
+                        
+                        // Handle controller change (new service worker activated)
+                        navigator.serviceWorker.addEventListener('controllerchange', () => {
+                            console.log('New service worker activated!');
                         });
                     })
                     .catch((error) => {

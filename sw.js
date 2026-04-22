@@ -1,5 +1,5 @@
 // Service Worker for Basement Baseball PWA
-const CACHE_VERSION = 'v1.18.41';
+const CACHE_VERSION = 'v1.18.42';
 const CACHE_NAME = `basement-baseball-${CACHE_VERSION}`;
 
 const urlsToCache = [
@@ -53,8 +53,32 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - network first for HTML, cache first for assets
 self.addEventListener('fetch', (event) => {
+    const url = new URL(event.request.url);
+    
+    // Network-first strategy for HTML files to ensure updates
+    if (event.request.headers.get('accept').includes('text/html')) {
+        event.respondWith(
+            fetch(event.request)
+                .then((response) => {
+                    // Clone and cache the response
+                    const responseToCache = response.clone();
+                    caches.open(CACHE_NAME)
+                        .then((cache) => {
+                            cache.put(event.request, responseToCache);
+                        });
+                    return response;
+                })
+                .catch(() => {
+                    // If network fails, try cache
+                    return caches.match(event.request);
+                })
+        );
+        return;
+    }
+    
+    // Cache-first strategy for other assets (JS, CSS, images, sounds)
     event.respondWith(
         caches.match(event.request)
             .then((response) => {
