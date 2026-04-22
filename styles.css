@@ -1969,8 +1969,9 @@ header {
 
 .checkbox-label span {
     font-weight: 500;
-    line-height: 1;
-    align-self: center;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
 }
 
 .radio-group {
@@ -2021,9 +2022,11 @@ header {
 
 .radio-group.horizontal .radio-label span {
     text-align: left;
-    line-height: 1;
+    line-height: 20px;
     order: 2;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
 }
 
 .radio-group.horizontal .radio-label:hover {
@@ -2048,8 +2051,10 @@ header {
     font-size: 1.1rem;
     font-weight: 600;
     color: #1f2937;
-    line-height: 1;
+    line-height: 20px;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
 }
     display: flex;
     align-items: center;
