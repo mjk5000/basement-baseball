@@ -1631,6 +1631,12 @@ header h1 {
         align-items: flex-start;
         gap: 10px;
     }
+    
+    .settings-section.innings-section label {
+        display: block;
+        text-align: left;
+        width: 100%;
+    }
 
     /* Stack game mode radio buttons vertically in compact mode */
     .radio-group.horizontal {
