@@ -12,39 +12,42 @@
     <meta http-equiv="Expires" content="0">
     <link rel="manifest" href="manifest.json">
     <title>⚾️ Basement Baseball</title>
-    <link rel="stylesheet" href="styles.css?v=1.18.19">
+    <link rel="stylesheet" href="styles.css?v=1.18.20">
 </head>
 <body>
     <div class="container">
         <header>
             <h1 id="gameTitle">⚾️ Basement Baseball ⚾️</h1>
-            <button class="compact-lineup-toggle" onclick="toggleCompactLineups()">
-                <span class="icon">👥</span> Lineups
-            </button>
         </header>
 
-        <!-- Compact Mode Lineup Overlay -->
-        <div class="lineup-overlay" id="lineupOverlay" onclick="hideCompactLineups()">
-            <div class="lineup-overlay-content" onclick="event.stopPropagation()">
-                <div class="lineup-overlay-header">
-                    <h3>Team Lineups</h3>
-                    <button class="close-btn" onclick="hideCompactLineups()">✕</button>
-                </div>
-                <div class="lineup-overlay-body">
-                    <div class="overlay-lineup away-overlay-lineup">
-                        <div class="overlay-lineup-title away-team-name">Away</div>
-                        <div class="overlay-lineup-score" id="away-overlay-score">0</div>
-                        <div class="overlay-lineup-list" id="awayOverlayLineup"></div>
-                    </div>
-                    <div class="overlay-lineup home-overlay-lineup">
-                        <div class="overlay-lineup-title home-team-name">Home</div>
-                        <div class="overlay-lineup-score" id="home-overlay-score">0</div>
-                        <div class="overlay-lineup-list" id="homeOverlayLineup"></div>
-                    </div>
-                </div>
+        <!-- Page Navigation (Compact Mode Only) -->
+        <div class="page-navigation">
+            <button class="nav-arrow nav-left" onclick="previousPage()">‹</button>
+            <div class="page-indicators">
+                <span class="page-dot" data-page="0" onclick="goToPage(0)"></span>
+                <span class="page-dot active" data-page="1" onclick="goToPage(1)"></span>
+                <span class="page-dot" data-page="2" onclick="goToPage(2)"></span>
             </div>
+            <button class="nav-arrow nav-right" onclick="nextPage()">›</button>
         </div>
 
+        <!-- Swipeable Pages Container -->
+        <div class="pages-container" id="pagesContainer">
+            <div class="page-wrapper" id="pageWrapper">
+                <!-- Page 0: Away Lineup -->
+                <div class="page away-page">
+                    <div class="page-lineup">
+                        <div class="page-lineup-header">
+                            <div class="page-lineup-title away-team-name">Away</div>
+                            <div class="page-lineup-score" id="away-page-score">0</div>
+                        </div>
+                        <div class="page-lineup-list" id="awayPageLineup"></div>
+                    </div>
+                </div>
+
+                <!-- Page 1: Main Game (Default) -->
+                <div class="page game-page active">
+        
         <!-- Scoreboard with Lineups -->
         <div class="scoreboard-wrapper">
             <!-- Away Lineup (Left Side) -->
@@ -378,7 +381,7 @@
                 </button>
             </div>
             <div class="version-info">
-                <span>v1.18.19 • Apr 22, 2026</span>
+                <span>v1.18.20 • Apr 22, 2026</span>
             </div>
             </div>
 
@@ -498,7 +501,7 @@
         <div id="settingsModal" class="modal">
             <div class="modal-content">
                 <h2>⚾ Game Setup</h2>
-                <div class="modal-version-info">v1.18.19 • Apr 22, 2026</div>
+                <div class="modal-version-info">v1.18.20 • Apr 22, 2026</div>
                 
                 <div class="settings-section">
                     <label for="awayTeamName">Away Team Name:</label>
@@ -561,8 +564,28 @@
                 </div>
             </div>
         </div>
+
+                </div>
+                <!-- End Page 1: Main Game -->
+
+                <!-- Page 2: Home Lineup -->
+                <div class="page home-page">
+                    <div class="page-lineup">
+                        <div class="page-lineup-header">
+                            <div class="page-lineup-title home-team-name">Home</div>
+                            <div class="page-lineup-score" id="home-page-score">0</div>
+                        </div>
+                        <div class="page-lineup-list" id="homePageLineup"></div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End Page Wrapper -->
+        </div>
+        <!-- End Pages Container -->
+
     </div>
 
-    <script src="game.js?v=1.18.19"></script>
+    <script src="game.js?v=1.18.20"></script>
 </body>
 </html>

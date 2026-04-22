@@ -4029,63 +4029,152 @@ document.addEventListener('fullscreenchange', () => {
 lockOrientation();
 
 // ============================================
-// COMPACT MODE LINEUP OVERLAY FUNCTIONS
+// SWIPEABLE PAGE NAVIGATION (COMPACT MODE)
 // ============================================
 
-function toggleCompactLineups() {
-    const overlay = document.getElementById('lineupOverlay');
-    if (overlay.style.display === 'flex') {
-        hideCompactLineups();
-    } else {
-        showCompactLineups();
+let currentPage = 1; // Start on game page (center)
+let touchStartX = 0;
+let touchEndX = 0;
+let isDragging = false;
+
+function initSwipeNavigation() {
+    const pagesContainer = document.getElementById('pagesContainer');
+    if (!pagesContainer) return;
+
+    pagesContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+    pagesContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
+    pagesContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
+    
+    // Initialize page position
+    goToPage(1, false);
+}
+
+function handleTouchStart(e) {
+    touchStartX = e.touches[0].clientX;
+    isDragging = true;
+}
+
+function handleTouchMove(e) {
+    if (!isDragging) return;
+    touchEndX = e.touches[0].clientX;
+    
+    // Prevent page scroll while swiping horizontally
+    const deltaX = Math.abs(touchEndX - touchStartX);
+    const deltaY = Math.abs(e.touches[0].clientY - (e.touches[0].clientY || 0));
+    if (deltaX > deltaY) {
+        e.preventDefault();
     }
 }
 
-function showCompactLineups() {
-    const overlay = document.getElementById('lineupOverlay');
-    overlay.style.display = 'flex';
-    syncLineupsToOverlay();
+function handleTouchEnd(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    
+    const swipeThreshold = 50; // Minimum swipe distance in pixels
+    const swipeDistance = touchStartX - touchEndX;
+    
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+        if (swipeDistance > 0) {
+            // Swiped left - go to next page
+            nextPage();
+        } else {
+            // Swiped right - go to previous page
+            previousPage();
+        }
+    }
 }
 
-function hideCompactLineups() {
-    const overlay = document.getElementById('lineupOverlay');
-    overlay.style.display = 'none';
+function goToPage(pageNumber, animate = true) {
+    if (pageNumber < 0 || pageNumber > 2) return;
+    
+    currentPage = pageNumber;
+    const pageWrapper = document.getElementById('pageWrapper');
+    const offset = -pageNumber * 100;
+    
+    if (animate) {
+        pageWrapper.style.transition = 'transform 0.3s ease-out';
+    } else {
+        pageWrapper.style.transition = 'none';
+    }
+    
+    pageWrapper.style.transform = `translateX(${offset}%)`;
+    
+    // Update page indicators
+    document.querySelectorAll('.page-dot').forEach((dot, index) => {
+        if (index === pageNumber) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+    
+    // Sync lineup data when viewing lineup pages
+    if (pageNumber === 0) {
+        syncAwayPageLineup();
+    } else if (pageNumber === 2) {
+        syncHomePageLineup();
+    }
 }
 
-function syncLineupsToOverlay() {
-    // Sync away lineup
-    const awayLineupList = document.getElementById('awayOverlayLineup');
+function nextPage() {
+    if (currentPage < 2) {
+        goToPage(currentPage + 1);
+    }
+}
+
+function previousPage() {
+    if (currentPage > 0) {
+        goToPage(currentPage - 1);
+    }
+}
+
+function syncAwayPageLineup() {
+    const awayLineupList = document.getElementById('awayPageLineup');
+    if (!awayLineupList) return;
+    
     awayLineupList.innerHTML = '';
     for (let i = 1; i <= 9; i++) {
         const originalBatter = document.getElementById(`away-batter-${i}`);
         if (originalBatter) {
             const batterClone = originalBatter.cloneNode(true);
-            batterClone.id = `away-overlay-batter-${i}`;
+            batterClone.id = `away-page-batter-${i}`;
             awayLineupList.appendChild(batterClone);
         }
     }
     
-    // Sync home lineup
-    const homeLineupList = document.getElementById('homeOverlayLineup');
+    // Sync score
+    const awayScore = document.getElementById('away-lineup-score').textContent;
+    document.getElementById('away-page-score').textContent = awayScore;
+    
+    // Sync team name
+    const awayTeamName = document.querySelector('.away-team-name').textContent;
+    document.querySelector('.away-page .page-lineup-title').textContent = awayTeamName;
+}
+
+function syncHomePageLineup() {
+    const homeLineupList = document.getElementById('homePageLineup');
+    if (!homeLineupList) return;
+    
     homeLineupList.innerHTML = '';
     for (let i = 1; i <= 9; i++) {
         const originalBatter = document.getElementById(`home-batter-${i}`);
         if (originalBatter) {
             const batterClone = originalBatter.cloneNode(true);
-            batterClone.id = `home-overlay-batter-${i}`;
+            batterClone.id = `home-page-batter-${i}`;
             homeLineupList.appendChild(batterClone);
         }
     }
     
-    // Sync scores
-    const awayScore = document.getElementById('away-lineup-score').textContent;
+    // Sync score
     const homeScore = document.getElementById('home-lineup-score').textContent;
-    document.getElementById('away-overlay-score').textContent = awayScore;
-    document.getElementById('home-overlay-score').textContent = homeScore;
+    document.getElementById('home-page-score').textContent = homeScore;
     
-    // Sync team names
-    const awayTeamName = document.querySelector('.away-team-name').textContent;
+    // Sync team name
     const homeTeamName = document.querySelector('.home-team-name').textContent;
-    document.querySelectorAll('.away-overlay-lineup .overlay-lineup-title')[0].textContent = awayTeamName;
-    document.querySelectorAll('.home-overlay-lineup .overlay-lineup-title')[0].textContent = homeTeamName;
+    document.querySelector('.home-page .page-lineup-title').textContent = homeTeamName;
 }
+
+// Initialize swipe navigation when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    initSwipeNavigation();
+});
