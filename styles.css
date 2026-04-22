@@ -1479,6 +1479,11 @@ header h1 {
         display: none !important;
     }
     
+    /* Hide advanced controls by default in compact mode */
+    #advancedControlsPanel {
+        display: none;
+    }
+    
     .controls-container {
         width: 100%;
         max-width: none;
