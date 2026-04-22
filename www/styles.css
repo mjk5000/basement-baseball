@@ -2308,19 +2308,32 @@ header {
         display: block;
     }
     
-    /* Adjust overlay for both lineups on small screens */
+    /* Adjust overlay for both lineups side-by-side on small screens */
     .lineup-overlay-content {
-        max-width: 95%;
+        max-width: 98%;
         max-height: 90%;
     }
     
     .lineup-overlay-body {
-        flex-direction: column;
+        gap: 10px;
         width: 100%;
     }
     
     .overlay-lineup {
-        max-width: 100%;
-        width: 100%;
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .overlay-lineup-title {
+        font-size: 1.1rem;
+    }
+    
+    .overlay-lineup-score {
+        font-size: 1.5rem;
+    }
+    
+    .overlay-lineup-list .batter-spot {
+        padding: 8px;
+        font-size: 0.9rem;
     }
 }
