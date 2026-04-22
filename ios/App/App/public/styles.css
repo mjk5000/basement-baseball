@@ -2289,22 +2289,19 @@ header {
     box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
 }
 
-/* Lineup buttons in manual controls - hidden on desktop, shown in compact mode */
-.lineup-away-btn,
-.lineup-home-btn {
+/* Lineup button in manual controls - hidden on desktop, shown in compact mode */
+.lineup-btn {
     display: none;
     background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
 }
 
-.lineup-away-btn:hover,
-.lineup-home-btn:hover {
+.lineup-btn:hover {
     background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
 }
 
-/* Show lineup buttons only in compact mode */
+/* Show lineup button only in compact mode */
 @media (max-width: 480px) {
-    .lineup-away-btn,
-    .lineup-home-btn {
+    .lineup-btn {
         display: block;
     }
     
