@@ -2010,8 +2010,6 @@ header {
     flex-shrink: 0;
     order: 1;
 }
-    order: 1;
-}
 
 .radio-group.horizontal .radio-label span {
     text-align: left;
