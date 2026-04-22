@@ -1948,7 +1948,6 @@ header {
 
 .checkbox-label {
     display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 8px;
     margin-top: 8px;
@@ -1962,14 +1961,10 @@ header {
     height: 18px;
     cursor: pointer;
     accent-color: #3b82f6;
-    margin: 0;
-    flex-shrink: 0;
-    vertical-align: middle;
 }
 
 .checkbox-label span {
     font-weight: 500;
-    vertical-align: middle;
 }
 
 .radio-group {
@@ -1988,7 +1983,6 @@ header {
 
 .radio-label {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
@@ -2009,7 +2003,6 @@ header {
     align-items: center !important;
     gap: 8px;
     text-align: left;
-    flex-wrap: nowrap;
 }
 
 .radio-group.horizontal .radio-label input[type="radio"] {
@@ -2017,13 +2010,13 @@ header {
     flex-shrink: 0;
     order: 1;
 }
+    order: 1;
+}
 
 .radio-group.horizontal .radio-label span {
     text-align: left;
-    order: 2;
-    white-space: nowrap;
     line-height: 1;
-    transform: translateY(-7px);
+    order: 2;
 }
 
 .radio-group.horizontal .radio-label:hover {
@@ -2048,11 +2041,7 @@ header {
     font-size: 1.1rem;
     font-weight: 600;
     color: #1f2937;
-    line-height: 20px;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-}
+    line-height: 1;
     display: flex;
     align-items: center;
 }
