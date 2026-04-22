@@ -12,7 +12,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="manifest" href="manifest.json">
     <title>⚾️ Basement Baseball</title>
-    <link rel="stylesheet" href="styles.css?v=1.18.34">
+    <link rel="stylesheet" href="styles.css?v=1.18.35">
 </head>
 <body>
     <div class="container">
@@ -336,9 +336,6 @@
                                 <button class="manual-btn undo-btn" id="undoBtn" onclick="undoLastAction()" disabled>
                                     <span class="icon">↩️</span>
                                 </button>
-                                <button class="manual-btn lineup-btn" onclick="showBothLineups()">
-                                    <span class="label">Lineups</span>
-                                </button>
                             </div>
                             <div class="manual-group">
                                 <button class="manual-btn simulate-btn" onclick="manualSimulateBatter()">
@@ -348,6 +345,13 @@
                         </div>
                     </div>
                 </div>
+            
+            <!-- Lineups Button -->
+            <div class="lineups-button-container">
+                <button class="lineups-standalone-btn" onclick="showBothLineups()">
+                    <span class="label">👥 Lineups</span>
+                </button>
+            </div>
             
             <!-- Icon Buttons Section -->
             <div class="lineup-icon-buttons">
@@ -371,7 +375,7 @@
                 </button>
             </div>
             <div class="version-info">
-                <span>v1.18.34 • Apr 22, 2026</span>
+                <span>v1.18.35 • Apr 22, 2026</span>
             </div>
             </div>
 
@@ -491,7 +495,7 @@
         <div id="settingsModal" class="modal">
             <div class="modal-content">
                 <h2>⚾ Game Setup</h2>
-                <div class="modal-version-info">v1.18.34 • Apr 22, 2026</div>
+                <div class="modal-version-info">v1.18.35 • Apr 22, 2026</div>
                 
                 <div class="settings-section">
                     <label for="awayTeamName">Away Team Name:</label>
@@ -556,6 +560,6 @@
         </div>
     </div>
 
-    <script src="game.js?v=1.18.34"></script>
+    <script src="game.js?v=1.18.35"></script>
 </body>
 </html>

@@ -1555,6 +1555,17 @@ header h1 {
         gap: 8px;
     }
     
+    /* Lineups button in compact mode */
+    .lineups-button-container {
+        margin: 6px auto 4px;
+    }
+    
+    .lineups-standalone-btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+        min-width: 140px;
+    }
+    
     .icon-btn {
         width: 36px;
         height: 36px;
@@ -1910,6 +1921,39 @@ header {
     padding: 4px;
     font-family: monospace;
     user-select: none;
+}
+
+/* Lineups Button Container */
+.lineups-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 8px auto 5px;
+    width: 100%;
+}
+
+.lineups-standalone-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: 2px solid #047857;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s;
+    min-width: 160px;
+}
+
+.lineups-standalone-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #059669, #047857);
+}
+
+.lineups-standalone-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Lineup Icon Buttons */
