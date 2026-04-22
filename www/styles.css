@@ -2183,210 +2183,181 @@ header {
 }
 
 /* ============================================ */
-/* SWIPEABLE PAGE NAVIGATION (COMPACT MODE) */
+/* COMPACT MODE LINEUP OVERLAY */
 /* ============================================ */
 
-/* Hide page navigation by default (desktop) */
-.page-navigation {
+/* Hide the compact lineup toggle by default */
+.compact-lineup-toggle {
     display: none;
 }
 
-/* Desktop: Normal container behavior */
-.pages-container {
-    width: 100%;
-}
-
-.page-wrapper {
-    width: 100%;
-}
-
-.page {
-    width: 100%;
-}
-
-/* Hide lineup pages on desktop */
-.away-page,
-.home-page {
+/* Lineup overlay (hidden by default) */
+.lineup-overlay {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
 }
 
-/* Page lineup styles (only used in compact mode) */
-.page-lineup {
-    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-    border-radius: 16px;
+.lineup-overlay-content {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+    border-radius: 20px;
     padding: 20px;
-    margin: 20px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    min-height: 500px;
+    max-width: 90%;
+    max-height: 85%;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s ease-out;
 }
 
-.page-lineup-header {
-    text-align: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
-.page-lineup-title {
-    color: white;
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-}
-
-.page-lineup-score {
-    color: #fbbf24;
-    font-size: 3rem;
-    font-weight: bold;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
-}
-
-.page-lineup-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.page-lineup-list .batter-spot {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 12px;
-    border-radius: 10px;
-    color: #1f2937;
-    font-weight: 600;
-    font-size: 1.1rem;
+.lineup-overlay-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.lineup-overlay-header h3 {
+    color: #1f2937;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.close-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.2s;
+    flex-shrink: 0;
 }
 
-.page-lineup-list .batter-spot.batting-now {
+.close-btn:hover {
+    background: #dc2626;
+    transform: scale(1.1);
+}
+
+.lineup-overlay-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.overlay-lineup {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.overlay-lineup-title {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.overlay-lineup-score {
+    color: #fbbf24;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.overlay-lineup-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.overlay-lineup-list .batter-spot {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px;
+    border-radius: 8px;
+    color: #1f2937;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.overlay-lineup-list .batter-spot.batting-now {
     background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-    border: 3px solid #f59e0b;
-    box-shadow: 0 0 16px rgba(245, 158, 11, 0.6);
-    transform: scale(1.02);
+    border: 2px solid #f59e0b;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
 }
 
-/* Show page navigation only in compact mode */
+/* Show compact toggle button only in compact mode */
 @media (max-width: 480px) {
-    .page-navigation {
+    .compact-lineup-toggle {
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 20px;
-        padding: 10px 0;
-        background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-        border-radius: 12px;
-        margin: 10px 10px 0 10px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Enable 3-page swipeable layout */
-    .pages-container {
-        width: 100%;
-        overflow: hidden;
-        touch-action: pan-y pinch-zoom;
-        position: relative;
-    }
-    
-    .page-wrapper {
-        display: flex;
-        width: 300%; /* 3 pages side by side */
-        transition: transform 0.3s ease-out;
-        transform: translateX(-33.333%); /* Start on middle page (game) - page index 1 */
-        min-height: 100vh;
-    }
-    
-    .page {
-        width: 33.333%; /* Each page takes 1/3 of wrapper */
-        flex-shrink: 0;
-        overflow-y: auto;
-        overflow-x: hidden;
-        min-height: 100vh;
-    }
-    
-    /* Ensure game page content is visible */
-    .game-page {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
-    
-    /* Show lineup pages in compact mode */
-    .away-page,
-    .home-page {
-        display: block;
-    }
-    
-    .nav-arrow {
+        gap: 8px;
         background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
         color: white;
         border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        font-size: 1.8rem;
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-size: 1rem;
         font-weight: bold;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
         transition: all 0.2s;
-        box-shadow: 0 3px 10px rgba(59, 130, 246, 0.4);
-        user-select: none;
-        line-height: 1;
-        padding-bottom: 3px;
+        margin-top: 10px;
     }
     
-    .nav-arrow:active {
+    .compact-lineup-toggle:hover,
+    .compact-lineup-toggle:active {
         background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-        transform: scale(0.95);
-        box-shadow: 0 2px 6px rgba(59, 130, 246, 0.5);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
     }
     
-    .page-indicators {
-        display: flex;
-        gap: 10px;
-        align-items: center;
+    .compact-lineup-toggle .icon {
+        font-size: 1.2rem;
     }
     
-    .page-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: #9ca3af;
-        cursor: pointer;
-        transition: all 0.3s;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Adjust overlay layout for very narrow screens */
+    .lineup-overlay-body {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
     
-    .page-dot.active {
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        width: 16px;
-        height: 16px;
-        box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
-    }
-    
-    /* Adjust page lineup sizes for compact mode */
-    .page-lineup {
-        margin: 15px;
-        padding: 15px;
-        min-height: auto;
-    }
-    
-    .page-lineup-title {
-        font-size: 1.5rem;
-    }
-    
-    .page-lineup-score {
-        font-size: 2.5rem;
-    }
-    
-    .page-lineup-list .batter-spot {
-        padding: 10px;
-        font-size: 1rem;
+    .lineup-overlay-content {
+        max-width: 95%;
+        max-height: 90%;
     }
 }
