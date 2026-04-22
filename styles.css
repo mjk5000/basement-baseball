@@ -1535,6 +1535,11 @@ header h1 {
         gap: 20px;
         padding: 10px 15px;
     }
+
+    /* Force "(vs Computer)" to new line in compact mode */
+    .vs-computer {
+        display: block;
+    }
 }
 
 /* iPhone Landscape Mode - optimize for wide but short screens */
