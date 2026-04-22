@@ -2016,14 +2016,14 @@ header {
     margin: 0;
     flex-shrink: 0;
     order: 1;
-    vertical-align: middle;
 }
 
 .radio-group.horizontal .radio-label span {
     text-align: left;
     order: 2;
     white-space: nowrap;
-    vertical-align: middle;
+    line-height: 1;
+    margin-top: -2px;
 }
 
 .radio-group.horizontal .radio-label:hover {
