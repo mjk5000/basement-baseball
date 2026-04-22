@@ -1557,6 +1557,7 @@ header h1 {
     
     /* Lineups button in compact mode */
     .lineups-button-container {
+        display: flex;
         margin: 6px auto 4px;
     }
     
@@ -1925,7 +1926,7 @@ header {
 
 /* Lineups Button Container */
 .lineups-button-container {
-    display: flex;
+    display: none; /* Hidden on desktop, shown in compact mode */
     justify-content: center;
     margin: 8px auto 5px;
     width: 100%;
