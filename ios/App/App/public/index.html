@@ -12,7 +12,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="manifest" href="manifest.json">
     <title>⚾️ Basement Baseball</title>
-    <link rel="stylesheet" href="styles.css?v=1.18.39">
+    <link rel="stylesheet" href="styles.css?v=1.18.40">
 </head>
 <body>
     <div class="container">
@@ -375,7 +375,7 @@
                 </button>
             </div>
             <div class="version-info">
-                <span>v1.18.39 • Apr 22, 2026</span>
+                <span>v1.18.40 • Apr 22, 2026</span>
             </div>
             </div>
 
@@ -495,7 +495,7 @@
         <div id="settingsModal" class="modal">
             <div class="modal-content">
                 <h2>⚾ Game Setup</h2>
-                <div class="modal-version-info">v1.18.39 • Apr 22, 2026</div>
+                <div class="modal-version-info">v1.18.40 • Apr 22, 2026</div>
                 
                 <div class="settings-section">
                     <label for="awayTeamName">Away Team Name:</label>
@@ -560,6 +560,39 @@
         </div>
     </div>
 
-    <script src="game.js?v=1.18.39"></script>
+    <script src="game.js?v=1.18.40"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered successfully:', registration);
+                        
+                        // Check for updates every time the page loads
+                        registration.update();
+                        
+                        // Listen for new service worker waiting to activate
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New version available, prompt user or auto-update
+                                    console.log('New version available! Reloading...');
+                                    // Auto-reload after 1 second to apply updates
+                                    setTimeout(() => {
+                                        window.location.reload();
+                                    }, 1000);
+                                }
+                            });
+                        });
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
 </body>
 </html>
