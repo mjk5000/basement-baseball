@@ -1540,6 +1540,15 @@ header h1 {
     .game-mode-detail {
         display: block;
     }
+
+    /* Adjust radio label alignment for multi-line text in compact mode */
+    .radio-group.horizontal .radio-label {
+        align-items: flex-start;
+    }
+
+    .radio-group.horizontal .radio-label input[type="radio"] {
+        margin-top: 2px;
+    }
 }
 
 /* iPhone Landscape Mode - optimize for wide but short screens */
