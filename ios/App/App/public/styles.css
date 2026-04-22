@@ -2232,7 +2232,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 15px;
+    gap: 20px;
     flex-wrap: wrap;
 }
 
@@ -2241,7 +2241,7 @@ header {
     border-radius: 12px;
     padding: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    flex: 1;
+    flex: 1 1 0;
     min-width: 280px;
     max-width: 400px;
 }
@@ -2312,12 +2312,12 @@ header {
     }
     
     .lineup-overlay-body {
-        gap: 10px;
+        gap: 15px;
         width: 100%;
     }
     
     .overlay-lineup {
-        flex: 1;
+        flex: 1 1 0;
         min-width: 0;
     }
     
@@ -2327,10 +2327,17 @@ header {
     
     .overlay-lineup-score {
         font-size: 1.5rem;
+        margin-bottom: 12px;
+    }
+    
+    .overlay-lineup-list {
+        gap: 6px;
     }
     
     .overlay-lineup-list .batter-spot {
-        padding: 8px;
+        padding: 9px;
         font-size: 0.9rem;
+        line-height: 1.3;
+        min-height: 38px;
     }
 }
