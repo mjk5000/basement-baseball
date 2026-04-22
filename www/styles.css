@@ -1636,6 +1636,7 @@ header h1 {
         display: block;
         text-align: left;
         width: 100%;
+        font-weight: 600;
     }
 
     /* Stack game mode radio buttons vertically in compact mode */
@@ -2072,6 +2073,7 @@ header {
 .settings-section.innings-section label {
     display: inline;
     margin-bottom: 0;
+    font-weight: 600;
 }
 
 .settings-section label {
