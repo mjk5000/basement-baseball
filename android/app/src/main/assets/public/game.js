@@ -93,8 +93,15 @@ function preloadCustomSounds() {
     const soundFiles = {
         'strike': [
             'sounds/Strike.m4a',
-            'sounds/Swing miss - serious.m4a',
-            'sounds/Swing miss what is that.m4a'
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Strike.m4a',
+            'sounds/Swing miss - serious.m4a'
         ],
         'strikeout': [
             'sounds/Strike 3.m4a',
@@ -102,7 +109,7 @@ function preloadCustomSounds() {
             'sounds/Strike 3 - 2.m4a',
             'sounds/Strike 3 - 3.m4a',
             'sounds/Struck out swinging.m4a',
-            'sounds/Swing and miss kid doesn\'t play baseball.m4a',
+            'sounds/Swing miss - kid doesn\'t play baseball.m4a',
             'sounds/Take a seat.m4a'
         ],
         'out': [
@@ -168,7 +175,9 @@ function preloadCustomSounds() {
             'sounds/Bunt successful hit.m4a'
         ],
         'error': [
-            'sounds/Error.m4a'
+            'sounds/Error.m4a',
+            'sounds/Error.m4a',
+            'sounds/Error - miss what is that.m4a'
         ],
         'endInning': [
             'sounds/End of inning.m4a'
@@ -2137,7 +2146,7 @@ function swingAndMiss() {
     if (gameState.strikes >= 3) {
         playSound('strikeout'); // Strikeout sound only, not regular strike
         gameState.lastPlay = 'Strikeout';
-        // showMessage removed - no strikeout announcement
+        showMessage(`Swings and misses!<br>Strikeout!`);
         showOutX('home');
         recordAtBat('strikeout');
         recordOut(true); // Skip generic out sound, we played strikeout sound
@@ -2179,7 +2188,7 @@ function noSwing() {
         if (gameState.strikes >= 3) {
             playSound('strikeout'); // Strikeout sound only, not regular strike
             gameState.lastPlay = 'Called strikeout';
-            // showMessage removed - no strikeout announcement
+            showMessage(`Called strike three!<br>Strikeout!`);
             showOutX('home');
             recordAtBat('strikeout');
             recordOut();
@@ -3397,7 +3406,7 @@ function manualStrike() {
     if (gameState.strikes >= 3) {
         playSound('strikeout'); // Strikeout sound only, not regular strike
         gameState.lastPlay = 'Strikeout';
-        // showMessage removed - no strikeout announcement
+        showMessage(`Strike three!<br>Strikeout!`);
         showOutX('home');
         recordAtBat('strikeout');
         recordOut();
@@ -3979,3 +3988,42 @@ function randomOutcome() {
 
 // Initialize display
 updateDisplay();
+
+// Auto-lock orientation based on device type
+function lockOrientation() {
+    if (!screen.orientation) return; // Orientation API not supported
+    
+    const screenWidth = window.screen.width;
+    const screenHeight = window.screen.height;
+    const maxDimension = Math.max(screenWidth, screenHeight);
+    
+    try {
+        // Phone: < 768px max dimension → portrait
+        if (maxDimension < 768) {
+            screen.orientation.lock('portrait').catch(() => {
+                // Lock failed (not in fullscreen or not supported)
+                console.log('Portrait lock not available - continuing without lock');
+            });
+        }
+        // Tablet: 768px - 1024px max dimension → landscape  
+        else if (maxDimension >= 768 && maxDimension <= 1024) {
+            screen.orientation.lock('landscape').catch(() => {
+                // Lock failed (not in fullscreen or not supported)
+                console.log('Landscape lock not available - continuing without lock');
+            });
+        }
+        // Desktop: do nothing, allow any orientation
+    } catch (err) {
+        console.log('Orientation lock not supported');
+    }
+}
+
+// Try to lock orientation when entering fullscreen
+document.addEventListener('fullscreenchange', () => {
+    if (document.fullscreenElement) {
+        lockOrientation();
+    }
+});
+
+// Try to lock on page load (will fail if not in fullscreen, which is fine)
+lockOrientation();

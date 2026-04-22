@@ -1340,10 +1340,10 @@ header h1 {
     /* Compact game status - horizontal layout for top section */
     .game-status {
         display: grid !important;
-        grid-template-columns: 1fr auto;
+        grid-template-columns: auto 1fr auto;
         grid-template-rows: auto auto;
-        gap: 5px;
-        padding: 6px;
+        gap: 3px;
+        padding: 4px;
         min-height: auto;
     }
     
@@ -1352,9 +1352,9 @@ header h1 {
         grid-row: 1;
         width: auto;
         flex-direction: row;
-        gap: 10px;
+        gap: 8px;
         margin: 0;
-        align-self: auto;
+        align-self: center;
     }
     
     .status-center {
@@ -1362,17 +1362,18 @@ header h1 {
         grid-row: 2;
         width: 100%;
         flex-direction: column;
-        gap: 5px;
+        gap: 3px;
     }
     
     .status-right {
-        grid-column: 2;
+        grid-column: 3;
         grid-row: 1;
         width: auto;
+        align-self: center;
     }
     
     .count-display {
-        gap: 6px;
+        gap: 5px;
         justify-content: flex-start;
         flex-direction: column;
     }
@@ -1382,22 +1383,25 @@ header h1 {
     }
     
     .count-label {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
     }
     
     .circle {
-        width: 10px;
-        height: 10px;
+        width: 9px;
+        height: 9px;
     }
     
     .inning-display {
-        gap: 4px;
+        gap: 2px;
         flex-direction: column;
         align-items: center;
     }
     
     .inning-number {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+        font-weight: 800;
     }
     
     /* Compact diamond */
@@ -1408,15 +1412,16 @@ header h1 {
     }
     
     .runners-display svg {
-        width: 90px;
-        height: 90px;
+        width: 85px;
+        height: 85px;
     }
     
     /* Compact message */
     .message {
         font-size: 0.85rem;
-        padding: 6px;
-        min-height: 40px;
+        padding: 5px;
+        min-height: 36px;
+        line-height: 1.2;
     }
     
     /* Compact controls */
@@ -1432,36 +1437,41 @@ header h1 {
     
     /* Tighter pitch input sections */
     .pitch-input, .quality-input {
-        padding: 10px;
-        margin-bottom: 8px;
+        padding: 8px;
+        margin-bottom: 6px;
     }
     
     .pitch-header {
-        font-size: 1rem;
-        margin-bottom: 8px;
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+        font-weight: 700;
     }
     
     .pitch-options {
-        gap: 8px;
-        margin-bottom: 6px;
+        gap: 6px;
+        margin-bottom: 4px;
     }
     
     .pitch-btn,
     .manual-btn {
-        height: 50px;
-        font-size: 0.7rem;
-        padding: 4px 2px;
-        gap: 2px;
+        height: 58px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 6px 4px;
+        gap: 3px;
         overflow: hidden;
         line-height: 1.1;
+        word-wrap: break-word;
+        text-overflow: clip;
     }
     
     /* Fix icon sizes in small screen */
     .pitch-btn .icon,
     .manual-btn .icon {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         line-height: 1;
         flex-shrink: 0;
+        margin-bottom: 1px;
     }
     
     .contact-grid,
@@ -1524,6 +1534,174 @@ header h1 {
     .game-info {
         gap: 20px;
         padding: 10px 15px;
+    }
+
+    /* Stack game mode radio buttons vertically in compact mode */
+    .radio-group.horizontal {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .radio-group.horizontal .radio-label {
+        align-items: center;
+    }
+
+    .radio-group.horizontal .radio-label input[type="radio"] {
+        margin-top: 0;
+    }
+}
+
+/* iPhone Landscape Mode - optimize for wide but short screens */
+@media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+    /* Hide header to save vertical space */
+    header {
+        display: none;
+    }
+    
+    /* Ultra-compact scoreboard */
+    .mlb-scoreboard {
+        padding: 3px;
+        margin-bottom: 3px;
+    }
+    
+    .scoreboard-table {
+        font-size: 0.75rem;
+    }
+    
+    .scoreboard-table th,
+    .scoreboard-table td {
+        padding: 2px 3px;
+    }
+    
+    /* Compact game status for landscape - minimize vertical height */
+    .game-status {
+        padding: 2px 4px !important;
+        gap: 2px !important;
+        min-height: 50px !important;
+    }
+    
+    .status-left {
+        gap: 6px !important;
+    }
+    
+    .status-center {
+        gap: 2px !important;
+    }
+    
+    .inning-display {
+        gap: 1px !important;
+    }
+    
+    .inning-number {
+        font-size: 1.2rem !important;
+    }
+    
+    .count-display {
+        gap: 3px !important;
+    }
+    
+    .count-label {
+        font-size: 0.55rem !important;
+    }
+    
+    .circle {
+        width: 8px !important;
+        height: 8px !important;
+    }
+    
+    .runners-display svg {
+        width: 70px !important;
+        height: 70px !important;
+    }
+    
+    .message {
+        font-size: 0.75rem !important;
+        padding: 3px 4px !important;
+        min-height: 30px !important;
+        line-height: 1.1 !important;
+    }
+    
+    /* Compact controls - vertical stack layout */
+    .game-area {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        margin-bottom: 2px;
+    }
+    
+    .controls-container {
+        padding: 4px;
+        gap: 3px;
+        width: 100%;
+        order: 1;
+    }
+    
+    .manual-controls {
+        padding: 4px;
+        gap: 3px;
+        width: 100%;
+        order: 2;
+        display: block !important; /* Ensure manual controls are visible */
+    }
+    
+    .pitch-input,
+    .quality-input {
+        padding: 4px;
+        margin-bottom: 3px;
+    }
+    
+    .pitch-header {
+        font-size: 0.8rem;
+        margin-bottom: 3px;
+    }
+    
+    .pitch-options {
+        gap: 4px;
+        margin-bottom: 2px;
+    }
+    
+    .pitch-btn,
+    .manual-btn {
+        height: 45px !important;
+        font-size: 0.62rem !important;
+        padding: 4px 2px !important;
+        gap: 2px !important;
+    }
+    
+    .pitch-btn .icon,
+    .manual-btn .icon {
+        font-size: 1rem !important;
+        margin-bottom: 0 !important;
+    }
+    
+    .manual-header {
+        font-size: 0.8rem;
+        padding: 3px;
+    }
+    
+    .manual-section {
+        gap: 3px;
+    }
+    
+    .manual-group {
+        gap: 3px;
+    }
+    
+    /* Icon buttons smaller */
+    .lineup-icon-buttons {
+        gap: 4px;
+        margin-top: 2px;
+    }
+    
+    .icon-btn {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .version-info {
+        font-size: 0.55rem !important;
+        margin-top: 1px;
     }
 }
 
@@ -1795,12 +1973,17 @@ header {
 .checkbox-label input[type="checkbox"] {
     width: 18px;
     height: 18px;
+    margin: 0;
+    flex-shrink: 0;
     cursor: pointer;
     accent-color: #3b82f6;
+    position: relative;
+    top: 2px;
 }
 
 .checkbox-label span {
     font-weight: 500;
+    line-height: 1;
 }
 
 .radio-group {
@@ -1820,6 +2003,7 @@ header {
 .radio-label {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 10px;
     padding: 12px;
     background: white;
@@ -1833,10 +2017,27 @@ header {
     border: none;
     padding: 8px 12px;
     background: transparent;
+    display: flex !important;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+}
+
+.radio-group.horizontal .radio-label input[type="radio"] {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.radio-group.horizontal .radio-label span {
+    text-align: left;
+    line-height: 1;
 }
 
 .radio-group.horizontal .radio-label:hover {
     background: #eff6ff;
+    border-radius: 8px;
 }
 
 .radio-label:hover {
@@ -1848,12 +2049,17 @@ header {
     width: 20px;
     height: 20px;
     cursor: pointer;
+    margin: 0;
+    flex-shrink: 0;
 }
 
 .radio-label span {
     font-size: 1.1rem;
     font-weight: 600;
     color: #1f2937;
+    line-height: 1;
+    display: flex;
+    align-items: center;
 }
 
 .help-text {
