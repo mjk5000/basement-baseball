@@ -1536,14 +1536,34 @@ header h1 {
         padding: 10px 15px;
     }
 
+    /* Reduce modal padding for narrow screens */
+    .modal-content {
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    .modal-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    /* Stack innings section vertically in compact mode */
+    .settings-section.innings-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
     /* Stack game mode radio buttons vertically in compact mode */
     .radio-group.horizontal {
         flex-direction: column;
         gap: 8px;
+        width: 100%;
     }
 
     .radio-group.horizontal .radio-label {
         align-items: center;
+        width: 100%;
     }
 
     .radio-group.horizontal .radio-label input[type="radio"] {
