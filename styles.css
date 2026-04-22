@@ -2023,7 +2023,7 @@ header {
     order: 2;
     white-space: nowrap;
     line-height: 1;
-    transform: translateY(-3px);
+    transform: translateY(-5px);
 }
 
 .radio-group.horizontal .radio-label:hover {
