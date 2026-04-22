@@ -3617,14 +3617,31 @@ function processBunt() {
             // Successful sacrifice - batter out, runners advance
             gameState.lastPlay = 'Sacrifice bunt';
             playSound('buntSacrifice'); // Sacrifice bunt sound
-            const sacBuntMessages = [
-                'Perfect sacrifice bunt!<br>Batter out, runner advances! 🥎',
-                'Good bunt down the line!<br>Throws to first. OUT! Runner advances! 🥎',
-                'Bunt to third!<br>Takes the out at first. Runner safe at second! 🥎',
-                'Textbook sacrifice!<br>Batter out, runner moves up! 🥎',
-                'Squeeze bunt executed!<br>Batter out at first, runner advances! 🥎'
-            ];
-            showMessage(sacBuntMessages[Math.floor(Math.random() * sacBuntMessages.length)]);
+            
+            // Create contextual message based on runners
+            let sacBuntMessage = '';
+            if (gameState.runners.third && !gameState.runners.second && !gameState.runners.first) {
+                // Only runner on third
+                const thirdOnlyMessages = [
+                    'Squeeze bunt!<br>Batter out at first. Runner scores! 🥎',
+                    'Perfect squeeze play!<br>OUT at first, runner crosses the plate! 🥎',
+                    'Sacrifice bunt!<br>Batter out, runner scores from third! 🥎',
+                    'Bunt down the line!<br>Throw to first for the out. Runner HOME! 🥎'
+                ];
+                sacBuntMessage = thirdOnlyMessages[Math.floor(Math.random() * thirdOnlyMessages.length)];
+            } else {
+                // General sacrifice messages for other situations
+                const sacBuntMessages = [
+                    'Perfect sacrifice bunt!<br>Batter out, runners advance! 🥎',
+                    'Good bunt down the line!<br>Throws to first. OUT! Runners advance! 🥎',
+                    'Textbook sacrifice!<br>Batter out, runners move up! 🥎',
+                    'Sacrifice bunt executed!<br>Batter out at first, runners advance! 🥎',
+                    'Bunt fielded!<br>OUT at first, runners advance safely! 🥎'
+                ];
+                sacBuntMessage = sacBuntMessages[Math.floor(Math.random() * sacBuntMessages.length)];
+            }
+            
+            showMessage(sacBuntMessage);
             showOutX(1); // Show X at first base
             recordAtBat('sacrificebunt');
             
