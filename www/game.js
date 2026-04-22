@@ -4089,7 +4089,8 @@ function goToPage(pageNumber, animate = true) {
     
     currentPage = pageNumber;
     const pageWrapper = document.getElementById('pageWrapper');
-    const offset = -pageNumber * 100;
+    // Each page is 33.333% of the wrapper, so shift by that amount per page
+    const offset = -pageNumber * 33.333;
     
     if (animate) {
         pageWrapper.style.transition = 'transform 0.3s ease-out';
