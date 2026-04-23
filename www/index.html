@@ -12,7 +12,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="manifest" href="manifest.json">
     <title>⚾️ Basement Baseball</title>
-    <link rel="stylesheet" href="styles.css?v=1.18.65">
+    <link rel="stylesheet" href="styles.css?v=1.18.66">
 </head>
 <body>
     <div class="container">
@@ -375,7 +375,7 @@
                 </button>
             </div>
             <div class="version-info">
-                <span>v1.18.65</span>
+                <span>v1.18.66</span>
             </div>
             </div>
 
@@ -556,19 +556,19 @@
                     <button class="start-game-btn" onclick="startNewGame()">New Game!</button>
                 </div>
                 
-                <div class="modal-version-info">v1.18.65</div>
+                <div class="modal-version-info">v1.18.66</div>
             </div>
         </div>
     </div>
 
-    <script src="game.js?v=1.18.65"></script>
+    <script src="game.js?v=1.18.66"></script>
     
     <!-- Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 // Register service worker with cache busting
-                navigator.serviceWorker.register('./sw.js?v=1.18.65', { updateViaCache: 'none' })
+                navigator.serviceWorker.register('./sw.js?v=1.18.66', { updateViaCache: 'none' })
                     .then((registration) => {
                         console.log('Service Worker registered successfully:', registration);
                         
