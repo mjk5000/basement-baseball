@@ -191,6 +191,9 @@ function preloadCustomSounds() {
         'undo': [
             'sounds/Undo.m4a'
         ],
+        'balk': [
+            'sounds/Balk.m4a'
+        ],
         'simulate': [
             'sounds/Simulate batter.m4a'
         ],
@@ -3622,6 +3625,7 @@ function advanceAllRunners() {
     
     if (gameState.gameOver) return; // Prevent actions after game over
     cancelAllSounds(); // Cancel any playing sounds
+    playSound('balk'); // Play balk sound
     saveState(); // Save state before action
     
     let runsScored = 0;
