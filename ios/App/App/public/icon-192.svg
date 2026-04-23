@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 100 100">
+  <!-- Green grass background circle -->
+  <circle cx="50" cy="50" r="48" fill="#2d7a1f"/>
+  
+  <!-- Brown dirt diamond -->
+  <path d="M 50 75 L 75 50 L 50 25 L 25 50 Z" fill="#d4a574" stroke="#8b6f47" stroke-width="1.5"/>
+  
+  <!-- White bases -->
+  <rect x="45" y="21" width="10" height="10" fill="white" stroke="#333" stroke-width="0.5" rx="1"/>
+  <rect x="69" y="45" width="10" height="10" fill="white" stroke="#333" stroke-width="0.5" rx="1"/>
+  <rect x="21" y="45" width="10" height="10" fill="white" stroke="#333" stroke-width="0.5" rx="1"/>
+  <polygon points="45,69 55,69 55,74 50,79 45,74" fill="white" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Green "B" in the center -->
+  <text x="50" y="62" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#2d7a1f" text-anchor="middle">B</text>
+</svg>
