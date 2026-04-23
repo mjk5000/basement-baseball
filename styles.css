@@ -7,8 +7,8 @@
 }
 
 html {
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
+    overflow: auto;
 }
 
 body {
@@ -16,7 +16,6 @@ body {
     background: linear-gradient(135deg, #4ade80 0%, #3b82f6 100%);
     min-height: 100vh;
     min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
-    height: 100%;
     padding: 10px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
