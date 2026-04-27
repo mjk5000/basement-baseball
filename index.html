@@ -12,7 +12,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="manifest" href="manifest.json">
     <title>⚾️ Basement Baseball</title>
-    <link rel="stylesheet" href="styles.css?v=1.18.70">
+    <link rel="stylesheet" href="styles.css?v=1.18.71">
 </head>
 <body>
     <div class="container">
@@ -375,7 +375,7 @@
                 </button>
             </div>
             <div class="version-info">
-                <span>v1.18.70</span>
+                <span>v1.18.71</span>
             </div>
             </div>
 
@@ -457,7 +457,7 @@
                 <div class="rules-content">
                     <div class="rule-item">
                         <h3>⚾ Hit Determination</h3>
-                        <p>Determination of type of hit is on your honor.</p>
+                        <p>Determination of type of hit is <strong>on your honor</strong>.</p>
                         <p><strong>Ground Balls:</strong> Hit to the ground before the pitcher</p>
                         <p><strong>Line Drive:</strong> Sharply hit ball back not touching ground but not too high</p>
                         <p><strong>Fly Ball:</strong> Well hit ball that is clearly going to outfield</p>
@@ -563,19 +563,19 @@
                     <button class="start-game-btn" onclick="startNewGame()">New Game!</button>
                 </div>
                 
-                <div class="modal-version-info">v1.18.70</div>
+                <div class="modal-version-info">v1.18.71</div>
             </div>
         </div>
     </div>
 
-    <script src="game.js?v=1.18.70"></script>
+    <script src="game.js?v=1.18.71"></script>
     
     <!-- Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 // Register service worker with cache busting
-                navigator.serviceWorker.register('./sw.js?v=1.18.70', { updateViaCache: 'none' })
+                navigator.serviceWorker.register('./sw.js?v=1.18.71', { updateViaCache: 'none' })
                     .then((registration) => {
                         console.log('Service Worker registered successfully:', registration);
                         
