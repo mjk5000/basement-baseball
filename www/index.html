@@ -12,7 +12,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="manifest" href="manifest.json">
     <title>⚾️ Basement Baseball</title>
-    <link rel="stylesheet" href="styles.css?v=1.18.69">
+    <link rel="stylesheet" href="styles.css?v=1.18.70">
 </head>
 <body>
     <div class="container">
@@ -375,7 +375,7 @@
                 </button>
             </div>
             <div class="version-info">
-                <span>v1.18.69</span>
+                <span>v1.18.70</span>
             </div>
             </div>
 
@@ -481,6 +481,9 @@
                         <p>Any complaining results in:</p>
                         <p>• Simulate Batter button press against the complaining batter, OR</p>
                         <p>• A walk against the complaining scorekeeper</p>
+                        <p><strong>Any Crying or Stomping off in disgust:</strong></p>
+                        <p>• One Day Suspension, OR</p>
+                        <p>• 25 immediate push ups</p>
                     </div>
                     
                     <div class="rule-item">
@@ -560,19 +563,19 @@
                     <button class="start-game-btn" onclick="startNewGame()">New Game!</button>
                 </div>
                 
-                <div class="modal-version-info">v1.18.69</div>
+                <div class="modal-version-info">v1.18.70</div>
             </div>
         </div>
     </div>
 
-    <script src="game.js?v=1.18.69"></script>
+    <script src="game.js?v=1.18.70"></script>
     
     <!-- Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 // Register service worker with cache busting
-                navigator.serviceWorker.register('./sw.js?v=1.18.69', { updateViaCache: 'none' })
+                navigator.serviceWorker.register('./sw.js?v=1.18.70', { updateViaCache: 'none' })
                     .then((registration) => {
                         console.log('Service Worker registered successfully:', registration);
                         
