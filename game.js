@@ -2204,7 +2204,7 @@ function noSwing() {
             showMessage(`Called strike three!<br>Strikeout!`);
             showOutX('home');
             recordAtBat('strikeout');
-            recordOut();
+            recordOut(true); // Skip generic out sound, we played strikeout sound
             resetCount();
         } else {
             playSound('strike'); // Strike sound
@@ -3587,7 +3587,7 @@ function manualStrike() {
         showMessage(`Strike three!<br>Strikeout!`);
         showOutX('home');
         recordAtBat('strikeout');
-        recordOut();
+        recordOut(true); // Skip generic out sound, we played strikeout sound
         resetCount();
     } else {
         playSound('strike'); // Strike sound
@@ -4163,7 +4163,7 @@ function randomOutcome() {
         { type: 'groundout', weight: 20, action: () => { showMessage(groundOutMsgs[Math.floor(Math.random() * groundOutMsgs.length)]); recordAtBat('out'); recordOut(); } },
         { type: 'flyout', weight: 15, action: () => { showMessage(flyOutMsgs[Math.floor(Math.random() * flyOutMsgs.length)]); recordAtBat('out'); recordOut(); } },
         { type: 'popup', weight: 8, action: () => { showMessage(popupMsgs[Math.floor(Math.random() * popupMsgs.length)]); recordAtBat('out'); recordOut(); } },
-        { type: 'strikeout', weight: 18, action: () => { showMessage(`Strike three!<br>Strikeout! (${gameState.strikeouts + 1} K) ⚡`); recordAtBat('strikeout'); recordOut(); } },
+        { type: 'strikeout', weight: 18, action: () => { showMessage(`Strike three!<br>Strikeout! (${gameState.strikeouts + 1} K) ⚡`); recordAtBat('strikeout'); recordOut(true); } },
         { type: 'walk', weight: 10, action: () => { showMessage('Walk! Take your base! 🚶'); walk(); recordAtBat('walk'); } },
         { type: 'error', weight: 5, action: () => { showMessage('Error! Safe at first! 😬'); hit(1, true); recordAtBat('error'); } },
         { type: 'foul', weight: 3, action: () => showMessage('Foul ball! ⚠️') }
